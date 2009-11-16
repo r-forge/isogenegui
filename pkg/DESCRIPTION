@@ -1,0 +1,11 @@
+Package: IsoGeneGUI
+Type: Package
+Title: A graphical user interface to conduct a dose-response analysis of microarray data 
+Version: 1.0
+Date: 2009-11-03
+Author: Setia Pramana
+Maintainer: Who to complain to <yourfault@somewhere.net>
+Description: More about what it does (maybe more than one line)
+Depends:tcltk, tkrplot, Biobase, multtest, relimp, geneplotter, RColorBrewer, WriteXLS,gdata, IsoGene, Iso
+License: What license is it under?
+LazyLoad: yes

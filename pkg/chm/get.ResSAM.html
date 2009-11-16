@@ -1,0 +1,146 @@
+<html><head><title>~~function to do ... ~~</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>get.ResSAM(IsoGeneGUI)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   get.ResSAM">
+<param name="keyword" value=" ~~function to do ... ~~">
+</object>
+
+
+<h2>~~function to do ... ~~</h2>
+
+
+<h3>Description</h3>
+
+<p>
+~~ A concise (1-5 lines) description of what the function does. ~~
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+get.ResSAM()
+</pre>
+
+
+<h3>Details</h3>
+
+<p>
+~~ If necessary, more details than the description above ~~
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+~Describe the value returned
+If it is a LIST, use
+</p>
+<table summary="R argblock">
+<tr valign="top"><td><code>comp1 </code></td>
+<td>
+Description of 'comp1'</td></tr>
+<tr valign="top"><td><code>comp2 </code></td>
+<td>
+Description of 'comp2'</td></tr>
+</table>
+<p>
+
+...</p>
+
+<h3>Warning</h3>
+
+<p>
+....
+</p>
+
+
+<h3>Note</h3>
+
+<p>
+~~further notes~~ 
+</p>
+<p>
+~Make other sections like Warning with section{Warning }{....} ~
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>
+~~who you are~~
+</p>
+
+
+<h3>References</h3>
+
+<p>
+~put references to the literature/web site here ~
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+~~objects to See Also as <code><a onclick="findlink('utils', 'help.html')" style="text-decoration: underline; color: blue; cursor: hand">help</a></code>, ~~~
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+##---- Should be DIRECTLY executable !! ----
+##-- ==&gt;  Define data, use random,
+##--    or do  help(data=index)  for the standard data sets.
+
+## The function is currently defined as
+function() {
+    qval &lt;- Isoqval(delta.now, AllFDR, SAMRes, stat=statSAMplot )
+    Res.SAM  &lt;- qval[[1]]
+    siggeneSAM &lt;- qval[[2]]
+
+    if (nrow (Res.SAM ) &gt; nrow(exprs2SAM) ) {
+reprow &lt;- which(table( Res.SAM[,2])==2)
+delrow &lt;- which(Res.SAM[,2]== reprow )[1]
+Res.SAM &lt;- Res.SAM[-delrow ,]
+  }
+
+    probe.id &lt;- rownames(exprs2SAM[Res.SAM [,1],] )
+    if (is.null(probe.id)) probe.id &lt;- Res.SAM [,1]
+    Res.SAM &lt;- data.frame(probe.id,Res.SAM ) 
+    Res.SAM &lt;- Res.SAM [order(Res.SAM [,2]),]
+    Res.SAM &lt;- data.frame(Res.SAM,MeanDiffSAM, DirectionSAM) 
+
+    names(Res.SAM ) &lt;- c("Probe ID", "row num", paste(statSAMplot ,"value"),"q-value", "Mean.Diff", "Direction")
+    rownames(Res.SAM )  &lt;- NULL
+
+ 
+    rowsig &lt;- siggeneSAM  [,1]
+    siggeneSAM   &lt;- Res.SAM [sort(rowsig ),]
+
+    names(siggeneSAM ) &lt;- c("Probe ID", "row num", paste(statSAMplot ,"value"),"q-value", "Mean.Diff", "Direction")
+    rownames(siggeneSAM )  &lt;- NULL
+
+    resSAM &lt;- list (Res.SAM,siggeneSAM  )
+    return(resSAM )
+ }
+</pre>
+
+<script Language="JScript">
+function findlink(pkg, fn) {
+var Y, link;
+Y = location.href.lastIndexOf("\\") + 1;
+link = location.href.substring(0, Y);
+link = link + "../../" + pkg + "/chtml/" + pkg + ".chm::/" + fn;
+location.href = link;
+}
+</script>
+
+
+<hr><div align="center">[Package <em>IsoGeneGUI</em> version 1.0 <a href="00Index.html">Index]</a></div>
+
+</body></html>

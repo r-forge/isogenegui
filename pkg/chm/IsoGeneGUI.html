@@ -1,0 +1,226 @@
+<html><head><title>~~function to do ... ~~</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>IsoGeneGUI(IsoGeneGUI)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   IsoGeneGUI">
+<param name="keyword" value=" ~~function to do ... ~~">
+</object>
+
+
+<h2>~~function to do ... ~~</h2>
+
+
+<h3>Description</h3>
+
+<p>
+~~ A concise (1-5 lines) description of what the function does. ~~
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+IsoGeneGUI()
+</pre>
+
+
+<h3>Details</h3>
+
+<p>
+~~ If necessary, more details than the description above ~~
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+~Describe the value returned
+If it is a LIST, use
+</p>
+<table summary="R argblock">
+<tr valign="top"><td><code>comp1 </code></td>
+<td>
+Description of 'comp1'</td></tr>
+<tr valign="top"><td><code>comp2 </code></td>
+<td>
+Description of 'comp2'</td></tr>
+</table>
+<p>
+
+...</p>
+
+<h3>Warning</h3>
+
+<p>
+....
+</p>
+
+
+<h3>Note</h3>
+
+<p>
+~~further notes~~ 
+</p>
+<p>
+~Make other sections like Warning with section{Warning }{....} ~
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>
+~~who you are~~
+</p>
+
+
+<h3>References</h3>
+
+<p>
+~put references to the literature/web site here ~
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+~~objects to See Also as <code><a onclick="findlink('utils', 'help.html')" style="text-decoration: underline; color: blue; cursor: hand">help</a></code>, ~~~
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+##---- Should be DIRECTLY executable !! ----
+##-- ==&gt;  Define data, use random,
+##--    or do  help(data=index)  for the standard data sets.
+
+## The function is currently defined as
+function () {
+library("tcltk")
+library(tkrplot)
+library(Biobase)
+library(multtest)
+library(relimp)
+library("geneplotter")  ## from BioConductor
+library("RColorBrewer") ## from CRAN
+library("WriteXLS")
+library("gdata")
+library(IsoGene)
+#############################################
+# Creating a main window with menu and plot #
+#############################################
+
+tt &lt;&lt;- tktoplevel()
+tkwm.title(tt,"IsoGene GUI")
+##############################
+
+#####################################
+# Making a menu for the main widget #
+#####################################
+
+topMenu &lt;- tkmenu(tt)           # Create a menu
+tkconfigure(tt, menu = topMenu) # Add it to the 'tt' window
+welcome &lt;-tkframe(tt ,borderwidth=2,width=1500,height=1000)
+tclRequire("BWidget")
+message &lt;-tkframe(tt ,borderwidth=2)
+
+fileMenu &lt;- tkmenu(topMenu, tearoff = FALSE)
+analysisMenu&lt;- tkmenu(topMenu, tearoff = FALSE)
+PlotsMenu&lt;- tkmenu(topMenu, tearoff = FALSE)
+HelpMenu&lt;- tkmenu(topMenu, tearoff = FALSE)
+
+loadMenu&lt;- tkmenu(fileMenu,tearoff = FALSE)
+SamMenu &lt;- tkmenu(analysisMenu, tearoff = FALSE)
+SamPlotMenu &lt;- tkmenu(PlotsMenu, tearoff = FALSE)
+
+tkadd(fileMenu,"cascade", label = "Open dataset", menu= loadMenu)
+tkadd(loadMenu, "command", label = "R workspace", command = loadDataSet )
+tkadd(loadMenu, "command", label = "Excel or Text files", command = openFile )
+tkadd(fileMenu,"separator")
+
+tkadd(fileMenu,"cascade", label = "Show dataset", command = showdata)
+
+tkadd(fileMenu,"separator")
+tkadd(fileMenu, "cascade", label = "Exit", command = exit)
+
+tkadd(topMenu, "cascade", label = "File", menu = fileMenu)
+
+tkadd(analysisMenu, "cascade", label = "Set Seed", command = Setseed)
+tkadd(analysisMenu, "cascade", label = "Asymptotic E2", command = Asymptotic )
+tkadd(analysisMenu, "cascade", label = "Permutation", command = Permutation )
+
+tkadd(analysisMenu, "cascade", label = "Significance Analysis of Microarrays", menu = SamMenu )
+tkadd(SamMenu, "command", label = "SAM Permutation", command = PermuteSAM )
+tkadd(SamMenu, "command", label = "SAM Analysis", command = IsoPlotSldr )
+
+tkadd(topMenu, "cascade", label = "Analysis", menu = analysisMenu)
+
+tkadd(PlotsMenu, "cascade", label = "IsoPlot", command = Isoplot)
+tkadd(PlotsMenu, "cascade", label = "Permutation P-values Plot", command = IsopvalPlot )
+tkadd(PlotsMenu, "cascade", label = "SAM Plots", menu = SamPlotMenu)
+tkadd(SamPlotMenu, "command", label = "Plot of FDR vs. Delta", command = PlotFdrDlt )
+tkadd(SamPlotMenu, "command", label = "Plot of number of significant genes vs. Delta", command = PlotSigDlt )
+tkadd(SamPlotMenu, "command", label = "Plot of number of FP vs. Delta", command = PlotFPDlt )
+tkadd(PlotsMenu, "cascade", label = "User Defined Scatter Plot", command = UserPlotting )
+
+tkadd(topMenu, "cascade", label = "Plots", menu = PlotsMenu)
+tkadd(HelpMenu, "cascade", label = "IsoGene Help", command = onHelp)
+tkadd(HelpMenu, "cascade", label = "About", command = about )
+tkadd(topMenu, "cascade", label = "Help", menu = HelpMenu)
+
+fontHeading &lt;- tkfont.create(family="times",size=22,weight="bold",slant="italic")
+fontTextLabel &lt;- tkfont.create(family="times",size=10)
+
+tkgrid(tklabel(welcome ,text="                             ",font=fontHeading))
+tkgrid(tklabel(welcome ,text="    Welcome to IsoGene GUI   ",font=fontHeading))
+tkgrid(tklabel(welcome ,text=" A Graphical User Interface for dose response analysis in microarray experiments",font=fontTextLabel))
+#tkgrid(tklabel(welcome ,text=" contact: setia.pramana@uhasselt.be",font=fontTextLabel))
+tkgrid(tklabel(welcome ,text="                              ",font=fontHeading))
+
+SeedNum &lt;&lt;- 1234
+tkgrid(welcome )
+
+yScr       &lt;- tkscrollbar(tt,command=function(...)tkyview(treeWidget,...))
+treeWidget &lt;&lt;- tkwidget(tt,"Tree",yscrollcommand=function(...)tkset(yScr,...),width=50,height=15)
+
+tkgrid(tklabel(tt ,text=" Infobox  ",font=fontTextLabel))
+tkgrid(treeWidget,yScr)
+tkgrid.configure(yScr,stick="nsw")
+
+# Insert at the end of the nodes in "root" a new node, called
+# "Record1Node", which displays the text "Record 1", etc.
+
+tkinsert(treeWidget,"end","root","Record1Node",text="Data")
+tkinsert(treeWidget,"end","root","Record2Node",text="Asymptotic E2")
+tkinsert(treeWidget,"end","root","Record3Node",text="Permutation ")
+tkinsert(treeWidget,"end","root","Record4Node",text="SAM")
+
+tkinsert(treeWidget,"end","Record1Node","data",text="Not Available")
+tkinsert(treeWidget,"end","Record2Node","nodeAsymp",text="Not Available")
+tkinsert(treeWidget,"end","Record3Node","nodePerm",text="Not Available")
+tkinsert(treeWidget,"end","Record4Node","nodeSAM",text="Not Available")
+
+tkgrid(tklabel(tt,text="") )
+
+tkwait.window(tt)
+
+  }
+</pre>
+
+<script Language="JScript">
+function findlink(pkg, fn) {
+var Y, link;
+Y = location.href.lastIndexOf("\\") + 1;
+link = location.href.substring(0, Y);
+link = link + "../../" + pkg + "/chtml/" + pkg + ".chm::/" + fn;
+location.href = link;
+}
+</script>
+
+
+<hr><div align="center">[Package <em>IsoGeneGUI</em> version 1.0 <a href="00Index.html">Index]</a></div>
+
+</body></html>

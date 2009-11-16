@@ -1,0 +1,199 @@
+<html><head><title>~~function to do ... ~~</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>IsoqqstatMOD(IsoGeneGUI)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   IsoqqstatMOD">
+<param name="keyword" value=" ~~function to do ... ~~">
+</object>
+
+
+<h2>~~function to do ... ~~</h2>
+
+
+<h3>Description</h3>
+
+<p>
+~~ A concise (1-5 lines) description of what the function does. ~~
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+IsoqqstatMOD(x, y, fudge, niter, seed)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+~~Describe <code>x</code> here~~ </td></tr>
+<tr valign="top"><td><code>y</code></td>
+<td>
+~~Describe <code>y</code> here~~ </td></tr>
+<tr valign="top"><td><code>fudge</code></td>
+<td>
+~~Describe <code>fudge</code> here~~ </td></tr>
+<tr valign="top"><td><code>niter</code></td>
+<td>
+~~Describe <code>niter</code> here~~ </td></tr>
+<tr valign="top"><td><code>seed</code></td>
+<td>
+~~Describe <code>seed</code> here~~ </td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+~~ If necessary, more details than the description above ~~
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+~Describe the value returned
+If it is a LIST, use
+</p>
+<table summary="R argblock">
+<tr valign="top"><td><code>comp1 </code></td>
+<td>
+Description of 'comp1'</td></tr>
+<tr valign="top"><td><code>comp2 </code></td>
+<td>
+Description of 'comp2'</td></tr>
+</table>
+<p>
+
+...</p>
+
+<h3>Warning</h3>
+
+<p>
+....
+</p>
+
+
+<h3>Note</h3>
+
+<p>
+~~further notes~~ 
+</p>
+<p>
+~Make other sections like Warning with section{Warning }{....} ~
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>
+~~who you are~~
+</p>
+
+
+<h3>References</h3>
+
+<p>
+~put references to the literature/web site here ~
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+~~objects to See Also as <code><a onclick="findlink('utils', 'help.html')" style="text-decoration: underline; color: blue; cursor: hand">help</a></code>, ~~~
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+##---- Should be DIRECTLY executable !! ----
+##-- ==&gt;  Define data, use random,
+##--    or do  help(data=index)  for the standard data sets.
+
+## The function is currently defined as
+function (x, y, fudge, niter, seed) 
+{
+
+    set.seed(seed)
+    xiter.index &lt;- t(sapply(1:niter, function(i) sample(x)))
+    to1 &lt;- to2 &lt;- to3 &lt;- to4 &lt;- to5 &lt;- matrix(0, nrow(y), niter)
+    if (fudge == "pooled" ) {
+        fudge.factor &lt;- IsofudgeMod2(dose,exprs2SAM,fudge="auto")
+     }
+    if (fudge == "specFudge" ) {
+ fudge.factor &lt;- IsofudgeMod2(dose,exprs2SAM ,fudge=fudgeVal )
+  }
+
+    if (fudge == "no") {
+        fudge.factor &lt;- c(rep(0, 5))
+    }
+    for (i in 1:niter) {
+        yyy0 &lt;- IsoGenemSAM(xiter.index[i, ], as.matrix(y), fudge.factor)
+        to1[, i] &lt;- sort(yyy0[[1]])
+        to2[, i] &lt;- sort(yyy0[[2]])
+        to3[, i] &lt;- sort(yyy0[[3]])
+        to4[, i] &lt;- sort(yyy0[[4]])
+        to5[, i] &lt;- sort(yyy0[[5]])
+ 
+     tkwm.deiconify(samPermute)
+tkgrab.set(samPermute)
+tkfocus(samPermute)
+  if (i &lt; niter ) { tclvalue(PermuteText1 ) &lt;- "Please wait...." }
+  else {tclvalue(PermuteText1 ) &lt;- "Permutation is finished...."}
+  tclvalue(PermuteText2 ) &lt;- paste( "Performing",i,"/",NumPermval,"permutations",sep = " " )
+
+    }
+    L &lt;- IsoGenemSAM(x, as.matrix(y), fudge.factor)
+    d &lt;- L[[1]]
+    d.sort.list &lt;- sort.list(d)
+    d.sort &lt;- d[d.sort.list]
+    perm.mean &lt;- apply(to1, 1, mean)
+    aa1 = cbind(d.sort, perm.mean, d.sort - perm.mean, d.sort.list)
+    d &lt;- L[[2]]
+    d.sort.list &lt;- sort.list(d)
+    d.sort &lt;- d[d.sort.list]
+    perm.mean &lt;- apply(to2, 1, mean)
+    aa2 = cbind(d.sort, perm.mean, d.sort - perm.mean, d.sort.list)
+    d &lt;- L[[3]]
+    d.sort.list &lt;- sort.list(d)
+    d.sort &lt;- d[d.sort.list]
+    perm.mean &lt;- apply(to3, 1, mean)
+    aa3 = cbind(d.sort, perm.mean, d.sort - perm.mean, d.sort.list)
+    d &lt;- L[[4]]
+    d.sort.list &lt;- sort.list(d)
+    d.sort &lt;- d[d.sort.list]
+    perm.mean &lt;- apply(to4, 1, mean)
+    aa4 = cbind(d.sort, perm.mean, d.sort - perm.mean, d.sort.list)
+    d &lt;- L[[5]]
+    d.sort.list &lt;- sort.list(d)
+    d.sort &lt;- d[d.sort.list]
+    perm.mean &lt;- apply(to5, 1, mean)
+    aa5 &lt;- cbind(d.sort, perm.mean, d.sort - perm.mean, d.sort.list)
+    Direction &lt;- L[[6]]
+    res &lt;- list(aa1 = aa1, to1 = to1, aa2 = aa2, to2 = to2, aa3 = aa3, 
+        to3 = to3, aa4 = aa4, to4 = to4, aa5 = aa5, to5 = to5, Direction=Direction )
+    return(res)
+  }
+</pre>
+
+<script Language="JScript">
+function findlink(pkg, fn) {
+var Y, link;
+Y = location.href.lastIndexOf("\\") + 1;
+link = location.href.substring(0, Y);
+link = link + "../../" + pkg + "/chtml/" + pkg + ".chm::/" + fn;
+location.href = link;
+}
+</script>
+
+
+<hr><div align="center">[Package <em>IsoGeneGUI</em> version 1.0 <a href="00Index.html">Index]</a></div>
+
+</body></html>

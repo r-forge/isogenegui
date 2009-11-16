@@ -1,0 +1,205 @@
+<html><head><title>~~function to do ... ~~</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>UserPlotting(IsoGeneGUI)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   UserPlotting">
+<param name="keyword" value=" ~~function to do ... ~~">
+</object>
+
+
+<h2>~~function to do ... ~~</h2>
+
+
+<h3>Description</h3>
+
+<p>
+~~ A concise (1-5 lines) description of what the function does. ~~
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+UserPlotting()
+</pre>
+
+
+<h3>Details</h3>
+
+<p>
+~~ If necessary, more details than the description above ~~
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+~Describe the value returned
+If it is a LIST, use
+</p>
+<table summary="R argblock">
+<tr valign="top"><td><code>comp1 </code></td>
+<td>
+Description of 'comp1'</td></tr>
+<tr valign="top"><td><code>comp2 </code></td>
+<td>
+Description of 'comp2'</td></tr>
+</table>
+<p>
+
+...</p>
+
+<h3>Warning</h3>
+
+<p>
+....
+</p>
+
+
+<h3>Note</h3>
+
+<p>
+~~further notes~~ 
+</p>
+<p>
+~Make other sections like Warning with section{Warning }{....} ~
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>
+~~who you are~~
+</p>
+
+
+<h3>References</h3>
+
+<p>
+~put references to the literature/web site here ~
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+~~objects to See Also as <code><a onclick="findlink('utils', 'help.html')" style="text-decoration: underline; color: blue; cursor: hand">help</a></code>, ~~~
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+##---- Should be DIRECTLY executable !! ----
+##-- ==&gt;  Define data, use random,
+##--    or do  help(data=index)  for the standard data sets.
+
+## The function is currently defined as
+function () { 
+
+ if ( !exists("pval.Asymp") &amp; !exists("RawPval") &amp; !exists("SAMRes") ) 
+     {     
+     tkmessageBox(title="Error Message",message="The analysis have not performed yet! At least one analysis had to be performed before using this feature!", icon="error",type="ok")
+    }
+ else {
+
+ object.list.asymp &lt;- object.list.perm  &lt;- object.list.SAM &lt;- NULL
+  
+ if (exists("pval.Asymp") )  {
+AsymptoticPval.E2 &lt;&lt;- pval.Asymp
+object.list.asymp &lt;- c("AsymptoticPval.E2","E2.value")
+FoldChange &lt;&lt;- Mu.Diff.Asymp
+E2.value &lt;&lt;- E2Val.Asymp 
+   }
+
+ if ( exists("RawPval") ) {
+E2.value &lt;&lt;- E2Val 
+Marcus.value &lt;&lt;- MarcusVal 
+ModifiedM.value &lt;&lt;- ModMVal 
+M.value &lt;&lt;- MVal 
+Williams.value &lt;&lt;- WilliamsVal 
+
+twosided.RawPval &lt;&lt;- RawPval[[2]]
+PermutationPval.E2 &lt;&lt;- twosided.RawPval[,2]
+PermutationPval.Williams &lt;&lt;- twosided.RawPval[,3]
+PermutationPval.Marcus &lt;&lt;- twosided.RawPval[,4]
+PermutationPval.M  &lt;&lt;- twosided.RawPval[,5]
+PermutationPval.ModM  &lt;&lt;- twosided.RawPval[,6]
+
+     object.list.perm &lt;- c("E2.value","Marcus.value","ModifiedM.value","M.value","Williams.value",
+        "PermutationPval.E2","PermutationPval.Williams","PermutationPval.Marcus","PermutationPval.M","PermutationPval.ModM")
+     if (exists("meandifPerm")) {
+       FoldChange &lt;&lt;- meandifPerm 
+  }
+     else {
+ FoldChange &lt;&lt;- MeanDiff (dose,exprs2Perm)
+  }
+  }
+
+ if (exists("SAMRes") ) {
+
+  stat.ls &lt;- c("M","E2","Marcus","Williams","ModifM")
+  Qval.mat &lt;- matrix(0,nrow(SAMRes[[1]]),5)
+  StatSAM.mat &lt;- matrix(0,nrow(SAMRes[[1]]),5)
+
+  FoldChange &lt;&lt;- MeanDiffSAM  
+
+  for (i in (1:length(stat.ls)))
+   { 
+AllFDR &lt;- Isoallfdr(SAMRes, , stat=stat.ls[i])
+Delta.table &lt;- data.frame(AllFDR) 
+Delta &lt;- Delta.table[1,1]
+qval &lt;- Isoqval(Delta, AllFDR, SAMRes, stat=stat.ls[i])
+qvalue &lt;-  qval [[1]]
+qvalue &lt;- qvalue [order(qvalue [,1]),]
+if (nrow (qvalue) &gt; nrow(exprs2SAM) ) {
+reprow &lt;- which(table(qvalue[,1])==2)
+delrow &lt;- which(qvalue[,1]== reprow )[1]
+qvalue2 &lt;- qvalue [-delrow ,]
+  }
+else { qvalue2 &lt;-  qvalue }
+Qval.mat[,i] &lt;- qvalue2 [,3]
+StatSAM.mat[,i] &lt;- qvalue2 [,2]
+  }
+
+SAM.M.value &lt;&lt;-StatSAM.mat[,1]
+SAM.E2.value &lt;&lt;-StatSAM.mat[,2]
+SAM.Marcus.value &lt;&lt;-StatSAM.mat[,3]
+SAM.Williams.value &lt;&lt;-StatSAM.mat[,4]
+SAM.ModifiedM.value &lt;&lt;-StatSAM.mat[,5]
+
+M.q.value &lt;&lt;-Qval.mat[,1]
+E2.q.value &lt;&lt;-Qval.mat[,2]
+Marcus.q.value &lt;&lt;-Qval.mat[,3]
+Williams.q.value &lt;&lt;-Qval.mat[,4]
+  ModifiedM.q.value &lt;&lt;-Qval.mat[,5]
+
+  object.list.SAM &lt;- c("SAM.M.value","SAM.E2.value","SAM.Marcus.value","SAM.Williams.value","SAM.ModifiedM.value",
+     "AsymptoticPval.E2","E2.q.value","M.q.value","Williams.q.value","Marcus.q.value","ModifiedM.q.value")
+ 
+     }
+
+  All.objects &lt;- unique(c("FoldChange",object.list.asymp, object.list.perm ,object.list.SAM) )
+UserPlot(All.objects)
+       
+    }
+  }
+</pre>
+
+<script Language="JScript">
+function findlink(pkg, fn) {
+var Y, link;
+Y = location.href.lastIndexOf("\\") + 1;
+link = location.href.substring(0, Y);
+link = link + "../../" + pkg + "/chtml/" + pkg + ".chm::/" + fn;
+location.href = link;
+}
+</script>
+
+
+<hr><div align="center">[Package <em>IsoGeneGUI</em> version 1.0 <a href="00Index.html">Index]</a></div>
+
+</body></html>

@@ -1,0 +1,565 @@
+<html><head><title>~~function to do ... ~~</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>Asymptotic(IsoGeneGUI)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   Asymptotic">
+<param name="keyword" value=" ~~function to do ... ~~">
+</object>
+
+
+<h2>~~function to do ... ~~</h2>
+
+
+<h3>Description</h3>
+
+<p>
+~~ A concise (1-5 lines) description of what the function does. ~~
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+Asymptotic()
+</pre>
+
+
+<h3>Details</h3>
+
+<p>
+~~ If necessary, more details than the description above ~~
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+~Describe the value returned
+If it is a LIST, use
+</p>
+<table summary="R argblock">
+<tr valign="top"><td><code>comp1 </code></td>
+<td>
+Description of 'comp1'</td></tr>
+<tr valign="top"><td><code>comp2 </code></td>
+<td>
+Description of 'comp2'</td></tr>
+</table>
+<p>
+
+...</p>
+
+<h3>Warning</h3>
+
+<p>
+....
+</p>
+
+
+<h3>Note</h3>
+
+<p>
+~~further notes~~ 
+</p>
+<p>
+~Make other sections like Warning with section{Warning }{....} ~
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>
+~~who you are~~
+</p>
+
+
+<h3>References</h3>
+
+<p>
+~put references to the literature/web site here ~
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+~~objects to See Also as <code><a onclick="findlink('utils', 'help.html')" style="text-decoration: underline; color: blue; cursor: hand">help</a></code>, ~~~
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+##---- Should be DIRECTLY executable !! ----
+##-- ==&gt;  Define data, use random,
+##--    or do  help(data=index)  for the standard data sets.
+
+## The function is currently defined as
+function() 
+
+{
+
+if (!exists("exprs") | !exists("dose"))  
+   {  
+      ReturnVal &lt;- tkmessageBox(title="Error Message",message="Load the data first!",icon="error",type="ok")
+if (tclvalue(ReturnVal)== "ok") tkfocus(tt)
+  } 
+else {
+
+asym&lt;-tktoplevel()
+tkwm.title(asym,"Asymptotic E2 Analysis") 
+
+      spec.frm &lt;- tkframe(asym,borderwidth=2)
+frame1 &lt;- tkframe(spec.frm, relief="groove", borderwidth=2)
+buttonFrameasym &lt;-tkframe(asym,borderwidth=2)
+
+### Select genes ##
+rb1 &lt;- tkradiobutton( frame1 )
+rb2 &lt;- tkradiobutton( frame1 )
+rbValue1 &lt;- tclVar("all")
+tkconfigure(rb1,variable=rbValue1,value="all",text="All Genes")
+tkconfigure(rb2,variable=rbValue1,value="range", text="Genes Range")
+
+fromgene&lt;- tclVar("")
+FromNum&lt;-tkentry(frame1 ,width="7",textvariable=fromgene)
+
+togene &lt;- tclVar("")
+ToNum&lt;-tkentry(frame1 ,width="7",textvariable=togene )
+
+Calc.Asymp &lt;- function ()
+  {
+if (!exists("exprs")&amp;!exists("dose"))  
+       {  
+  ReturnVal &lt;- tkmessageBox(title="Error Message",message="No data set loaded, please load the dataset first!",icon="info",type="ok")
+  if (tclvalue(ReturnVal)== "ok") tkfocus(asym)
+ } 
+  else {
+tkconfigure(asym,cursor="watch")
+
+     rbVal1 &lt;- as.character(tclvalue(rbValue1))
+
+      if (rbVal1=="all") {
+    exprs2Asymp &lt;&lt;- exprs 
+   matchID  &lt;- c(1:nrow(exprs2Asymp ))
+  }
+    if (rbVal1=="range") {
+         exprs2Asymp &lt;&lt;- exprs [tclvalue(fromgene):tclvalue(togene),] 
+   matchID  &lt;- c(tclvalue(fromgene):tclvalue(togene))
+
+    }
+
+         assign("matchIDAsymp",matchID  ,envir=.GlobalEnv)
+
+# foldchange ##
+      res.Asymp &lt;&lt;-AsymtotE2(dose,exprs2Asymp )
+pval.Asymp  &lt;&lt;- res.Asymp[,2]
+ ProbeID &lt;&lt;- rownames(exprs2Asymp)
+Mu.Diff.Asymp &lt;&lt;-  MeanDiff (dose,exprs2Asymp)
+E2Val.Asymp &lt;&lt;- res.Asymp[,1]
+N &lt;- length(ProbeID )
+      ReturnVal &lt;- tkmessageBox(message="The calculation of asymptotic p-values have been finished",icon="info",type="ok")
+if (tclvalue(ReturnVal)== "ok") tkfocus(asym)
+tkconfigure(asym,cursor="arrow")
+
+try(tkdelete(treeWidget,"nodeAsymp") , silent = T )
+try( tkdelete(treeWidget,"AsymPvalNode"), silent = T )
+tkinsert(treeWidget,"end","Record2Node","AsymPvalNode",text="Raw P-values")
+tkinsert(treeWidget,"end","AsymPvalNode","NumGeneNode",text=paste("Number gene analized: ",N) )
+
+      }
+  }
+
+Calculate.but &lt;-tkbutton(frame1,text=" Calculate ",command=Calc.Asymp)
+
+lab1 &lt;- tklabel(frame1,text="Calculate the Asymptotic p-values for E2 ")
+lab2 &lt;- tklabel(frame1,text="Select the genes: ")
+
+tkgrid.configure(lab1,sticky="w")
+tkgrid.configure(lab2,sticky="w")
+
+tkgrid(lab1)
+tkgrid(lab2)
+
+tkgrid.configure(rb1,sticky="w")
+tkgrid(rb1)
+tkgrid(rb2,tklabel(frame1 ,text="From"),FromNum,tklabel(frame1 ,text="To"),ToNum,
+tklabel(frame1,text="                        "),Calculate.but)
+tkgrid.configure(rb2,sticky="w")
+
+tkgrid(frame1)
+
+tkgrid.configure(frame1,sticky="nsw")
+
+#### Frame Adjusting the raw p values ####
+
+frame2 &lt;- tkframe(spec.frm, relief="groove", borderwidth=2)
+
+cb1 &lt;- tkcheckbutton(frame2)
+cb2 &lt;- tkcheckbutton(frame2)
+cb3 &lt;- tkcheckbutton(frame2)
+cb4 &lt;- tkcheckbutton(frame2)
+cb5 &lt;- tkcheckbutton(frame2)
+cb6 &lt;- tkcheckbutton(frame2)
+cb7 &lt;- tkcheckbutton(frame2)
+
+cbValue1 &lt;- tclVar("1")
+cbValue2 &lt;- tclVar("0")
+cbValue3 &lt;- tclVar("0")
+cbValue4 &lt;- tclVar("0")
+cbValue5 &lt;- tclVar("0")
+cbValue6 &lt;- tclVar("0")
+cbValue7 &lt;- tclVar("0")
+
+tkconfigure(cb1,variable=cbValue1,text="BH")
+tkconfigure(cb2,variable=cbValue2,text="BY")
+tkconfigure(cb3,variable=cbValue3,text="SidakSS")
+tkconfigure(cb4,variable=cbValue4,text="SidakSD")
+tkconfigure(cb5,variable=cbValue5,text="Holm")
+tkconfigure(cb6,variable=cbValue6,text="Hochberg")
+tkconfigure(cb7,variable=cbValue7,text="Bonferroni")
+
+label.pvalAdj &lt;- tklabel(frame2,text="P-value adjustment: ")
+tkgrid(label.pvalAdj)
+tkgrid.configure(label.pvalAdj,sticky="w")
+
+tkgrid(cb1,cb2,cb3,cb4)
+tkgrid(cb5,cb6,cb7)
+
+tkgrid.configure(cb1,cb2,cb3,cb4,cb5,cb6,cb7,sticky="w")
+
+FDR &lt;- tclVar("0.05")
+FDRtxt &lt;-tkentry(frame2 ,width="5",textvariable=FDR)
+tkgrid(tklabel(frame2,text="Overall Significant Level: "),FDRtxt )
+
+cb10 &lt;- tkcheckbutton(frame2)
+cbValue10 &lt;- tclVar("0")
+tkconfigure(cb10,variable=cbValue10,text="Display the significant genes")
+tkgrid(cb10)
+
+######
+AdjustBut &lt;- function()
+{
+  if (!exists("pval.Asymp"))  
+   {  
+      ReturnVal &lt;- tkmessageBox(title="Error Message",message="The raw-pvalues have been not calculated yet!",icon="info",type="ok")
+if (tclvalue(ReturnVal)== "ok") tkfocus(asym)
+  } 
+  else {
+
+tkconfigure(asym,cursor="watch")
+
+cbVal1 &lt;- as.character(tclvalue(cbValue1))
+cbVal2 &lt;- as.character(tclvalue(cbValue2))
+cbVal3 &lt;- as.character(tclvalue(cbValue3))
+cbVal4 &lt;- as.character(tclvalue(cbValue4))
+cbVal5 &lt;- as.character(tclvalue(cbValue5))
+cbVal6 &lt;- as.character(tclvalue(cbValue6))
+cbVal7 &lt;- as.character(tclvalue(cbValue7))
+     cbVal10 &lt;- as.character(tclvalue(cbValue10))
+
+E2Val &lt;- E2Val.Asymp
+     FDRval &lt;&lt;- as.numeric(tclvalue(FDR))
+
+Direction  &lt;- res.Asymp[,3]
+try( tkdelete(treeWidget,"AdjPvalNode"), silent = T )
+tkinsert(treeWidget,"end","Record2Node","AdjPvalNode",text= paste("Adjusted P-values, FDR: ", FDRval)  )
+
+      sigeneBH &lt;&lt;- sigeneBY &lt;&lt;- sigeneSS &lt;&lt;- sigeneSD &lt;&lt;- sigeneHolm &lt;&lt;- sigeneHoch &lt;&lt;- sigeneBon &lt;&lt;- NULL
+adjpBH &lt;&lt;- adjpBY &lt;&lt;- adjpSS &lt;&lt;- adjpSD &lt;&lt;- adjpHolm &lt;&lt;- adjpHoch &lt;&lt;- adjpBon &lt;&lt;- NULL
+result &lt;- matrix(NA,7,4)
+
+if (cbVal1=="1")  {
+adjpBH &lt;- adjustment (pval.Asymp,"BH")
+assign("adjpBH",adjpBH ,envir=.GlobalEnv)
+      sigeneBH &lt;- Signif (pval.Asymp, FDRval ,"BH")
+numsigBH &lt;- nrow(sigeneBH )
+numsigBH [is.null(numsigBH )] &lt;- 0
+    result[1,] &lt;- c("BH",numsigBH,1,1 )
+tkinsert(treeWidget,"end","AdjPvalNode","BHNode",text= paste("BH, Sig:",  numsigBH ) )
+
+  }
+
+if (cbVal2=="1")  {
+adjpBY &lt;- adjustment (pval.Asymp,"BY")  
+assign("adjpBY",adjpBY ,envir=.GlobalEnv)
+    
+sigeneBY &lt;- Signif (pval.Asymp, FDRval ,"BY")
+numsigBY &lt;- nrow(sigeneBY )
+numsigBY[is.null(numsigBY)] &lt;- 0
+    result[2,] &lt;- c("BY",numsigBY ,3,1)
+tkinsert(treeWidget,"end","AdjPvalNode","BYNode",text= paste("BY, Sig:",  numsigBY ) )
+
+  }
+
+if (cbVal3=="1")  {
+adjpSS &lt;- adjustment (pval.Asymp,"SidakSS")
+assign("adjpSS",adjpSS ,envir=.GlobalEnv)
+      sigeneSS  &lt;- Signif (pval.Asymp, FDRval ,"SidakSS")
+      numsigSS &lt;- nrow(sigeneSS )
+numsigSS [is.null(numsigSS )] &lt;- 0
+    result[3,] &lt;- c("SidakSS",numsigSS,4,1 )
+tkinsert(treeWidget,"end","AdjPvalNode","Sidak1Node",text= paste ("Sidak SS, Sig:",  numsigSS ) )
+
+  }
+
+if (cbVal4=="1")  {
+      adjpSD &lt;- adjustment (pval.Asymp,"SidakSD")
+assign("adjpSD",adjpSD,envir=.GlobalEnv)
+sigeneSD &lt;- Signif (pval.Asymp, FDRval ,"SidakSD")
+      numsigSD &lt;- nrow(sigeneSD )
+numsigSD [is.null(numsigSD )] &lt;- 0
+    result[4,] &lt;- c("SidakSD",numsigSD,1,2 )
+tkinsert(treeWidget,"end","AdjPvalNode","Sidak2Node",text= paste ("Sidak SD, Sig:",  numsigSD ) )
+
+  }
+
+if (cbVal5=="1")  {
+      adjpHolm &lt;- adjustment (pval.Asymp,"Holm")
+assign("adjpHolm",adjpHolm,envir=.GlobalEnv)
+      sigeneHolm &lt;- Signif (pval.Asymp, FDRval ,"Holm")
+numsigHolm  &lt;- nrow(sigeneHolm )
+numsigHolm  [is.null(numsigHolm  )] &lt;- 0
+    result[5,] &lt;- c("Holm",numsigHolm,2,2  )
+tkinsert(treeWidget,"end","AdjPvalNode","HolmNode",text= paste( "Holm, Sig:",  numsigHolm  ) )
+
+  }
+
+if (cbVal6=="1")  {
+      adjpHoch &lt;- adjustment (pval.Asymp,"Hochberg")
+assign("adjpHoch",adjpHoch ,envir=.GlobalEnv)
+sigeneHoch &lt;- Signif (pval.Asymp, FDRval ,"Hochberg")
+numsigHoch &lt;- nrow(sigeneHoch)
+numsigHoch  [is.null(numsigHoch  )] &lt;- 0
+    result[6,] &lt;- c("Hochberg",numsigHoch , 3,2 )
+tkinsert(treeWidget,"end","AdjPvalNode","HocbergNode",text= paste ("Hocberg, Sig:",  numsigHoch ) )
+
+  }
+
+if (cbVal7=="1")  {
+adjpBon &lt;- adjustment (pval.Asymp,"Bonferroni")
+assign("adjpBon",adjpBon ,envir=.GlobalEnv)
+        sigeneBon &lt;- Signif (pval.Asymp, FDRval ,"Bonferroni")
+numsigBon  &lt;- nrow(sigeneBon)
+numsigBon  [is.null(numsigBon  )] &lt;- 0
+    result[7,] &lt;- c("Bonferroni",numsigBon ,4,2 )
+tkinsert(treeWidget,"end","AdjPvalNode","BonferroniNode",text=paste("Bonferroni, Sig:",  numsigBon  ) )
+  }
+
+num &lt;- nrow(exprs2Asymp )
+result2 &lt;- na.exclude(result)
+colnames(result2) &lt;- c("P-values Adjusment","Number of significant genes ", "color","line type")
+
+if (nrow(result2 )&gt; 1 ) 
+    try(showData(result2[,1:2] ,title= paste("Number of Significant Genes, FDR:", FDRval ,"  Number of Genes analyzed:",num)))
+
+if (nrow(result2 )== 1 ) 
+printasymp(num,FDRval ,result2)
+
+RowNumSig &lt;- unique(c(sigeneBH$row.num,sigeneBY$row.num,sigeneSS$row.num,sigeneSD$row.num,
+sigeneHolm$row.num,sigeneHoch$row.num,sigeneBon$row.num) )
+
+AdjPvalAll &lt;- cbind(adjpBH[,2], adjpBY[,2],adjpSS[,2],adjpSD[,2],adjpHolm[,2],adjpHoch[,2],adjpBon [,2])
+
+colnames(AdjPvalAll ) &lt;- paste(result2[,1],"p-val")
+if (ncol(AdjPvalAll )== 1 ) {
+PvalSig &lt;- AdjPvalAll [RowNumSig ,] 
+orderedRowNum &lt;- RowNumSig [order(PvalSig )]
+  }
+else {
+sumSig &lt;- apply(AdjPvalAll [RowNumSig ,] ,1,sum)
+orderedRowNum &lt;- RowNumSig [order(sumSig)]
+  }
+
+AdjPvalAll &lt;-round(AdjPvalAll , digits = 6)
+
+ Mu.Diff &lt;-  Mu.Diff.Asymp
+row.num &lt;- 1:nrow(exprs2Asymp)
+Res.Asymtot &lt;&lt;- data.frame(ProbeID,row.num  ,Mu.Diff,Direction ,E2Val,pval.Asymp,AdjPvalAll )
+      rownames(Res.Asymtot) &lt;&lt;- NULL
+
+AsymtotSigGenes1  &lt;- Res.Asymtot[orderedRowNum,]
+rownames(AsymtotSigGenes1) &lt;- NULL
+SigGenes.AsymptotE2 &lt;&lt;- AsymtotSigGenes1 
+
+if(cbVal10=="1" ) {
+try(showData(AsymtotSigGenes1 ,title= paste("List of Significant Genes based on Asymptotic P-values, FDR:", FDRval ,"  Number of Genes analyzed :",num)))
+  } 
+
+  tkconfigure(asym,cursor="arrow")
+  result3 &lt;- result2
+        assign("result3",result3 ,envir=.GlobalEnv)
+
+  }
+  }
+
+run.but &lt;-tkbutton(frame2,text=" Calculate ",command = AdjustBut)
+tkgrid(tklabel(frame2,text="                             "),run.but)
+
+tkgrid(tklabel(frame2,text="                             "))
+
+savesiggene &lt;- function() {
+save.result("SigGenes.AsymptotE2")
+  }
+savesiggene.but &lt;- tkbutton(frame2,text="Save significant genes",command=savesiggene)
+
+saveallgene &lt;- function() {
+Pval.AllGenes.Asymp &lt;&lt;- Res.Asymtot
+save.result("Pval.AllGenes.Asymp")
+  }
+saveallgene.but &lt;- tkbutton(frame2,text="Save results for all genes",command=saveallgene )
+
+tkgrid.configure(savesiggene.but, saveallgene.but , sticky="w")
+
+tkgrid(frame2)
+tkgrid.configure(frame2,sticky="w")
+
+#### Frame for Producing Plots ##
+
+frame3 &lt;- tkframe(spec.frm, relief="groove", borderwidth=2)
+
+cb8 &lt;- tkcheckbutton(frame3)
+cb9 &lt;- tkcheckbutton(frame3)
+cb11 &lt;- tkcheckbutton(frame3)
+
+cbValue8 &lt;- tclVar("0")
+cbValue9 &lt;- tclVar("0")
+cbValue11 &lt;- tclVar("0")
+
+tkconfigure(cb8,variable=cbValue8,text="Plot E2 vs Asymptotic p-values")
+tkconfigure(cb9,variable=cbValue9,text="Ranking Plot (Adjust the p-values first)")
+#tkconfigure(cb11,variable=cbValue11,text="Plot E2 vs Mu*dose.max-Mu*dose.min")
+tkconfigure(cb11,variable=cbValue11,text="Plot Fold change vs E2")
+
+label.plots &lt;-tklabel(frame3,text="Plots: ")
+tkgrid(label.plots  )
+tkgrid.configure(label.plots,sticky="w")
+tkgrid.configure(cb8,sticky="w")
+tkgrid.configure(cb11,sticky="w")
+tkgrid.configure(cb9,sticky="w")
+tkgrid(cb8)
+tkgrid(cb10)
+tkgrid(cb9)
+
+PlotBut &lt;- function () {
+
+if (!exists("pval.Asymp"))  
+   {  
+        ReturnVal &lt;- tkmessageBox(title="Error Message",message="The raw-pvalues have not calculated yet!",icon="info",type="ok")
+  if (tclvalue(ReturnVal)== "ok") tkfocus(asym)
+ } 
+   else {
+
+tkconfigure(asym,cursor="watch")
+
+     cbVal8 &lt;- as.character(tclvalue(cbValue8))
+cbVal9 &lt;- as.character(tclvalue(cbValue9))
+     cbVal11 &lt;- as.character(tclvalue(cbValue11))
+
+if (cbVal8=="1"){
+     rankPlot &lt;- function()
+{
+params &lt;- par(bg="white")
+x &lt;-cbind(res.Asymp[,1],-log10(pval.Asymp))
+colors  &lt;- densCols(x)
+  plot(x, col=colors, pch=20, lwd=3,xlab=" E2 ",
+                   ylab="-log10(Raw Asymptotic P-values)") 
+  }
+      Plot2(rankPlot,1.5,1.5, title="Windows Graph Output: E2 vs -log10(raw p-value) Plot" )     
+
+  }
+
+if (cbVal9=="1" ){
+
+      rankPlot &lt;- function()
+  {
+if (!exists("result3")) {
+params &lt;- par(bg="white")
+options(show.error.messages = FALSE)
+plot((1:nrow(exprs2Asymp )),main="P-values",xlab=" Index ",ylab="Raw P-values",ylim=c(0,1)) 
+ try(lines(sort(pval.Asymp),col=2,  lwd=2,lty=1,type="s"))
+
+  }
+else{  
+             
+ params &lt;- par(bg="white")
+options(warn = -1)
+plot((1:nrow(exprs2Asymp )),main="P-values",xlab=" Index ",ylab="P-values",ylim=c(0,1)) 
+try(lines(sort(adjpBH[,2] ),col=1,  lwd=2,lty=1,type="s"),T)
+try(lines(sort(adjpBY[,2] ),col=3,  lwd=2,lty=1,type="s"),T)
+try(lines(sort(adjpSS[,2] ),col=4,  lwd=2,lty=1,type="s"),T)
+try(lines(sort(adjpSD[,2] ),col=1,  lwd=2,lty=1,type="s"),T)
+try(lines(sort(adjpHolm[,2] ),col=2, lwd=2,lty=2,type="s"),T)
+try(lines(sort(adjpHoch[,2] ),col=3, lwd=2,lty=2,type="s"),T)
+try(lines(sort(adjpBon[,2] ),col=4,  lwd=2,lty=2,type="s"),T)
+ try(lines(sort(pval.Asymp),col=2,  lwd=2,lty=1,type="s"))
+abline(FDRval ,0)
+metd &lt;- result3[,1]
+col &lt;- result3[,3]
+type &lt;- result3[,4]
+legend((0.6*nrow(exprs2Asymp )), 0.9, c("Raw P-val",metd ),
+      col = c(2,as.numeric(col)),  lty = c(1,as.numeric(type)), lwd=2,  merge = TRUE )
+options(warn = 1)
+  }
+  }
+Plot2(rankPlot,1.7,1.5 ,title="Windows Graph Output: Plot p-values"  )
+  }
+
+if (cbVal11=="1") {
+      E2vsDiffPlot &lt;- function () {
+params &lt;- par(bg="white")
+options(show.error.messages = FALSE)
+x &lt;-cbind( Mu.Diff.Asymp ,res.Asymp[,1] )
+colors  &lt;- densCols(x)
+  
+plot (x,col=colors, pch=20, lwd=3,ylab="E2", xlab="Fold change" )
+  }
+             Plot2(E2vsDiffPlot ,1.5,1.5, title="Windows Graph Output: Fold change vs E2" )
+
+## Fold change = &gt; Mu*dose.max-Mu*dose.min ##
+  }
+tkconfigure(asym,cursor="arrow")
+options(show.error.messages = T)
+  }
+  }
+
+plot.but &lt;-tkbutton(frame3,text=" Produce plots ",command=PlotBut)
+tkgrid(tklabel(frame3,text="                             "),plot.but)
+
+tkgrid(frame3)
+tkgrid.configure(frame3,sticky="nsw")
+
+
+onExit &lt;- function()
+  {
+    ReturnVal &lt;&lt;- 0
+tkdestroy(asym)
+  }
+
+tkgrid(tklabel(buttonFrameasym ,text="                             "))
+Exit.but &lt;-tkbutton(buttonFrameasym ,text=" Exit the analysis ",command=onExit )
+tkgrid(Exit.but)
+tkgrid.configure(Exit.but,sticky="e")
+
+tkgrid(spec.frm)
+tkgrid(buttonFrameasym )
+  }
+  }
+</pre>
+
+<script Language="JScript">
+function findlink(pkg, fn) {
+var Y, link;
+Y = location.href.lastIndexOf("\\") + 1;
+link = location.href.substring(0, Y);
+link = link + "../../" + pkg + "/chtml/" + pkg + ".chm::/" + fn;
+location.href = link;
+}
+</script>
+
+
+<hr><div align="center">[Package <em>IsoGeneGUI</em> version 1.0 <a href="00Index.html">Index]</a></div>
+
+</body></html>

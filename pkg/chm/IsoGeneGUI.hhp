@@ -1,0 +1,72 @@
+[OPTIONS]
+Auto Index=Yes
+Contents file=IsoGeneGUI.toc
+Compatibility=1.1 or later
+Compiled file=IsoGeneGUI.chm
+Default topic=00Index.html
+Display compile progress=No
+Full-text search=Yes
+Full text search stop list file=..\..\..\gnuwin32\help\R.stp
+Title=R Help for package IsoGeneGUI
+
+
+[FILES]
+00Index.html
+Asymptotic.html
+AsymtotE2.html
+CVPlot.html
+CalcStat.html
+ChooseStat.html
+EditData.html
+IsoGeneGUI-package.html
+IsoGeneGUI.html
+IsoGenemMod.html
+IsoPlot.mod.html
+IsoPlotSldr.html
+IsoRawpMod.html
+IsoStat.html
+IsoTest.html
+IsofudgeMod.html
+IsofudgeMod2.html
+Isomean.html
+Isoplot.html
+IsopvalPlot.html
+IsopvaluePlot.html
+IsoqqstatMOD.html
+MeanDiff.html
+Permutation.html
+PermuteSAM.html
+Plot2.html
+PlotFPDlt.html
+PlotFdrDlt.html
+PlotSigDlt.html
+PvalAdj.html
+SEPlot.html
+SaveGraph.html
+Setseed.html
+Signif.html
+UserPlot.html
+UserPlotting.html
+about.html
+adjustment.html
+browse.html
+browse2.html
+diginum.html
+exit.html
+get.ResSAM.html
+getDose.html
+getExprs.html
+loadDataSet.html
+onHelp.html
+openFile.html
+printasymp.html
+printsummary.html
+samplot2.html
+save.result.html
+save.result.mult.html
+saveDir.html
+saveXls.html
+savingRwd.html
+showdata.html
+summ.html
+xfudge.html

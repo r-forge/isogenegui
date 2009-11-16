@@ -1,0 +1,833 @@
+<html><head><title>~~function to do ... ~~</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>Permutation(IsoGeneGUI)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   Permutation">
+<param name="keyword" value=" ~~function to do ... ~~">
+</object>
+
+
+<h2>~~function to do ... ~~</h2>
+
+
+<h3>Description</h3>
+
+<p>
+~~ A concise (1-5 lines) description of what the function does. ~~
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+Permutation()
+</pre>
+
+
+<h3>Details</h3>
+
+<p>
+~~ If necessary, more details than the description above ~~
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+~Describe the value returned
+If it is a LIST, use
+</p>
+<table summary="R argblock">
+<tr valign="top"><td><code>comp1 </code></td>
+<td>
+Description of 'comp1'</td></tr>
+<tr valign="top"><td><code>comp2 </code></td>
+<td>
+Description of 'comp2'</td></tr>
+</table>
+<p>
+
+...</p>
+
+<h3>Warning</h3>
+
+<p>
+....
+</p>
+
+
+<h3>Note</h3>
+
+<p>
+~~further notes~~ 
+</p>
+<p>
+~Make other sections like Warning with section{Warning }{....} ~
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>
+~~who you are~~
+</p>
+
+
+<h3>References</h3>
+
+<p>
+~put references to the literature/web site here ~
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+~~objects to See Also as <code><a onclick="findlink('utils', 'help.html')" style="text-decoration: underline; color: blue; cursor: hand">help</a></code>, ~~~
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+##---- Should be DIRECTLY executable !! ----
+##-- ==&gt;  Define data, use random,
+##--    or do  help(data=index)  for the standard data sets.
+
+## The function is currently defined as
+function() {
+
+if (!exists("exprs") | !exists("dose"))  
+   {  
+      ReturnVal &lt;- tkmessageBox(title="Error Message",message="Load the data first!",icon="error",type="ok")
+if (tclvalue(ReturnVal)== "ok") tkfocus(tt)
+  } 
+else {
+
+ iso&lt;-tktoplevel()
+
+tkwm.title(iso,"Permutation Analysis - IsoGene GUI") 
+
+      spec.frm &lt;- tkframe(iso,borderwidth=2)
+frame1 &lt;- tkframe(spec.frm, relief="groove", borderwidth=2)
+buttonFrameiso &lt;-tkframe(iso,borderwidth=2)
+
+### Select the RAW P value  ##
+      rb3 &lt;- tkradiobutton( frame1 )
+rb4 &lt;- tkradiobutton( frame1 )
+rbValue2 &lt;- tclVar("new")
+
+tkconfigure(rb3,variable=rbValue2,value="new",text="New Permutation")
+tkconfigure(rb4,variable=rbValue2,value="old", text="Obtain the raw p-value from a file:")
+      
+### Select genes ##
+rb1 &lt;- tkradiobutton( frame1 )
+rb2 &lt;- tkradiobutton( frame1 )
+rbValue1 &lt;- tclVar("all")
+tkconfigure(rb1,variable=rbValue1,value="all",text="All Genes")
+tkconfigure(rb2,variable=rbValue1,value="range", text="Genes Range")
+
+fromgene&lt;- tclVar("")
+FromNum&lt;-tkentry(frame1 ,width="8",textvariable=fromgene)
+
+togene &lt;- tclVar("")
+ToNum&lt;-tkentry(frame1 ,width="8",textvariable=togene )
+
+      tkgrid(rb3)
+tkgrid.configure(rb3,sticky="w")
+tkgrid( tklabel(frame1,text="Select the genes: "))
+  
+tkgrid(rb1)
+tkgrid(rb2,tklabel(frame1 ,text="From"),FromNum,tklabel(spec.frm,text="To"),ToNum)
+
+### Permutation ###
+numperm&lt;- tclVar("100")
+NumPerm &lt;-tkentry(frame1 ,width="5",textvariable=numperm)
+label.numperm &lt;- tklabel(frame1 ,text="      Number of Permutation: ")
+tkgrid(label.numperm,NumPerm )
+tkgrid.configure(label.numperm,sticky="w")
+
+cb14 &lt;- tkcheckbutton(frame1)
+cbValue14&lt;- tclVar("0")
+tkconfigure(cb14,variable=cbValue14,text="Save the permutations result:")
+
+      Save.but &lt;-tkbutton(frame1,text="browse",command=savingRwd )
+      SavefileName &lt;&lt;- tclVar("")
+SavefileEdit &lt;-tkentry(frame1,width="35",textvariable=SavefileName)
+
+      tkgrid(cb14,Save.but,SavefileEdit )
+
+Calc.Permut &lt;- function() {
+ 
+if (!exists("exprs")&amp;!exists("dose"))  
+       {  
+  ReturnVal &lt;- tkmessageBox(title="Error Message",message="No data set loaded, please load the dataset first!",icon="info",type="ok")
+  if (tclvalue(ReturnVal)== "ok") tkfocus(asym)
+ } 
+  else {
+  tkconfigure(iso,cursor="watch")
+  rbVal1 &lt;- as.character(tclvalue(rbValue1))
+  rbVal2 &lt;- as.character(tclvalue(rbValue2))
+  FDR &lt;- as.numeric(tclvalue(FDR))
+        NumPerm &lt;&lt;- as.numeric(tclvalue(numperm))
+  assign("NumPerm",NumPerm ,envir=.GlobalEnv)
+
+   cbVal14 &lt;- as.character(tclvalue(cbValue14))
+  tclvalue(PermuteText3 ) &lt;- " please wait..... " 
+     tclvalue(PermuteText4 ) &lt;- " "
+
+  if (rbVal2 == "old") { 
+ReturnVal &lt;- tkmessageBox(title="Error Message",message="You have choosen the wrong option !",icon="info",type="ok")
+  if (tclvalue(ReturnVal)== "ok") tkfocus(iso)
+                }
+  if (rbVal2 == "new") {
+RawPval &lt;- NULL
+      if (rbVal1=="all") {
+      exprs2Perm &lt;- exprs
+matchID &lt;- c(1:nrow(exprs2Perm ))
+  }
+    if (rbVal1=="range") {
+       exprs2Perm &lt;- exprs[tclvalue(fromgene):tclvalue(togene),] 
+matchID &lt;- c(tclvalue(fromgene):tclvalue(togene))
+      }
+ProbeID &lt;- rownames(exprs2Perm )
+    assign("exprs2Perm",exprs2Perm ,envir=.GlobalEnv)
+    assign("ProbeID",ProbeID ,envir=.GlobalEnv)
+assign("matchID",matchID ,envir=.GlobalEnv)
+
+## Calculating the Raw P values ### 
+RawPval &lt;- IsoRawpMod (dose, exprs2Perm , niter = NumPerm, seed = SeedNum)
+      assign("RawPval",RawPval ,envir=.GlobalEnv)
+N &lt;- length(ProbeID )
+try(tkdelete(treeWidget,"nodePerm") , silent = T )
+try( tkdelete(treeWidget,"RawPermNode"), silent = T )
+
+tkinsert(treeWidget,"end","Record3Node","RawPermNode",text="Permutation (raw) P-values")
+tkinsert(treeWidget,"end","RawPermNode","NumgeneNode",text=paste("Number gene analized: ",N) )
+tkinsert(treeWidget,"end","RawPermNode","NumpermNode",text=paste("Number of permutations: ",NumPerm ) )
+
+if (cbVal14 == "1") { 
+              save(RawPval,file=fileRwd )
+  }
+     }
+
+if (cbVal14 == "1") { 
+          ReturnVal &lt;- tkmessageBox(message="The permutation have finished and been saved",icon="info",type="ok")
+    if (tclvalue(ReturnVal)== "ok") tkfocus(iso)
+    tkconfigure(iso,cursor="arrow")
+ }
+
+else { 
+
+      ReturnVal &lt;-tkmessageBox(message="The permutation have been finished. Do you want to save the permutation?",
+icon="question",type="yesno",default="yes")
+
+##Here
+if (tclvalue(ReturnVal)== "no") 
+{ tkfocus(iso)
+ tclvalue(PermuteText3 ) &lt;- " "  }
+
+if (tclvalue(ReturnVal)== "yes")
+        {
+ savingRwd ()
+ save(RawPval,file=fileRwd )
+ tclvalue(PermuteText3 ) &lt;- "  " 
+ tkfocus(iso)
+            }
+tkconfigure(iso,cursor="arrow")
+
+  }
+
+ }
+ }
+
+Calculate.but &lt;-tkbutton(frame1,text=" Run Permutation ",command=Calc.Permut)
+#tkgrid( Calculate.but)
+
+PermuteText3 &lt;&lt;- tclVar("     ")
+label1 &lt;- tklabel(frame1,text=tclvalue(PermuteText3 ))
+tkconfigure(label1,textvariable=PermuteText3 )
+PermuteText4 &lt;&lt;- tclVar("     ")
+label2 &lt;- tklabel(frame1,text=tclvalue(PermuteText4 ))
+tkconfigure(label2,textvariable=PermuteText4 )
+
+tkgrid( Calculate.but,label1,label2)
+tkgrid( tklabel(frame1,text="                "))
+
+
+      Open.but &lt;-tkbutton(frame1 ,text="browse",command=browse)
+      pvalName &lt;&lt;- tclVar("       ")
+pvalEdit &lt;-tkentry(frame1,width="25",textvariable=pvalName )
+
+      tkgrid(rb4,Open.but,pvalEdit )
+tkgrid.configure(rb4,sticky="sw")
+
+      tkgrid.configure(frame1,sticky="nsw")
+ tkgrid(frame1)
+
+
+
+############# Choose the Test Statistic #########
+
+### Statistics Check button ##
+
+frame2 &lt;- tkframe(spec.frm, relief="groove", borderwidth=2)
+frame2.1 &lt;- tkframe(frame2 , borderwidth=2)
+frame2.2 &lt;- tkframe(frame2 , borderwidth=2)
+
+tkgrid.configure(frame2.1,sticky="w")
+tkgrid.configure(frame2.2,sticky="w")
+
+cb1 &lt;- tkcheckbutton(frame2.1)
+cb2 &lt;- tkcheckbutton(frame2.1)
+cb3 &lt;- tkcheckbutton(frame2.1)
+cb4 &lt;- tkcheckbutton(frame2.1)
+cb5 &lt;- tkcheckbutton(frame2.1)
+cbValue1 &lt;- tclVar("0")
+cbValue2 &lt;- tclVar("1")
+cbValue3 &lt;- tclVar("0")
+cbValue4 &lt;- tclVar("0")
+cbValue5 &lt;- tclVar("0")
+
+tkconfigure(cb1,variable=cbValue1,text="M")
+tkconfigure(cb2,variable=cbValue2,text="E2")
+tkconfigure(cb3,variable=cbValue3,text="Marcus")
+tkconfigure(cb4,variable=cbValue4,text="Williams")
+tkconfigure(cb5,variable=cbValue5,text="M'")
+
+label.stat &lt;- tklabel(frame2.1,text="Statistic: ")
+tkgrid(label.stat )
+tkgrid.configure(label.stat ,sticky="w")
+
+tkgrid(cb1,cb2,cb3,cb4,cb5)
+tkgrid.configure(cb1,cb2,cb3,cb4,cb5,sticky="w")
+
+tkgrid.configure(frame2,sticky="nsw")
+tkgrid.configure(frame2.1,sticky="w")
+
+##############
+### P-values Radio button ##
+####
+
+cb6 &lt;- tkcheckbutton(frame2.2)
+cb7 &lt;- tkcheckbutton(frame2.2)
+cb8 &lt;- tkcheckbutton(frame2.2)
+cb9 &lt;- tkcheckbutton(frame2.2)
+cb10 &lt;- tkcheckbutton(frame2.2)
+cb11 &lt;- tkcheckbutton(frame2.2)
+cb12 &lt;- tkcheckbutton(frame2.2)
+
+cbValue6 &lt;- tclVar("1")
+cbValue7 &lt;- tclVar("0")
+cbValue8 &lt;- tclVar("0")
+cbValue9 &lt;- tclVar("0")
+cbValue10 &lt;- tclVar("0")
+cbValue11 &lt;- tclVar("0")
+cbValue12 &lt;- tclVar("0")
+
+tkconfigure(cb6,variable=cbValue6,text="BH")
+tkconfigure(cb7,variable=cbValue7,text="BY")
+tkconfigure(cb8,variable=cbValue8,text="SidakSS")
+tkconfigure(cb9,variable=cbValue9,text="SidakSD")
+tkconfigure(cb10,variable=cbValue10,text="Holm")
+tkconfigure(cb11,variable=cbValue11,text="Hochberg")
+tkconfigure(cb12,variable=cbValue12,text="Bonferroni")
+
+      label.fdr &lt;- tklabel(frame2.2,text="Controlling FDR Procedure: ")
+tkgrid(label.fdr )
+tkgrid.configure(label.fdr,sticky="w")
+
+tkgrid(cb6,cb7)
+tkgrid.configure(cb6,sticky="w")
+
+ label.fwer &lt;- tklabel(frame2.2,text="Controlling FWER Procedure: ")
+tkgrid(label.fwer )
+tkgrid.configure(label.fwer ,sticky="w")
+tkgrid(cb8,cb9,cb10,cb11,cb12)
+tkgrid.configure(cb8,cb8,cb9,cb10,cb11,cb12,sticky="w")
+
+FDR &lt;- tclVar("0.05")
+FDRtxt &lt;-tkentry(frame2.2,width="4",textvariable=FDR)
+
+ label.FDR &lt;- tklabel(frame2.2,text="Overall Significant Level: ")
+tkgrid.configure(label.FDR ,FDRtxt  ,sticky="w")
+tkgrid(label.FDR, FDRtxt  )
+
+cb13 &lt;- tkcheckbutton(frame2.2)
+cbValue13 &lt;- tclVar("0")
+tkconfigure(cb13,variable=cbValue13,text="Display the significant genes")
+
+tkgrid(cb13)
+tkgrid.configure(cb13,sticky="w")
+
+#####
+
+PermResBut &lt;- function () {
+  if (!exists("RawPval"))  
+   {  
+             ReturnVal &lt;- tkmessageBox(title="Error Message",message="The raw-pvalues have not calculated yet!",icon="info",type="ok")
+       if (tclvalue(ReturnVal)== "ok") tkfocus(iso)
+      } 
+   else {
+   tkconfigure(iso,cursor="watch")
+
+  # Calculating foldchange ##
+N &lt;- nrow(exprs2Perm ) 
+ meandifPerm &lt;&lt;- MeanDiff (dose,exprs2Perm)
+     
+
+      Mu.high_low.Diff &lt;- meandifPerm 
+
+assign("Mu.high_low.Diff",Mu.high_low.Diff , envir=.GlobalEnv)
+
+       ### Split the p-values ####
+         twosided.RawPval &lt;- RawPval[[2]]
+         assign("twosided.RawPval",twosided.RawPval,envir=.GlobalEnv)
+   
+
+   cbVal1 &lt;- as.character(tclvalue(cbValue1))
+   cbVal2 &lt;- as.character(tclvalue(cbValue2))
+   cbVal3 &lt;- as.character(tclvalue(cbValue3))
+   cbVal4 &lt;- as.character(tclvalue(cbValue4))
+   cbVal5 &lt;- as.character(tclvalue(cbValue5))
+   cbVal6 &lt;- as.character(tclvalue(cbValue6))
+   cbVal7 &lt;- as.character(tclvalue(cbValue7))
+        cbVal8 &lt;- as.character(tclvalue(cbValue8))
+   cbVal9 &lt;- as.character(tclvalue(cbValue9))
+        cbVal10 &lt;- as.character(tclvalue(cbValue10))
+        cbVal11 &lt;- as.character(tclvalue(cbValue11))
+        cbVal12 &lt;- as.character(tclvalue(cbValue12))
+        cbVal13 &lt;- as.character(tclvalue(cbValue13))
+
+   FDRval &lt;&lt;- as.numeric(tclvalue(FDR))
+
+    ### Calculating Statistics  ### 
+
+   N &lt;- nrow(exprs2Perm)
+
+   ## Add info on the tree ###
+         ## Here 
+   try( tkdelete(treeWidget,"AdjPvalPermNode"), silent = T )
+   tkinsert(treeWidget,"end","Record3Node","AdjPvalPermNode",text= paste ("Adjusted P-values", ",  FDR: ", FDRval) )
+
+     stat1 &lt;- stat2 &lt;- stat3 &lt;- stat4 &lt;- stat5 &lt;- NULL
+
+   if (cbVal1=="1") 
+stat1 &lt;-("M")
+
+   if (cbVal2=="1") 
+stat2 &lt;-("E2")
+
+   if (cbVal3=="1") 
+stat3 &lt;-("Marcus")
+
+   if (cbVal4=="1") 
+stat4 &lt;-("Williams")
+
+   if (cbVal5=="1") 
+stat5 &lt;-("ModM")
+
+   stat.list &lt;-c(stat1,stat2,stat3,stat4,stat5)
+   proc1 &lt;- proc3 &lt;- proc2 &lt;- proc4 &lt;- proc5 &lt;- proc6 &lt;- proc7 &lt;- NULL
+   linecd &lt;- matrix(NA,7,3)
+
+   if (cbVal6=="1") {
+proc1 &lt;-("BH")
+linecd[1,] &lt;- c("BH",1,1)
+
+  }
+
+   if (cbVal7=="1") {
+proc2 &lt;-("BY")
+linecd[2,] &lt;- c("BY",3,1)
+
+  }
+
+   if (cbVal8=="1") {
+proc3 &lt;-("SidakSS")
+linecd[3,] &lt;- c("SidakSS",4,1)
+  }
+
+   if (cbVal9=="1") {
+proc4 &lt;-("SidakSD")
+linecd[4,] &lt;- c("SidakSD",1,2)
+
+  }
+
+   if (cbVal10=="1") {
+proc5 &lt;-("Holm")
+linecd[5,] &lt;- c("Holm",2,2)
+
+  }
+
+   if (cbVal11=="1") {
+proc6 &lt;-("Hochberg")
+linecd[6,] &lt;- c("Hochberg",3,2)
+
+  }
+   if (cbVal12=="1") {
+proc7 &lt;-("Bonferroni")
+linecd[7,] &lt;- c("Bonferroni",4,2)
+
+  }
+
+         proc.list &lt;- c(proc1, proc3 ,proc2, proc4,proc5 ,proc6, proc7)
+         objectname &lt;- numsig &lt;- numsigN &lt;- matrix(0,length(stat.list),length(proc.list))
+   linecd &lt;&lt;- na.exclude(linecd)
+   RowNumSig &lt;- NULL
+   RowNumSig &lt;- vector("list", length(stat.list))
+   MadjpALL &lt;- vector("list", length(stat.list))
+
+   Madjp &lt;-matrix(0,length(matchID),length(proc.list)+1)
+   listgene &lt;- listgene2 &lt;-NULL
+         for (i in (1:length(stat.list)))
+     {    
+   tkinsert(treeWidget,"end","AdjPvalPermNode",paste("StatNode",stat.list[i],sep=""), text=stat.list[i] )
+
+    for (j in (1:length(proc.list)))
+  {  
+
+       TestResult &lt;- IsoTest (twosided.RawPval, FDRval , type = proc.list[j], stat = stat.list[i])
+  Madjp[,1] &lt;- PvalAdj(twosided.RawPval, FDRval , type = proc.list[j], stat = stat.list[i])[,1]
+       Madjp[,j+1] &lt;- PvalAdj(twosided.RawPval, FDRval , type = proc.list[j], stat = stat.list[i])[,2]
+  nsig &lt;- nrow(TestResult) 
+  nsig [is.null(nsig)] &lt;- 0
+
+ tkinsert(treeWidget,"end",paste("StatNode",stat.list[i], sep=""),paste(stat.list[i],proc.list[j],sep="" ) ,
+text= paste ( proc.list[j], ",  Sig: ",  nsig )  )
+
+              Stat &lt;- get (paste(stat.list[i],"Val", sep="")) 
+  Result &lt;- data.frame(TestResult[,1:2], Stat[TestResult$row.num],TestResult[,3:4],
+ Mu.high_low.Diff[TestResult$row.num],Direction [TestResult$row.num]  )
+  names(Result) &lt;- c("Probe ID ", "Row Number",stat.list[i],"Raw P-values",
+ paste(proc.list[j],"Adj P-values"),"Mu.high-Mu.low","Direction"  )
+              rownames(Result)&lt;- NULL
+              
+  objectname[i,j] &lt;-paste("result.",stat.list[i],".",proc.list[j],sep = "" ) 
+  numsig [i,j] &lt;- paste("numsig.",stat.list[i],".",proc.list[j],sep = "" ) 
+ 
+  numsigN [i,j] &lt;- nsig
+      assign(numsig[i,j],nsig ,envir=.GlobalEnv)
+  assign(objectname[i,j],Result,envir=.GlobalEnv)
+
+  RowNumSig[[i]] &lt;- unique(append(RowNumSig[[i]],Result[,2] ))
+  MadjpALL [[i]] &lt;- Madjp
+
+       }
+
+AdjPvalALL &lt;- MadjpALL [[i]]
+
+### Assigning the Adjusted p value matrix to the global enviroment ###
+
+assign(paste("PVal",stat.list[i],sep=""),AdjPvalALL ,envir=.GlobalEnv)
+RowSig &lt;- RowNumSig[[i]]
+colnames(AdjPvalALL) &lt;- c("raw p-val",paste(  proc.list,"p-val") )
+
+AdjPvalSig &lt;- AdjPvalALL[RowSig,-1]
+if ( ncol(AdjPvalALL)&gt; 2 ) {
+sumSig &lt;- apply(AdjPvalSig ,1,sum)
+orderedRowNum &lt;- RowSig [order(sumSig)]
+  }
+if ( ncol(AdjPvalALL)&lt; 3 ) {
+orderedRowNum &lt;- RowSig [order(AdjPvalSig)]
+  }
+ 
+
+AdjPvalALL &lt;-round(AdjPvalALL , digits = 6)
+testStat &lt;- get(paste(stat.list[i],"Val",sep=""))
+
+row.num &lt;- 1:length(ProbeID )
+Res.PermGenes &lt;- data.frame(ProbeID,row.num,meandifPerm ,Direction ,testStat )
+names(Res.PermGenes) &lt;- c("ProbeID ","row.num","Mean-Diff","Direction",stat.list[i])
+ rownames(Res.PermGenes ) &lt;- NULL
+Res.PermGenes1 &lt;- data.frame (Res.PermGenes ,AdjPvalALL )
+Res.PermSig &lt;- Res.PermGenes1[orderedRowNum,]
+rownames(Res.PermSig) &lt;- NULL
+
+listgene[i] &lt;- paste("SignGenes.Perm.",stat.list[i],".statistic",sep = "" )  
+assign(listgene[i],Res.PermSig,envir=.GlobalEnv)
+assign("listgene",listgene,envir=.GlobalEnv)
+
+
+listgene2[i] &lt;- paste("ResultAllGenes.Perm",stat.list[i],".statistic",sep = "" )  
+assign(listgene2[i],Res.PermGenes1 ,envir=.GlobalEnv)
+assign("listgene2",listgene2,envir=.GlobalEnv)
+
+
+     if (cbVal13=="1")  {
+  try(showData(Res.PermSig,title= paste("Significant Genes based on Permutation P-values, Test Statistic: ",
+  stat.list[i],"  FDR:", FDRval ,"  N :",N )))
+  }
+      }
+         rownum &lt;- length(proc.list) * length(stat.list)
+   numsigPerm &lt;- matrix(0,rownum,3)
+   numsigPerm [,1] &lt;- rep(stat.list, each=length(proc.list))
+   numsigPerm [,2] &lt;- proc.list
+   numsigPerm [,3] &lt;- as.vector(t(numsigN))
+   colnames(numsigPerm) &lt;- c("Statistics", "P-value Adjustment" , " Number of Significant Genes")
+   showData(numsigPerm, title= paste("Number of Significant Genes with Permutation, FDR:",FDRval , ", N:",N,"genes" ))
+ 
+        tkconfigure(iso,cursor="arrow")
+    }   
+
+  }
+  run.but &lt;-tkbutton(frame2,text=" Proceed  ",command=PermResBut)
+  tkgrid(run.but)
+
+tkgrid(tklabel(frame2,text="                             "))
+
+  tkgrid(frame2)
+
+##### Frame saving the list of significant genes ####
+
+frame2.1 &lt;- tkframe(frame2 ,relief="groove", borderwidth=2)
+
+savesiggene &lt;- function() {
+save.result.mult(listgene )
+  }
+savesiggene.but &lt;- tkbutton(frame2.1 ,text="Save significant genes",command=savesiggene)
+
+saveallgene &lt;- function() {
+save.result.mult(listgene2 )
+  }
+saveallgene.but &lt;- tkbutton(frame2.1 ,text="Save results for all genes",command=saveallgene )
+
+tkgrid.configure(savesiggene.but, saveallgene.but , sticky="w")
+
+  tkgrid(frame2.1)
+
+     
+############
+
+#### Frame for Producing Plots ##
+
+    frame3 &lt;- tkframe(spec.frm, relief="groove", borderwidth=2)
+frame3.1 &lt;- tkframe(frame3 , borderwidth=2)
+
+label.plots &lt;-tklabel(frame3,text="Plots: ")
+tkgrid(label.plots)
+tkgrid.configure(label.plots,sticky="w")
+
+cb18 &lt;- tkcheckbutton(frame3.1)
+cb19 &lt;- tkcheckbutton(frame3.1)
+cb20 &lt;- tkcheckbutton(frame3.1)
+cb21 &lt;- tkcheckbutton(frame3.1)
+cb22 &lt;- tkcheckbutton(frame3.1)
+cbValue18 &lt;- tclVar("0")
+cbValue19 &lt;- tclVar("1")
+cbValue20 &lt;- tclVar("0")
+cbValue21 &lt;- tclVar("0")
+cbValue22 &lt;- tclVar("0")
+
+tkconfigure(cb18 ,variable=cbValue18,text="M")
+tkconfigure(cb19 ,variable=cbValue19,text="E2")
+tkconfigure(cb20 ,variable=cbValue20,text="Marcus")
+tkconfigure(cb21 ,variable=cbValue21,text="Williams")
+tkconfigure(cb22 ,variable=cbValue22,text="M'")
+
+label.stat3 &lt;- tklabel(frame3,text="Specify the statistic that you want to plot: ")
+tkgrid(label.stat3 )
+tkgrid.configure(label.stat3 ,sticky="w")
+
+tkgrid(cb18 ,cb19 ,cb20 ,cb21 ,cb22 )
+tkgrid.configure(cb18 ,cb19 ,cb20 ,cb21 ,cb22,sticky="w")
+
+tkgrid(frame3.1)
+tkgrid.configure(frame3.1,sticky="w")
+#tkgrid.configure(frame3,sticky="nsw")
+#tkgrid.configure(frame3,sticky="w")
+
+cb15 &lt;- tkcheckbutton(frame3)
+cb16 &lt;- tkcheckbutton(frame3)
+cb17 &lt;- tkcheckbutton(frame3)
+
+cbValue15 &lt;- tclVar("0")
+cbValue16 &lt;- tclVar("0")
+cbValue17 &lt;- tclVar("0")
+
+tkconfigure(cb15,variable=cbValue15,text="Plot of the specified statistic vs its raw p-values")
+tkconfigure(cb16,variable=cbValue16,text="Plot of fold change vs the specified statistic")
+tkconfigure(cb17,variable=cbValue17,text="P-values plot of the specified statistic (adjust the p-value first!)")
+
+label.plots &lt;-tklabel(frame3,text="Specify the plot(s): ")
+tkgrid(label.plots  )
+tkgrid.configure(label.plots,sticky="w")
+tkgrid.configure(cb15,sticky="w")
+tkgrid.configure(cb16,sticky="w")
+tkgrid.configure(cb17,sticky="w")
+tkgrid(cb15)
+tkgrid(cb16)
+tkgrid(cb17)
+
+     PlotBut &lt;- function () {
+
+if (!exists("twosided.RawPval"))  
+     {  
+           ReturnVal &lt;- tkmessageBox(title="Error Message",message="The raw-pvalues have not calculated yet!",icon="error",type="ok")
+     if (tclvalue(ReturnVal)== "ok") tkfocus(iso)
+   } 
+   else {
+
+tkconfigure(iso,cursor="watch")
+
+     cbVal15 &lt;- as.character(tclvalue(cbValue15))
+cbVal16 &lt;- as.character(tclvalue(cbValue16))
+     cbVal17 &lt;- as.character(tclvalue(cbValue17))
+cbVal18 &lt;- as.character(tclvalue(cbValue18))
+cbVal19 &lt;- as.character(tclvalue(cbValue19))
+     cbVal20 &lt;- as.character(tclvalue(cbValue20))
+cbVal21 &lt;- as.character(tclvalue(cbValue21))
+cbVal22 &lt;- as.character(tclvalue(cbValue22))
+
+stat6 &lt;- stat7 &lt;- stat8 &lt;- stat9 &lt;- stat10 &lt;-  NULL
+
+   if (cbVal18=="1") 
+stat6 &lt;-("M")
+
+   if (cbVal19=="1") 
+stat7 &lt;-("E2")
+
+   if (cbVal20=="1") 
+stat8 &lt;-("Marcus")
+
+   if (cbVal21=="1") 
+stat9 &lt;-("Williams")
+
+   if (cbVal22=="1") 
+stat10 &lt;-("ModM")
+
+   stat.list2 &lt;&lt;-c(stat6 ,stat7 ,stat8 ,stat9 ,stat10 )
+
+twosd.pvalmat &lt;&lt;- twosided.RawPval[,-1]
+colnames(twosd.pvalmat ) &lt;&lt;- c("E2","Williams","Marcus","M","ModM")
+
+if (cbVal15=="1"){
+       for (i in (1:length(stat.list2)))
+      {
+ stat &lt;- stat.list2[i]
+ rankPlot &lt;- function()
+{
+params &lt;- par(bg="white")
+pvalue &lt;- twosd.pvalmat[,which(colnames(twosd.pvalmat ) == stat)]
+      statval &lt;- get(paste(stat,"Val",sep="")) 
+x &lt;-cbind(pvalue , statval )
+colors  &lt;- densCols(x)
+  plot(x, col=colors, pch=20, lwd=3,xlab= stat,
+                   ylab="-log10(Raw asymptotic p-values)") 
+  }
+      Plot2(rankPlot,1.5,1.5, title= paste("Windows Graph Output:", stat.list2[i],"vs -log10(raw p-value) Plot" ) )
+
+           }
+     }
+   
+if (cbVal17=="1" ){
+
+       for (i in (1:length(stat.list2)))
+        { 
+    stat &lt;- stat.list2[i]
+               rankPlot &lt;- function() {
+    
+     if (!exists("linecd")) {    ### Plot only Raw-Pvalue ###
+       params &lt;- par(bg="white")
+       options(show.error.messages = FALSE)
+ pvalue &lt;- twosd.pvalmat[,which(colnames(twosd.pvalmat ) == stat)]
+ plot((1:length(matchID)),main="P-values",xlab=" Index ",ylab="Raw P-values",ylim=c(0,1)) 
+  try(lines(sort(pvalue ),col=2,  lwd=2,lty=1,type="s"))
+ options(show.error.messages = T)
+ }
+else {  
+              pval.mat &lt;- get(paste("PVal",stat,sep="")) 
+ params &lt;- par(bg="white")
+plot((1:length(matchID)),main="P-values",xlab=" Index ",ylab=paste("P-values",stat),ylim=c(0,1))
+         lines(sort(pval.mat[,1]),col=2,  lwd=2,lty=1,type="s")
+ 
+for (j in (1:ncol(pval.mat)-1))
+ {
+   col &lt;- linecd[j,2]
+   typel &lt;- linecd[j,3]
+   lines(sort(pval.mat[,j+1]),col=as.numeric(col),  lwd=2,lty=as.numeric(typel))
+  }
+abline(FDRval ,0)
+metd &lt;- linecd[,1]
+col &lt;- linecd[,2]
+typel &lt;- linecd[,3]
+legend((0.7*length(matchID)), 0.5, c("Raw P-val",metd ),
+      col = c(2,as.numeric(col)),  lty = c(1,as.numeric(typel)), lwd=2,  merge = TRUE )
+  }
+ } 
+ Plot2(rankPlot,1.7,1.5 ,title=paste("Windows Graph Output: Plot p-values of ",stat)   )
+ 
+  }
+
+   }
+
+if (cbVal16=="1") {
+   for (i in (1:length(stat.list2)))
+     {
+ stat &lt;- stat.list2[i]
+    E2vsDiffPlot &lt;- function () {
+   params &lt;- par(bg="white")
+   options(show.error.messages = FALSE)
+   statval &lt;- get(paste(stat,"Val",sep="")) 
+   x &lt;-cbind(meandifPerm ,statval  )
+   colors  &lt;- densCols(x)
+     plot (x,col=colors, pch=20, lwd=3,ylab=stat, xlab="Fold change" )
+  }
+
+      Plot2(E2vsDiffPlot ,1.5,1.5, title= paste("Windows Graph Output:", stat.list2[i],"vs Fold change Plot" ) )
+
+           }
+
+   }
+
+  }
+tkconfigure(iso,cursor="arrow")
+
+  }
+
+options(show.error.messages = T)
+
+plot.but &lt;-tkbutton(frame3,text=" Produce plots ",command=PlotBut)
+tkgrid(tklabel(frame3,text="                             "),plot.but)
+
+tkgrid(frame3)
+tkgrid.configure(frame3,sticky="nsw")
+
+############
+
+  onExit &lt;- function()
+  {
+    ReturnVal &lt;&lt;- 0
+      tkgrab.release(iso)
+tkdestroy(iso)
+  }
+
+
+  Exit.but &lt;-tkbutton(buttonFrameiso ,text=" Exit the analysis",command=onExit )
+  tkgrid(Exit.but)
+  tkgrid.configure(Exit.but,sticky="e")
+
+  tkgrid(spec.frm)
+  tkgrid(buttonFrameiso)
+
+ }
+  }
+</pre>
+
+<script Language="JScript">
+function findlink(pkg, fn) {
+var Y, link;
+Y = location.href.lastIndexOf("\\") + 1;
+link = location.href.substring(0, Y);
+link = link + "../../" + pkg + "/chtml/" + pkg + ".chm::/" + fn;
+location.href = link;
+}
+</script>
+
+
+<hr><div align="center">[Package <em>IsoGeneGUI</em> version 1.0 <a href="00Index.html">Index]</a></div>
+
+</body></html>

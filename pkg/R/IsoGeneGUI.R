@@ -51,7 +51,7 @@ tkadd(fileMenu, "cascade", label = "Exit", command = exit)
 tkadd(topMenu, "cascade", label = "File", menu = fileMenu)
 
 tkadd(analysisMenu, "cascade", label = "Set Seed", command = Setseed)
-tkadd(analysisMenu, "cascade", label = "Asymptotic E2", command = Asymptotic )
+tkadd(analysisMenu, "cascade", label = "Likelihood Ratio Test (E2)", command = ExactE2 )
 tkadd(analysisMenu, "cascade", label = "Permutation", command = Permutation )
 
 
@@ -81,7 +81,6 @@ fontTextLabel <- tkfont.create(family="times",size=10)
 tkgrid(tklabel(welcome ,text="                             ",font=fontHeading))
 tkgrid(tklabel(welcome ,text="    Welcome to IsoGene GUI   ",font=fontHeading))
 tkgrid(tklabel(welcome ,text=" A Graphical User Interface for dose response analysis in microarray experiments",font=fontTextLabel))
-#tkgrid(tklabel(welcome ,text=" contact: setia.pramana@uhasselt.be",font=fontTextLabel))
 tkgrid(tklabel(welcome ,text="                              ",font=fontHeading))
 
 SeedNum <<- 1234
@@ -99,7 +98,7 @@ tkgrid.configure(yScr,stick="nsw")
 # "Record1Node", which displays the text "Record 1", etc.
 
 tkinsert(treeWidget,"end","root","Record1Node",text="Data")
-tkinsert(treeWidget,"end","root","Record2Node",text="Asymptotic E2")
+tkinsert(treeWidget,"end","root","Record2Node",text="Likelihood Ratio Test (E2)")
 tkinsert(treeWidget,"end","root","Record3Node",text="Permutation ")
 tkinsert(treeWidget,"end","root","Record4Node",text="SAM")
 

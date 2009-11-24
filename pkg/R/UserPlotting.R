@@ -11,8 +11,8 @@ function () {
  object.list.asymp <- object.list.perm  <- object.list.SAM <- NULL
   
  if (exists("pval.Asymp") )  {
-AsymptoticPval.E2 <<- pval.Asymp
-object.list.asymp <- c("AsymptoticPval.E2","E2.value")
+ExactPval.E2 <<- pval.Asymp
+object.list.asymp <- c("ExactPval.E2","E2.value")
 FoldChange <<- Mu.Diff.Asymp
 E2.value <<- E2Val.Asymp 
    }
@@ -81,7 +81,7 @@ Williams.q.value <<-Qval.mat[,4]
   ModifiedM.q.value <<-Qval.mat[,5]
 
   object.list.SAM <- c("SAM.M.value","SAM.E2.value","SAM.Marcus.value","SAM.Williams.value","SAM.ModifiedM.value",
-     "AsymptoticPval.E2","E2.q.value","M.q.value","Williams.q.value","Marcus.q.value","ModifiedM.q.value")
+     "ExactPval.E2","E2.q.value","M.q.value","Williams.q.value","Marcus.q.value","ModifiedM.q.value")
  
      }
 

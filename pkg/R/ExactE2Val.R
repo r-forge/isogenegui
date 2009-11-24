@@ -1,4 +1,4 @@
-`AsymtotE2` <-
+`ExactE2Val` <-
 function (x,y)
 #
   {

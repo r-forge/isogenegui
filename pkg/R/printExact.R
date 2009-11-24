@@ -1,9 +1,9 @@
-`printasymp` <-
+`printExact` <-
 function(num,FDR,result)
 {
   
 infoBox  <- tktoplevel()
-tkwm.title(infoBox,"Asymptotic E2") 
+tkwm.title(infoBox,"Global Likelihood Ratio Test (E2)") 
 
        xscr <- tkscrollbar(infoBox, repeatinterval=5,orient="horizontal",
                        command=function(...)tkxview(txt,...))
@@ -18,7 +18,7 @@ tkgrid(txt,yscr)
       tkgrid.configure(xscr,sticky="ew")
        
       tkinsert(txt,"end","                               \n")
-tkinsert(txt,"end", paste("Results for E2 using Asymptotic p-value \n"))
+tkinsert(txt,"end", paste("Results for E2 using exact distribution p-value \n"))
 tkinsert(txt,"end","                               \n")
       tkinsert(txt,"end", paste("Number of Genes analyzed  :", num ," \n"))
       tkinsert(txt,"end", paste("Overall significant level :", FDR ," \n"))

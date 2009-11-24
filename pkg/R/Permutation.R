@@ -556,9 +556,6 @@ tkgrid.configure(cb18 ,cb19 ,cb20 ,cb21 ,cb22,sticky="w")
 
 tkgrid(frame3.1)
 tkgrid.configure(frame3.1,sticky="w")
-#tkgrid.configure(frame3,sticky="nsw")
-#tkgrid.configure(frame3,sticky="w")
-
 
 cb15 <- tkcheckbutton(frame3)
 cb16 <- tkcheckbutton(frame3)
@@ -637,7 +634,7 @@ pvalue <- twosd.pvalmat[,which(colnames(twosd.pvalmat ) == stat)]
 x <-cbind(pvalue , statval )
 colors  <- densCols(x)
   plot(x, col=colors, pch=20, lwd=3,xlab= stat,
-                   ylab="-log10(Raw asymptotic p-values)") 
+                   ylab="-log10(Raw p-values)") 
 }
       Plot2(rankPlot,1.5,1.5, title= paste("Windows Graph Output:", stat.list2[i],"vs -log10(raw p-value) Plot" ) )
 

@@ -1,6 +1,7 @@
-`Asymptotic` <-
+`ExactE2` <-
 function() 
 
+## Asymp in this function corresponds to exact pvalues ##
 {
 
 if (!exists("exprs") | !exists("dose"))  
@@ -12,7 +13,7 @@ else {
 
 
 asym<-tktoplevel()
-tkwm.title(asym,"Asymptotic E2 Analysis") 
+tkwm.title(asym,"Global Likelihood Ratio Test (E2) Analysis") 
 
       spec.frm <- tkframe(asym,borderwidth=2)
 frame1 <- tkframe(spec.frm, relief="groove", borderwidth=2)
@@ -56,13 +57,13 @@ tkconfigure(asym,cursor="watch")
          assign("matchIDAsymp",matchID  ,envir=.GlobalEnv)
 
 # foldchange ##
-      res.Asymp <<-AsymtotE2(dose,exprs2Asymp )
+      res.Asymp <<-ExactE2Val(dose,exprs2Asymp )
 pval.Asymp  <<- res.Asymp[,2]
  ProbeID <<- rownames(exprs2Asymp)
 Mu.Diff.Asymp <<-  MeanDiff (dose,exprs2Asymp)
 E2Val.Asymp <<- res.Asymp[,1]
 N <- length(ProbeID )
-      ReturnVal <- tkmessageBox(message="The calculation of asymptotic p-values have been finished",icon="info",type="ok")
+      ReturnVal <- tkmessageBox(message="The calculation of the p-values have been finished",icon="info",type="ok")
 if (tclvalue(ReturnVal)== "ok") tkfocus(asym)
 tkconfigure(asym,cursor="arrow")
 
@@ -76,7 +77,7 @@ tkinsert(treeWidget,"end","AsymPvalNode","NumGeneNode",text=paste("Number gene a
 
 Calculate.but <-tkbutton(frame1,text=" Calculate ",command=Calc.Asymp)
 
-lab1 <- tklabel(frame1,text="Calculate the Asymptotic p-values for E2 ")
+lab1 <- tklabel(frame1,text="Calculate the p-values for E2 ")
 lab2 <- tklabel(frame1,text="Select the genes: ")
 
 tkgrid.configure(lab1,sticky="w")
@@ -262,7 +263,7 @@ if (nrow(result2 )> 1 )
     try(showData(result2[,1:2] ,title= paste("Number of Significant Genes, FDR:", FDRval ,"  Number of Genes analyzed:",num)))
 
 if (nrow(result2 )== 1 ) 
-printasymp(num,FDRval ,result2)
+printexact(num,FDRval ,result2)
 
 RowNumSig <- unique(c(sigeneBH$row.num,sigeneBY$row.num,sigeneSS$row.num,sigeneSD$row.num,
 sigeneHolm$row.num,sigeneHoch$row.num,sigeneBon$row.num) )
@@ -293,7 +294,7 @@ SigGenes.AsymptotE2 <<- AsymtotSigGenes1
 
 
 if(cbVal10=="1" ) {
-try(showData(AsymtotSigGenes1 ,title= paste("List of Significant Genes based on Asymptotic P-values, FDR:", FDRval ,"  Number of Genes analyzed :",num)))
+try(showData(AsymtotSigGenes1 ,title= paste("List of Significant Genes based on exact P-values, FDR:", FDRval ,"  Number of Genes analyzed :",num)))
 } 
 
   tkconfigure(asym,cursor="arrow")
@@ -338,9 +339,8 @@ cbValue8 <- tclVar("0")
 cbValue9 <- tclVar("0")
 cbValue11 <- tclVar("0")
 
-tkconfigure(cb8,variable=cbValue8,text="Plot E2 vs Asymptotic p-values")
+tkconfigure(cb8,variable=cbValue8,text="Plot E2 values vs Exact p-values")
 tkconfigure(cb9,variable=cbValue9,text="Ranking Plot (Adjust the p-values first)")
-#tkconfigure(cb11,variable=cbValue11,text="Plot E2 vs Mu*dose.max-Mu*dose.min")
 tkconfigure(cb11,variable=cbValue11,text="Plot Fold change vs E2")
 
 label.plots <-tklabel(frame3,text="Plots: ")
@@ -376,7 +376,7 @@ params <- par(bg="white")
 x <-cbind(res.Asymp[,1],-log10(pval.Asymp))
 colors  <- densCols(x)
   plot(x, col=colors, pch=20, lwd=3,xlab=" E2 ",
-                   ylab="-log10(Raw Asymptotic P-values)") 
+                   ylab="-log10(Raw Exact P-values)") 
 }
       Plot2(rankPlot,1.5,1.5, title="Windows Graph Output: E2 vs -log10(raw p-value) Plot" )     
 

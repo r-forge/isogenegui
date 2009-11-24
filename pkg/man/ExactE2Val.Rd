@@ -1,12 +1,12 @@
-\name{AsymtotE2}
-\alias{AsymtotE2}
+\name{ExactE2Val}
+\alias{ExactE2Val}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{ ~~function to do ... ~~ }
 \description{
   ~~ A concise (1-5 lines) description of what the function does. ~~
 }
 \usage{
-AsymtotE2(x, y)
+ExactE2Val(x, y)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{

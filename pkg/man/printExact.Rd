@@ -1,12 +1,12 @@
-\name{printasymp}
-\alias{printasymp}
+\name{printExact}
+\alias{printExact}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{ ~~function to do ... ~~ }
 \description{
   ~~ A concise (1-5 lines) description of what the function does. ~~
 }
 \usage{
-printasymp(num, FDR, result)
+printExact(num, FDR, result)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -41,7 +41,7 @@ function(num,FDR,result)
 {
   
 infoBox  <- tktoplevel()
-tkwm.title(infoBox,"Asymptotic E2") 
+tkwm.title(infoBox,"Global Likelihood Ratio Test (E2)") 
 
        xscr <- tkscrollbar(infoBox, repeatinterval=5,orient="horizontal",
                        command=function(...)tkxview(txt,...))
@@ -56,7 +56,7 @@ tkgrid(txt,yscr)
       tkgrid.configure(xscr,sticky="ew")
        
       tkinsert(txt,"end","                               \n")
-tkinsert(txt,"end", paste("Results for E2 using Asymptotic p-value \n"))
+tkinsert(txt,"end", paste("Results for E2 using exact distribution p-value \n"))
 tkinsert(txt,"end","                               \n")
       tkinsert(txt,"end", paste("Number of Genes analyzed  :", num ," \n"))
       tkinsert(txt,"end", paste("Overall significant level :", FDR ," \n"))

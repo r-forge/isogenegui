@@ -1,154 +1,68 @@
 \name{IsoGeneGUI}
 \alias{IsoGeneGUI}
-%- Also NEED an '\alias' for EACH other topic documented here.
-\title{ ~~function to do ... ~~ }
+\title{ IsoGeneGUI}
 \description{
-  ~~ A concise (1-5 lines) description of what the function does. ~~
+The IsoGene Graphical User Interface (IsoGene-GUI) is a user friendly interface of the IsoGene package which is aimed to identify for genes with a monotonic trend in the expression levels with respect to the increasing doses using several test statistics: global likelihood ratio test (E2), Bartholomew 1961, Barlow et al. 1972 and Robertson et al. 1988), Williams (1971, 1972), Marcus (1976), the M (Hu et al. 2005) and the modified M (Lin et al. 2007). 
+
+The p-values of the global likelihood ratio test (E2) are obtained using the exact distribution and permutation. The other four test statistics are obtained using permutation . 
+
+Several p-values adjustment are provided:  Bonferroni, Holm (1979), Hochberg (1988), and Sidak procedures for controlling the family-wise Type I error rate (FWER), and BH (Benjamini and Hochberg 1995) and BY (Benjamini and Yekutieli 2001) procedures are used for controlling the FDR.
 }
-\usage{
+
+\author{
+Author: Setia Pramana
+
+Maintainer: Setia Pramana <setia.pramana@uhasselt.be>
+}
+\references{
+Barlow, R., Bartholomew, D., Bremner, M. and Brunk, H. (1972) Statistical Inference
+Under Order Restriction. New York: Wiley.
+
+Bartholomew, D. (1961) Ordered tests in the analysis of variance. Biometrika, 48, 325-
+332.
+
+Benjamini, Y. and Yekutieli, D. (2001) The control of the false discovery rate in multiple
+testing under dependency. ANN STAT, 29 (4), 1165-1188.
+
+Hu, J., Kapoor, M., Zhang, W., Hamilton, S. and Coombes, K. (2005) Analysis of dose
+response effects on gene expression data with comparison of two microarray platforms.
+Bioinformatics, 21(17), 3524-3529.
+
+Lin, D., Shkedy, Z., Yekutieli, D., Burzykowski, T., Gohlmann, H., De Bondt, A., Perera,
+T., Geerts, T. and Bijnens, L. (2007) Testing for trends in dose-response microarray
+experiments: A comparison of several testing procedures, multiplicity and resampling-
+based inference. Statistical Applications in Genetics and Molecular Biology, 6(1), Article
+26.
+
+Marcus, R. (1976) The powers of some tests of the quality of normal means against an
+ordered alternative. Biometrika, 63, 177-83.
+ 
+Robertson, T., Wright, F. and Dykstra, R. (1988) Order Restricted Statistical Inference.
+Wiley.
+
+S. Holm (1979). A simple sequentially rejective multiple test procedure. Scand. J. Statist.. Vol. 6:
+65-70.
+
+Y. Benjamini and Y. Hochberg (1995). Controlling the false discovery rate: a practical and powerful approach to multiple testing. J. R. Statist. Soc. B. Vol. 57: 289-300.
+
+
+Y. Hochberg (1988). A sharper Bonferroni procedure for multiple tests of significance, Biometrika.
+Vol. 75: 800-802.
+
+Williams, D. (1971) A test for differences between treatment means when several dose
+levels are compared with a zero dose control. Biometrics, 27, 103-117.
+
+Williams, D. (1972) The comparison of several dose levels with a zero dose control. Bio-
+metrics, 28, 519-531.
+
+}
+
+\keyword{ dose-response, microarrays}
+\seealso{
+\code{\link[<IsoGene>:<IsoGene>-package]{<IsoGene>}} 
+
+}
+\examples{
+library(IsoGeneGUI)
 IsoGeneGUI()
 }
-%- maybe also 'usage' for other objects documented here.
-\details{
-  ~~ If necessary, more details than the description above ~~
-}
-\value{
-  ~Describe the value returned
-  If it is a LIST, use
-  \item{comp1 }{Description of 'comp1'}
-  \item{comp2 }{Description of 'comp2'}
-  ...
-}
-\references{ ~put references to the literature/web site here ~ }
-\author{ ~~who you are~~ }
-\note{ ~~further notes~~ 
-
- ~Make other sections like Warning with \section{Warning }{....} ~
-}
-\seealso{ ~~objects to See Also as \code{\link{help}}, ~~~ }
-\examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-
-## The function is currently defined as
-function () {
-library("tcltk")
-library(tkrplot)
-library(Biobase)
-library(multtest)
-library(relimp)
-library("geneplotter")  ## from BioConductor
-library("RColorBrewer") ## from CRAN
-library("WriteXLS")
-library("gdata")
-library(IsoGene)
-#############################################
-# Creating a main window with menu and plot #
-#############################################
-
-tt <<- tktoplevel()
-tkwm.title(tt,"IsoGene GUI")
-##############################
-
-#####################################
-# Making a menu for the main widget #
-#####################################
-
-topMenu <- tkmenu(tt)           # Create a menu
-tkconfigure(tt, menu = topMenu) # Add it to the 'tt' window
-welcome <-tkframe(tt ,borderwidth=2,width=1500,height=1000)
-tclRequire("BWidget")
-message <-tkframe(tt ,borderwidth=2)
-
-fileMenu <- tkmenu(topMenu, tearoff = FALSE)
-analysisMenu<- tkmenu(topMenu, tearoff = FALSE)
-PlotsMenu<- tkmenu(topMenu, tearoff = FALSE)
-HelpMenu<- tkmenu(topMenu, tearoff = FALSE)
-
-loadMenu<- tkmenu(fileMenu,tearoff = FALSE)
-SamMenu <- tkmenu(analysisMenu, tearoff = FALSE)
-SamPlotMenu <- tkmenu(PlotsMenu, tearoff = FALSE)
-
-
-tkadd(fileMenu,"cascade", label = "Open dataset", menu= loadMenu)
-tkadd(loadMenu, "command", label = "R workspace", command = loadDataSet )
-tkadd(loadMenu, "command", label = "Excel or Text files", command = openFile )
-tkadd(fileMenu,"separator")
-
-tkadd(fileMenu,"cascade", label = "Show dataset", command = showdata)
-
-tkadd(fileMenu,"separator")
-tkadd(fileMenu, "cascade", label = "Exit", command = exit)
-
-tkadd(topMenu, "cascade", label = "File", menu = fileMenu)
-
-tkadd(analysisMenu, "cascade", label = "Set Seed", command = Setseed)
-tkadd(analysisMenu, "cascade", label = "Asymptotic E2", command = Asymptotic )
-tkadd(analysisMenu, "cascade", label = "Permutation", command = Permutation )
-
-
-tkadd(analysisMenu, "cascade", label = "Significance Analysis of Microarrays", menu = SamMenu )
-tkadd(SamMenu, "command", label = "SAM Permutation", command = PermuteSAM )
-tkadd(SamMenu, "command", label = "SAM Analysis", command = IsoPlotSldr )
-
-tkadd(topMenu, "cascade", label = "Analysis", menu = analysisMenu)
-
-tkadd(PlotsMenu, "cascade", label = "IsoPlot", command = Isoplot)
-tkadd(PlotsMenu, "cascade", label = "Permutation P-values Plot", command = IsopvalPlot )
-tkadd(PlotsMenu, "cascade", label = "SAM Plots", menu = SamPlotMenu)
-tkadd(SamPlotMenu, "command", label = "Plot of FDR vs. Delta", command = PlotFdrDlt )
-tkadd(SamPlotMenu, "command", label = "Plot of number of significant genes vs. Delta", command = PlotSigDlt )
-tkadd(SamPlotMenu, "command", label = "Plot of number of FP vs. Delta", command = PlotFPDlt )
-tkadd(PlotsMenu, "cascade", label = "User Defined Scatter Plot", command = UserPlotting )
-
-tkadd(topMenu, "cascade", label = "Plots", menu = PlotsMenu)
-tkadd(HelpMenu, "cascade", label = "IsoGene Help", command = onHelp)
-tkadd(HelpMenu, "cascade", label = "About", command = about )
-tkadd(topMenu, "cascade", label = "Help", menu = HelpMenu)
-
-
-fontHeading <- tkfont.create(family="times",size=22,weight="bold",slant="italic")
-fontTextLabel <- tkfont.create(family="times",size=10)
-
-tkgrid(tklabel(welcome ,text="                             ",font=fontHeading))
-tkgrid(tklabel(welcome ,text="    Welcome to IsoGene GUI   ",font=fontHeading))
-tkgrid(tklabel(welcome ,text=" A Graphical User Interface for dose response analysis in microarray experiments",font=fontTextLabel))
-#tkgrid(tklabel(welcome ,text=" contact: setia.pramana@uhasselt.be",font=fontTextLabel))
-tkgrid(tklabel(welcome ,text="                              ",font=fontHeading))
-
-SeedNum <<- 1234
-tkgrid(welcome )
-
-yScr       <- tkscrollbar(tt,command=function(...)tkyview(treeWidget,...))
-treeWidget <<- tkwidget(tt,"Tree",yscrollcommand=function(...)tkset(yScr,...),width=50,height=15)
-
-tkgrid(tklabel(tt ,text=" Infobox  ",font=fontTextLabel))
-tkgrid(treeWidget,yScr)
-tkgrid.configure(yScr,stick="nsw")
-
-
-# Insert at the end of the nodes in "root" a new node, called
-# "Record1Node", which displays the text "Record 1", etc.
-
-tkinsert(treeWidget,"end","root","Record1Node",text="Data")
-tkinsert(treeWidget,"end","root","Record2Node",text="Asymptotic E2")
-tkinsert(treeWidget,"end","root","Record3Node",text="Permutation ")
-tkinsert(treeWidget,"end","root","Record4Node",text="SAM")
-
-
-tkinsert(treeWidget,"end","Record1Node","data",text="Not Available")
-tkinsert(treeWidget,"end","Record2Node","nodeAsymp",text="Not Available")
-tkinsert(treeWidget,"end","Record3Node","nodePerm",text="Not Available")
-tkinsert(treeWidget,"end","Record4Node","nodeSAM",text="Not Available")
-
-tkgrid(tklabel(tt,text="") )
-
-tkwait.window(tt)
-
-  }
-}
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

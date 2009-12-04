@@ -1,0 +1,352 @@
+<html><head><title>~~function to do ... ~~</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>IsopvalPlot(IsoGeneGUI)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   IsopvalPlot">
+<param name="keyword" value=" ~~function to do ... ~~">
+</object>
+
+
+<h2>~~function to do ... ~~</h2>
+
+
+<h3>Description</h3>
+
+<p>
+~~ A concise (1-5 lines) description of what the function does. ~~
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+IsopvalPlot()
+</pre>
+
+
+<h3>Details</h3>
+
+<p>
+~~ If necessary, more details than the description above ~~
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+~Describe the value returned
+If it is a LIST, use
+</p>
+<table summary="R argblock">
+<tr valign="top"><td><code>comp1 </code></td>
+<td>
+Description of 'comp1'</td></tr>
+<tr valign="top"><td><code>comp2 </code></td>
+<td>
+Description of 'comp2'</td></tr>
+</table>
+<p>
+
+...</p>
+
+<h3>Warning</h3>
+
+<p>
+....
+</p>
+
+
+<h3>Note</h3>
+
+<p>
+~~further notes~~ 
+</p>
+<p>
+~Make other sections like Warning with section{Warning }{....} ~
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>
+~~who you are~~
+</p>
+
+
+<h3>References</h3>
+
+<p>
+~put references to the literature/web site here ~
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+~~objects to See Also as <code><a onclick="findlink('utils', 'help.html')" style="text-decoration: underline; color: blue; cursor: hand">help</a></code>, ~~~
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+##---- Should be DIRECTLY executable !! ----
+##-- ==&gt;  Define data, use random,
+##--    or do  help(data=index)  for the standard data sets.
+
+## The function is currently defined as
+function() {
+
+if (!exists("exprs") | !exists("dose"))  
+   {  
+      ReturnVal &lt;- tkmessageBox(title="Error Message",message="Load the data first!",icon="error",type="ok")
+if (tclvalue(ReturnVal)== "ok") tkfocus(tt)
+  } 
+  else {
+
+isopvalplot &lt;-tktoplevel()
+tkwm.deiconify(isopvalplot )
+tkwm.title(isopvalplot ,"Permutation p-values Plot ") 
+tkgrab.set(isopvalplot )
+tkfocus(isopvalplot )
+spec.frm &lt;- tkframe(isopvalplot ,borderwidth=2)
+frame1 &lt;- tkframe(spec.frm, relief="groove", borderwidth=2)
+
+buttonFrameisoplot  &lt;-tkframe(isopvalplot ,borderwidth=2)
+
+rb1 &lt;- tkradiobutton(frame1 )
+rb2 &lt;- tkradiobutton(frame1 )
+rb3 &lt;- tkradiobutton(frame1 )
+
+rbValue1 &lt;- tclVar("row")
+tkconfigure(rb1,variable=rbValue1,value="gene",text="Gene Name(s), e.g., gene1,gene3")
+tkconfigure(rb2,variable=rbValue1,value="row", text="Row Number(s),e.g., 2,3,4         ")
+tkconfigure(rb3,variable=rbValue1,value="rowrange", text="Range of Row Number         From: ")
+
+genename&lt;- tclVar("")
+GeneName&lt;-tkentry(frame1 ,width="20",textvariable=genename)
+
+rownum&lt;- tclVar("")
+RowNum&lt;-tkentry(frame1 ,width="20",textvariable=rownum)
+
+fromrow&lt;- tclVar("")
+FromNum&lt;-tkentry(frame1 ,width="6",textvariable=fromrow)
+
+torow &lt;- tclVar("")
+ToNum&lt;-tkentry(frame1 ,width="6",textvariable=torow)
+
+tkgrid(tklabel(frame1 ,text="Insert Gene name/ row name you want to draw:"))
+
+tkgrid(rb1,GeneName)
+tkgrid.configure(rb1,sticky="w")
+
+tkgrid(rb2,RowNum)
+tkgrid.configure(rb2,sticky="w")
+
+tkgrid(rb3,FromNum,tklabel(frame1 ,text="To"),ToNum)
+tkgrid.configure(rb3,sticky="w")
+
+numperm &lt;- tclVar("100")
+NumPerm &lt;-tkentry(frame1 ,width="5",textvariable=numperm)
+label.numperm &lt;- tklabel(frame1 ,text="      Number of Permutation: ")
+tkgrid(label.numperm,NumPerm )
+tkgrid.configure(label.numperm,sticky="w")
+
+tkgrid(frame1)
+tkgrid.configure(frame1,sticky="nsw")
+
+### Statistics Check button ##
+
+frame2 &lt;- tkframe(spec.frm, relief="groove", borderwidth=2)
+
+rb4 &lt;- tkradiobutton(frame2 )
+rb5 &lt;- tkradiobutton(frame2 )
+rb6 &lt;- tkradiobutton(frame2 )
+rb7 &lt;- tkradiobutton(frame2 )
+rb8 &lt;- tkradiobutton(frame2 )
+
+rbValue2 &lt;- tclVar("M")
+tkconfigure(rb4,variable=rbValue2,value="M",text="M")
+tkconfigure(rb5,variable=rbValue2,value="E2", text="E2")
+tkconfigure(rb6,variable=rbValue2,value="Marcus", text="Marcus")
+tkconfigure(rb7,variable=rbValue2,value="Williams", text="Williams")
+tkconfigure(rb8,variable=rbValue2,value="ModifM", text="M'")
+
+label.stat &lt;- tklabel(frame2,text="Statistic: ")
+tkgrid(label.stat )
+tkgrid.configure(label.stat ,sticky="w")
+
+tkgrid(rb4,rb5,rb6,rb7,rb8)
+tkgrid.configure(rb4,rb5,rb6,rb7,rb8,sticky="w")
+tkgrid(frame2)
+tkgrid.configure(frame2,sticky="nsw")
+
+OnOK &lt;- function()
+{
+
+  if (!exists("exprs"))  
+{  
+tkdestroy(isopvalplot)
+ReturnVal &lt;- tkmessageBox(title="Error Message",message="No data set loaded, please load the dataset first!",icon="info",type="ok")
+if (tclvalue(ReturnVal)== "ok") tkfocus(tt)
+  } 
+ else {
+      tkdestroy(isopvalplot)
+rbVal1 &lt;- as.character(tclvalue(rbValue1))
+rbVal2 &lt;- as.character(tclvalue(rbValue2))
+
+NumPerm &lt;- as.numeric(tclvalue(numperm))
+
+stat &lt;- rbVal2 
+ 
+      if (rbVal1=="rowrange") {
+
+range &lt;- as.numeric(tclvalue(fromrow):tclvalue(torow))
+nrange &lt;- length(range)
+      plotIso &lt;- function() 
+{
+nrange [nrange &gt; 3 &amp; nrange &lt;= 12] &lt;- 3
+nrange [nrange &gt; 12] &lt;- 6
+lengthplot &lt;- round ((length(range)+1)/nrange)
+lengthplot [nrange &lt;= 2] &lt;- 1
+      par(mfrow=c((lengthplot*2),nrange ))
+      for (i in (1:length(range )))
+    {
+    params &lt;- par(bg="white")
+    IsopvaluePlot(dose,as.matrix(exprs[range[i],]), niter=NumPerm , seed=SeedNum, stat = stat)
+           }
+  }
+Myhscale &lt;- 2
+Myvscale &lt;- 2 
+
+ Myvscale[nrange &gt; 2 &amp; nrange &lt; 6] &lt;- 2.5
+Myhscale[nrange &gt; 1 &amp; nrange &lt;12] &lt;- 3
+Myvscale[nrange &gt;  6 ] &lt;- 2.5
+Myhscale[nrange &gt; 12] &lt;- 4
+Plot2(plotIso,Myhscale , Myvscale, title="Windows Graph Output: Permutation p-values Plot" )
+      }
+
+     if (rbVal1=="row") {
+a &lt;- tclvalue(rownum)
+b &lt;- strsplit(a,",")
+e &lt;-0
+for (i in (1:length(b[[1]])))
+{
+c &lt;- strsplit(b[[1]][i]," ")
+d &lt;- as.numeric(c[[1]])
+e[i] &lt;- na.omit(d)
+  }
+
+range &lt;- as.numeric(e)
+nrange &lt;- length(range)
+      plotIso &lt;- function() 
+{
+nrange [nrange &gt; 3 &amp; nrange &lt; 13] &lt;- 3
+nrange [nrange &gt; 12] &lt;- 6
+lengthplot &lt;- round ((length(range)+1)/nrange)
+lengthplot [nrange &lt;= 2] &lt;- 1
+      par(mfrow=c(2*lengthplot,nrange ))
+      for (i in (1:length(range )))
+    {
+    params &lt;- par(bg="white")
+    IsopvaluePlot(dose,as.matrix(exprs[range[i],]), niter=NumPerm , seed=SeedNum, stat = stat)
+          }
+  }
+Myhscale &lt;- 2
+Myvscale &lt;- 2 
+
+ Myvscale[nrange &gt; 2 &amp; nrange &lt; 6] &lt;- 2.5
+Myhscale[nrange &gt; 1 &amp; nrange &lt;12] &lt;- 3
+Myvscale[nrange &gt;  6 ] &lt;- 3
+Myhscale[nrange &gt; 12] &lt;-4
+Plot2(plotIso,Myhscale , Myvscale,title="Windows Graph Output: Permutation p-values Plot" )
+
+      }
+
+     if (rbVal1=="gene") {
+genenameVal &lt;- as.character(tclvalue(genename))
+
+b &lt;- strsplit(genenameVal  ,",")
+f &lt;-0
+for (i in (1:length(b[[1]])))
+{
+c &lt;- unlist(strsplit(b[[1]][i]," "))
+loc &lt;- which(nchar(c)!=0)
+d &lt;-c[loc]
+      e &lt;- which(rownames(exprs)== d)
+try( f[i] &lt;- na.omit(e),silent=T)
+  }
+g &lt;- which(is.na(f))
+if ( length(g) &gt; 0) tkmessageBox(title="Error Message",message=" Some genes are not found or wrong input. Follow the instructions!! ",icon="warning",type="ok")
+
+range &lt;- na.omit(f)
+
+        if (length(range)!= 0){
+        nrange &lt;- length(range)
+
+        plotIso &lt;- function() 
+    {
+nrange [nrange &gt; 3 &amp; nrange &lt; 13] &lt;- 3
+nrange [nrange &gt; 12] &lt;- 6
+lengthplot &lt;- round ((length(range)+1)/nrange)
+lengthplot [nrange &lt;= 2] &lt;- 1
+      par(mfrow=c(2*lengthplot,nrange ))
+      for (i in (1:length(range )))
+    {
+    params &lt;- par(bg="white")
+    IsopvaluePlot(dose,as.matrix(exprs[range[i],]), niter=NumPerm , seed=SeedNum, stat = stat)
+          }
+          }
+  Myhscale &lt;- 2
+  Myvscale &lt;- 2 
+
+   Myvscale[nrange &gt; 2 &amp; nrange &lt; 6] &lt;- 2.5
+  Myhscale[nrange &gt; 1 &amp; nrange &lt;12] &lt;- 3
+  Myvscale[nrange &gt;  6 ] &lt;- 3
+  Myhscale[nrange &gt; 12] &lt;-4
+   Plot2(plotIso,Myhscale , Myvscale,title="Windows Graph Output: Permutation p-values Plot" )
+
+    
+
+     }
+        if (length(range) == 0){
+        tkmessageBox(message = "The gene is not found!")
+           }
+     }
+      }
+  }
+
+onCancel &lt;- function()
+  {
+      tkgrab.release(isopvalplot )
+tkdestroy(isopvalplot )
+      
+ }
+
+OK.but &lt;-tkbutton(buttonFrameisoplot  ,text="   OK   ",command=OnOK)
+Cancel.but &lt;-tkbutton(buttonFrameisoplot  ,text=" Cancel ",command=onCancel)
+tkgrid(spec.frm)
+tkgrid(OK.but,Cancel.but)
+tkgrid(buttonFrameisoplot )
+
+  }
+  }
+</pre>
+
+<script Language="JScript">
+function findlink(pkg, fn) {
+var Y, link;
+Y = location.href.lastIndexOf("\\") + 1;
+link = location.href.substring(0, Y);
+link = link + "../../" + pkg + "/chtml/" + pkg + ".chm::/" + fn;
+location.href = link;
+}
+</script>
+
+
+<hr><div align="center">[Package <em>IsoGeneGUI</em> version 1.0 <a href="00Index.html">Index</a>]</div>
+
+</body></html>

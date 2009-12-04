@@ -1,0 +1,321 @@
+<html><head><title>~~function to do ... ~~</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>IsoPlotSldr(IsoGeneGUI)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   IsoPlotSldr">
+<param name="keyword" value=" ~~function to do ... ~~">
+</object>
+
+
+<h2>~~function to do ... ~~</h2>
+
+
+<h3>Description</h3>
+
+<p>
+~~ A concise (1-5 lines) description of what the function does. ~~
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+IsoPlotSldr()
+</pre>
+
+
+<h3>Details</h3>
+
+<p>
+~~ If necessary, more details than the description above ~~
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+~Describe the value returned
+If it is a LIST, use
+</p>
+<table summary="R argblock">
+<tr valign="top"><td><code>comp1 </code></td>
+<td>
+Description of 'comp1'</td></tr>
+<tr valign="top"><td><code>comp2 </code></td>
+<td>
+Description of 'comp2'</td></tr>
+</table>
+<p>
+
+...</p>
+
+<h3>Warning</h3>
+
+<p>
+....
+</p>
+
+
+<h3>Note</h3>
+
+<p>
+~~further notes~~ 
+</p>
+<p>
+~Make other sections like Warning with section{Warning }{....} ~
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>
+~~who you are~~
+</p>
+
+
+<h3>References</h3>
+
+<p>
+~put references to the literature/web site here ~
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+~~objects to See Also as <code><a onclick="findlink('utils', 'help.html')" style="text-decoration: underline; color: blue; cursor: hand">help</a></code>, ~~~
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+##---- Should be DIRECTLY executable !! ----
+##-- ==&gt;  Define data, use random,
+##--    or do  help(data=index)  for the standard data sets.
+
+## The function is currently defined as
+function() {
+
+if (!exists("SAMRes"))  
+   {  
+        tkmessageBox(title="Error Message",message="The SAM statistics have not calculated yet!",icon="error",type="ok")
+     } 
+   else {
+
+ChooseStat ()
+statSAMplot &lt;&lt;- statUsed
+pos &lt;&lt;-1
+winPlot &lt;- tktoplevel()
+tkwm.title(winPlot ,"SAM Analysis" )
+tkwm.geometry(winPlot , "+10+10")
+sliderFramePlot &lt;-tkframe(winPlot ,borderwidth=2)
+sliderFramePlot1 &lt;-tkframe(sliderFramePlot ,borderwidth=2,relief="groove")
+sliderFramePlot2 &lt;-tkframe(sliderFramePlot ,borderwidth=2,relief="groove")
+
+buttonFramePlot &lt;-tkframe(winPlot ,borderwidth=2)
+showbutFrame &lt;-tkframe(winPlot ,borderwidth=2)
+
+AllFDR &lt;&lt;- Isoallfdr(SAMRes, , stat=statSAMplot )
+Delta.table &lt;&lt;- data.frame(AllFDR )
+delta1 &lt;- Delta.table [1,1]
+
+labelText &lt;&lt;- tclVar(paste("Delta value:",delta1 ))
+
+SliderValue &lt;- tclVar("1" ) 
+
+SliderValueLabel &lt;- tklabel(sliderFramePlot1 ,text=labelText )
+tkconfigure(SliderValueLabel,textvariable=labelText )
+
+slider &lt;- tkscale(sliderFramePlot1 , from=1, to=nrow(Delta.table),
+                   showvalue=F, variable=SliderValue,
+                   resolution=1, orient="horizontal",length=400)
+
+slidertxt &lt;- tklabel(sliderFramePlot1 ,text="Delta Slider:" )
+tkgrid(slidertxt )
+tkgrid.configure(slidertxt ,sticky="w")
+
+tkgrid(SliderValueLabel,tklabel(sliderFramePlot1 ,text="" ))
+
+inputtxt &lt;- tklabel(sliderFramePlot2 ,text="Input delta/FDR:" )
+tkgrid(inputtxt )
+tkgrid.configure(inputtxt ,sticky="w")
+
+      rb1 &lt;- tkradiobutton( sliderFramePlot2 )
+      rb2 &lt;- tkradiobutton( sliderFramePlot2 )
+      rbValue1 &lt;- tclVar("delta")
+      tkconfigure(rb1,variable=rbValue1,value="delta",text="Delta:")
+ tkconfigure(rb2,variable=rbValue1,value="fdr", text="FDR:")
+
+deltaval &lt;- tclVar("  ")
+deltatxt&lt;-tkentry(sliderFramePlot2 ,width="5",textvariable=deltaval )
+tkgrid.configure(rb1 ,deltatxt,sticky="w")
+tkgrid(rb1 , deltatxt)
+
+FDR &lt;- tclVar("0.05")
+FDRtxt &lt;-tkentry(sliderFramePlot2 ,width="5",textvariable=FDR )
+tkgrid.configure(rb2 ,FDRtxt  ,sticky="w")
+
+inputDelta &lt;- function() {
+  rbVal1 &lt;- as.character(tclvalue(rbValue1))
+  
+  if (rbVal1 == "delta") {
+         Deltaval &lt;- as.numeric(tclvalue(deltaval ))
+    pos1 &lt;- match(Deltaval,Delta.table[,1])
+    if (is.na(pos1)) { 
+  tkmessageBox(message="The delta value is not valid! Check the delta table !",icon="error",type="ok")
+  }
+    else { 
+  pos &lt;&lt;- pos1 
+ delta.now &lt;&lt;- Deltaval
+ }
+    }
+        else {
+    FDRval &lt;- as.numeric(tclvalue(FDR))
+    Deltaval &lt;&lt;- min(na.exclude(Delta.table [Delta.table [, 5] &lt;= FDRval , 1]))
+        delta.now &lt;&lt;- Deltaval 
+    pos &lt;&lt;- match(Deltaval,Delta.table[,1])
+        }
+       img &lt;- tkrreplot(img,fun=samplot2 , 1.5,1.5)
+
+  }
+
+input.but &lt;- tkbutton(sliderFramePlot2 ,text="Display",command=inputDelta )
+
+tkgrid(rb2 , FDRtxt, input.but   )
+
+showSigSAM &lt;- function() {
+
+      ResSAM &lt;- get.ResSAM ()
+siggeneSAM &lt;&lt;-ResSAM [[2]]
+showData(siggeneSAM,title= paste("List of significant genes - ",statSAMplot, "-SAM ", sep="") )
+  }
+
+savegene &lt;- function() {
+     ResSAM &lt;- get.ResSAM ()
+siggeneSAM &lt;&lt;-ResSAM [[2]]
+save.result("siggeneSAM" )
+  }
+
+saveAllgene &lt;- function() {
+     ResSAM &lt;- get.ResSAM ()
+AllgeneSAM&lt;&lt;-ResSAM [[1]]
+save.result("AllgeneSAM" )
+  }
+
+showDelta &lt;- function() {
+   showData(Delta.table,title="Delta table")
+  }
+
+savedeltaTab&lt;- function() {
+save.result("Delta.table")
+  }
+
+siggene.but &lt;- tkbutton(showbutFrame ,text="Display significant genes",command=showSigSAM )
+savegene.but &lt;- tkbutton(showbutFrame ,text="Save significant genes",command=savegene)
+saveAllgene.but &lt;- tkbutton(showbutFrame ,text="Save all genes results",command=saveAllgene )
+
+savedeltaTab.but &lt;- tkbutton(showbutFrame ,text="Save Delta table",command=savedeltaTab)
+
+delta.but &lt;- tkbutton(showbutFrame ,text="Display delta table",command=showDelta )
+
+tkgrid(siggene.but,tklabel(showbutFrame ,text="  "),savegene.but,tklabel(showbutFrame ,text="  "),
+    saveAllgene.but, tklabel(showbutFrame ,text="  "), delta.but,tklabel(showbutFrame ,text="  "),savedeltaTab.but)
+
+scr &lt;- tkscrollbar(buttonFramePlot , repeatinterval=1, command=function(...)tkyview(tl,...))
+tl &lt;-tklistbox(buttonFramePlot ,height=2,selectmode="single",yscrollcommand=function(...)tkset(scr,...),background="white")
+
+type &lt;- c("ps","png","tiff","bmp","jpeg")
+
+for (i in (1:length(type )))
+{
+    tkinsert(tl,"end",type [i])
+  }
+tkselection.set(tl,0)
+
+plotFrame &lt;- tkframe(winPlot ,relief="groove",borderwidth=2)
+
+img &lt;- tkrplot(plotFrame,fun=samplot2 ,1.5,1.5)
+tkgrid(img)
+
+draw &lt;- function(...){
+
+pos &lt;&lt;- as.numeric(tclvalue(SliderValue))
+
+img &lt;- tkrreplot(img,fun=samplot2 , 1.5,1.5)
+
+delta.now &lt;&lt;- Delta.table[pos,1]
+tclvalue(labelText) &lt;&lt;- paste("Delta value:",delta.now)
+
+  }
+
+
+CopyToClip &lt;- function()
+{
+ ReturnVal &lt;- tkmessageBox(message="The graph have been copied into clipboard",icon="info",type="ok")
+ if (tclvalue(ReturnVal)== "ok") tkfocus(winPlot )
+  }
+
+SaveGraph &lt;- function()
+{
+fileName&lt;- tclvalue(tkgetSaveFile())
+if (!nchar(fileName))
+    tkmessageBox(message="No graph to copy!")
+else
+{ 
+  fileTypeChoice &lt;- type[as.numeric(tkcurselection(tl))+1]
+            split &lt;- strsplit(fileName,".",fixed=TRUE)
+            fileName &lt;- paste(split[[1]][1],".",fileTypeChoice ,sep="")
+            if(fileTypeChoice == "ps") fileTypeChoice &lt;- "postscript"
+            eval(parse(text=paste(fileTypeChoice ,"(file=fileName)",sep="")))
+samplot2 ()
+            dev.off()
+       }
+  }
+
+copy.but &lt;- tkbutton(buttonFramePlot,text="Copy the graph to Clipboard",command=CopyToClip)
+save.but &lt;- tkbutton(buttonFramePlot,text="Browse",command=SaveGraph)
+
+tkconfigure (slider, command = draw )
+tkgrid(img)
+tkgrid(slider)
+
+onExit &lt;- function()
+  {
+    ReturnVal &lt;&lt;- 0
+      tkgrab.release(winPlot )
+tkdestroy(winPlot )
+       
+ }
+
+tkgrid(tklabel(buttonFramePlot,text="                             "))
+Exit.but &lt;-tkbutton(buttonFramePlot,text=" Exit SAM analysis ",command=onExit )
+tkgrid(copy.but,tklabel(buttonFramePlot,text="save the graph as:"),tl,scr,save.but,tklabel(buttonFramePlot,text="     "),Exit.but)
+
+tkgrid(plotFrame) 
+tkgrid(sliderFramePlot)
+tkgrid(sliderFramePlot1,  sliderFramePlot2)
+tkgrid(showbutFrame )
+tkgrid(buttonFramePlot)
+
+  }
+  }
+</pre>
+
+<script Language="JScript">
+function findlink(pkg, fn) {
+var Y, link;
+Y = location.href.lastIndexOf("\\") + 1;
+link = location.href.substring(0, Y);
+link = link + "../../" + pkg + "/chtml/" + pkg + ".chm::/" + fn;
+location.href = link;
+}
+</script>
+
+
+<hr><div align="center">[Package <em>IsoGeneGUI</em> version 1.0 <a href="00Index.html">Index</a>]</div>
+
+</body></html>

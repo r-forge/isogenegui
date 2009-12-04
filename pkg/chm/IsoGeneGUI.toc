@@ -1,0 +1,259 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HEAD></HEAD><HTML><BODY>
+<UL>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="Package IsoGeneGUI:  Contents">
+<param name="Local" value="00Index.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="Package IsoGeneGUI:  R objects">
+</OBJECT>
+<UL>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="IsoGeneGUI-package">
+<param name="Local" value="IsoGeneGUI-package.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="about">
+<param name="Local" value="about.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="adjustment">
+<param name="Local" value="adjustment.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="browse">
+<param name="Local" value="browse.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="browse2">
+<param name="Local" value="browse2.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="CalcStat">
+<param name="Local" value="CalcStat.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="ChooseStat">
+<param name="Local" value="ChooseStat.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="CVPlot">
+<param name="Local" value="CVPlot.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="diginum">
+<param name="Local" value="diginum.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="EditData">
+<param name="Local" value="EditData.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="ExactE2">
+<param name="Local" value="ExactE2.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="ExactE2Val">
+<param name="Local" value="ExactE2Val.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="exit">
+<param name="Local" value="exit.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="get.ResSAM">
+<param name="Local" value="get.ResSAM.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="getDose">
+<param name="Local" value="getDose.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="getExprs">
+<param name="Local" value="getExprs.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="IsofudgeMod">
+<param name="Local" value="IsofudgeMod.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="IsofudgeMod2">
+<param name="Local" value="IsofudgeMod2.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="IsoGeneGUI">
+<param name="Local" value="IsoGeneGUI.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="IsoGenemMod">
+<param name="Local" value="IsoGenemMod.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="Isomean">
+<param name="Local" value="Isomean.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="Isoplot">
+<param name="Local" value="Isoplot.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="IsoPlot.mod">
+<param name="Local" value="IsoPlot.mod.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="IsoPlotSldr">
+<param name="Local" value="IsoPlotSldr.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="IsopvalPlot">
+<param name="Local" value="IsopvalPlot.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="IsopvaluePlot">
+<param name="Local" value="IsopvaluePlot.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="IsoqqstatMOD">
+<param name="Local" value="IsoqqstatMOD.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="IsoRawpMod">
+<param name="Local" value="IsoRawpMod.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="IsoStat">
+<param name="Local" value="IsoStat.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="IsoTest">
+<param name="Local" value="IsoTest.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="loadDataSet">
+<param name="Local" value="loadDataSet.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="MeanDiff">
+<param name="Local" value="MeanDiff.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="onHelp">
+<param name="Local" value="onHelp.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="openFile">
+<param name="Local" value="openFile.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="Permutation">
+<param name="Local" value="Permutation.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="PermuteSAM">
+<param name="Local" value="PermuteSAM.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="Plot2">
+<param name="Local" value="Plot2.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="PlotFdrDlt">
+<param name="Local" value="PlotFdrDlt.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="PlotFPDlt">
+<param name="Local" value="PlotFPDlt.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="PlotSigDlt">
+<param name="Local" value="PlotSigDlt.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="printExact">
+<param name="Local" value="printExact.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="printsummary">
+<param name="Local" value="printsummary.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="PvalAdj">
+<param name="Local" value="PvalAdj.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="samplot2">
+<param name="Local" value="samplot2.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="save.result">
+<param name="Local" value="save.result.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="save.result.mult">
+<param name="Local" value="save.result.mult.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="saveDir">
+<param name="Local" value="saveDir.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="SaveGraph">
+<param name="Local" value="SaveGraph.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="saveXls">
+<param name="Local" value="saveXls.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="savingRwd">
+<param name="Local" value="savingRwd.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="SEPlot">
+<param name="Local" value="SEPlot.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="Setseed">
+<param name="Local" value="Setseed.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="showdata">
+<param name="Local" value="showdata.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="Signif">
+<param name="Local" value="Signif.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="summ">
+<param name="Local" value="summ.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="UserPlot">
+<param name="Local" value="UserPlot.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="UserPlotting">
+<param name="Local" value="UserPlotting.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="xfudge">
+<param name="Local" value="xfudge.html">
+</OBJECT>
+</UL>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="Package IsoGeneGUI:  Titles">
+</OBJECT>
+<UL>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="IsoGeneGUI">
+<param name="Local" value="IsoGeneGUI-package.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="~~function to do ... ~~">
+<param name="Local" value="about.html">
+</OBJECT>
+</UL>
+</UL>
+</BODY></HTML>

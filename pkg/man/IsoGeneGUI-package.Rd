@@ -1,9 +1,70 @@
+\title{IsoGeneGUI Graphical User Interface for the IsoGene package}
 \name{IsoGeneGUI-package}
 \alias{IsoGeneGUI-package}
+\alias{IsoGeneGUI}
+\alias{summ}
+\alias{xfudge}
+\alias{about}            
+\alias{adjustment}      
+\alias{browse}
+\alias{browse2}
+\alias{CalcStat}
+\alias{ChooseStat}
+\alias{CVPlot}
+\alias{diginum}       
+\alias{EditData}
+\alias{ExactE2}
+\alias{ExactE2Val}
+\alias{exit}
+\alias{get.ResSAM}
+\alias{getDose}
+\alias{getExprs}
+\alias{IsofudgeMod}
+\alias{IsofudgeMod2}
+\alias{IsoGenemMod}
+\alias{Isomean}    
+\alias{Isoplot}
+\alias{IsoPlot.mod}
+\alias{IsoPlotSldr}
+\alias{IsopvalPlot}   
+\alias{IsopvaluePlot}
+\alias{IsoqqstatMOD}
+\alias{IsoRawpMod}
+\alias{IsoStat}
+\alias{IsoTest}
+\alias{loadDataSet}
+\alias{MeanDiff}      
+\alias{onHelp}  
+\alias{openFile}        
+\alias{Permutation}   
+\alias{PermuteSAM}
+\alias{Plot2}         
+\alias{PlotFdrDlt}    
+\alias{PlotFPDlt}    
+\alias{PlotSigDlt}    
+\alias{printExact}    
+\alias{printsummary}     
+\alias{PvalAdj}      
+\alias{samplot2}    
+\alias{save.result}
+\alias{save.result.mult}
+\alias{saveDir}
+\alias{SaveGraph}
+\alias{saveXls}     
+\alias{savingRwd}
+\alias{SeedNum}
+\alias{SEPlot}         
+\alias{Setseed}       
+\alias{showdata}        
+\alias{Signif}          
+\alias{summ}     
+\alias{treeWidget}      
+\alias{UserPlot}  
+\alias{UserPlotting}  
+\alias{xfudge}
+
 \docType{package}
-\title{
-IsoGeneGUI
-}
+
 \description{
 The IsoGene Graphical User Interface (IsoGene-GUI) is a user friendly interface of the IsoGene package which is aimed to identify for genes with a monotonic trend in the expression levels with respect to the increasing doses using several test statistics: global likelihood ratio test (E2), Bartholomew 1961, Barlow et al. 1972 and Robertson et al. 1988), Williams (1971, 1972), Marcus (1976), the M (Hu et al. 2005) and the modified M (Lin et al. 2007). 
 
@@ -61,9 +122,8 @@ Williams, D. (1972) The comparison of several dose levels with a zero dose contr
 metrics, 28, 519-531.
 
 }
-~~ Optionally other standard keywords, one per line, from file KEYWORDS in ~~
-~~ the R documentation directory ~~
-\keyword{ dose-response, microarrays}
+
+\keyword{IO}
 \seealso{
 \code{\link[<IsoGene>:<IsoGene>-package]{<IsoGene>}} 
 

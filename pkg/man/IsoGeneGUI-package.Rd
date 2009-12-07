@@ -34,7 +34,8 @@
 \alias{IsoTest}
 \alias{loadDataSet}
 \alias{MeanDiff}      
-\alias{onHelp}  
+\alias{onHelpIsoGene}  
+\alias{onHelpIsoGeneGUI}  
 \alias{openFile}        
 \alias{Permutation}   
 \alias{PermuteSAM}

@@ -70,7 +70,9 @@ tkadd(SamPlotMenu, "command", label = "Plot of number of FP vs. Delta", command 
 tkadd(PlotsMenu, "cascade", label = "User Defined Scatter Plot", command = UserPlotting )
 
 tkadd(topMenu, "cascade", label = "Plots", menu = PlotsMenu)
-tkadd(HelpMenu, "cascade", label = "IsoGene Help", command = onHelp)
+tkadd(HelpMenu, "cascade", label = "IsoGene Help", command = onHelpIsoGene )
+tkadd(HelpMenu, "cascade", label = "IsoGeneGUI Help", command = onHelpIsoGeneGUI )
+
 tkadd(HelpMenu, "cascade", label = "About", command = about )
 tkadd(topMenu, "cascade", label = "Help", menu = HelpMenu)
 

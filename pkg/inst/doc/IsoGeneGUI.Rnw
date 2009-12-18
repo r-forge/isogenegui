@@ -1,0 +1,102 @@
+%\VignetteIndexEntry{IsoGeneGUI Vignette}
+%\VignetteDepends{}
+%\VignetteKeywords{Dose-response microarray data GUI}
+%\VignettePackage{IsoGeneGUI}
+
+
+\documentclass[a4paper]{article}
+\usepackage[OT1]{fontenc}
+\usepackage{Sweave}
+\usepackage{url}
+\begin{document}
+
+\title{IsoGeneGUI Package Vignette}
+\author{Setia Pramana}
+\date{December 1, 2009}
+\maketitle
+
+\section{Introduction}
+The IsoGene Graphical User Interface (IsoGeneGUI) is a user friendly interface of the IsoGene package which is aimed to 
+perform analysis of dose-response studies in microarray experiments. 
+The IsoGeneGUI is developed for the user with no or limited knowledge about R programming so he/she can perform 
+the analysis of dose-response in microarray setting  easily. This GUI was developed using tcl/tk package.
+The statistical methodologies (test statistics, etc)  used in this package are discussed by Lin et.al (2007 and 2008). 
+
+
+\section{Usage}
+To run the package 
+<<open, eval=FALSE >>=
+library(IsoGeneGUI)
+IsoGeneGUI()
+@
+
+
+\section{Menus}
+
+The package has four main menus: File, Analysis, Plots and Help.
+
+\begin{enumerate}
+\item  File:
+       \begin{enumerate}
+       \item Open Data
+       		 \begin{enumerate}
+         		 \item R workspace (*.RData files)
+          		 \item Excel or text file (*.xls or *.txt files)
+          	 \end{enumerate}
+      \item  Show Data
+       \item  Exit
+ 		\end{enumerate}
+\item Analysis:  
+ 	\begin{enumerate}
+    \item Set seed
+    \item  Likelihood Ratio Test E2 Analysis
+    \item Permutation Analysis
+    \item Significant Analysis of Microarrays (SAM)
+    	\begin{enumerate}
+         \item  SAM Permutation
+        \item SAM Analysis
+         \end{enumerate}	
+	\end{enumerate}
+\item Plot:    
+	\begin{enumerate}    
+    \item  IsoPlot
+   	\item Permutation Plot
+    \item SAM Plot
+    	\begin{enumerate}   
+          \item  Plot of FDR vs. Delta
+          \item  Plot of number of significant genes vs. Delta
+          \item Plot of number of False Positive vs. Delta
+        \end{enumerate}
+   	\item  User defined scatter plot
+	\end{enumerate}
+\item Help: 
+	\begin{enumerate}    
+   	\item  IsoGene Help
+    \item  IsoGeneGUI Help
+    \item  About
+  	\end{enumerate}
+\end{enumerate}
+ 
+User can follow the links of the IsoGeneGUI package help to obtain more detail about the package.
+A full reference manual can be obtained from internet: \url{http://www.censtat.uhasselt.be/software/}
+
+
+\section*{References}
+
+\begin{enumerate} 
+	\item Lin, D., Shkedy, Z., Yekutieli, D., Burzykowski, T., G¨ohlmann, H., De Bondt, A., Perera, T., Geerts, T. and Bijnens, L. (2007) 
+	Testing for trends in dose-response microarray experiments: A comparison of several testing 
+	procedures, multiplicity and resamplingbased inference. 
+	\textit{Statistical Applications in Genetics and Molecular Biology}, \textbf{6(1)}, Article 26.
+ 
+	\item Lin, D., Shkedy, Z., Burzykowki, R., Ion,
+	T., G\"{o}hlmann, H.W.H., De Bondt, A., Perera, T., Geerts, T.,
+	Bijnens, L. (2008) An investigation on performance of Significance
+	Analysis of Microarray (SAM) for the comparisons of several
+	treatments with one control in the presence of small variance genes.
+	\textit{Biometrical Journal}, Multiple Comparison Problem, Special Issue,
+	\textbf{50(5)}, 801--823.
+
+\end{enumerate}
+
+\end{document}

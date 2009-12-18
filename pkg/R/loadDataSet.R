@@ -1,9 +1,12 @@
 `loadDataSet` <-
 function() {
 
+    initdir <- system.file("data",package="IsoGeneGUI")
     file <- tclvalue(tkgetOpenFile(filetypes=
-        gettext('{"R Data Files" {".rda" ".Rdata" ".RDA"}} {"All Files" {"*"}}')))
-    assign("file",file,envir=.GlobalEnv)
+        gettext('{"R Data Files" {".rda" ".Rdata" ".RDA"}} {"All Files" {"*"}}'), initialdir =initdir   ) )
+
+
+   assign("file",file,envir=.GlobalEnv)
     
 if (file == "")
  { 

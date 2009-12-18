@@ -263,7 +263,7 @@ AdjustBut <- function()
     			try(showData(result2[,1:2] ,title= paste("Number of Significant Genes, FDR:", FDRval ,"  Number of Genes analyzed:",num)))
 		
 		if (nrow(result2 )== 1 ) 
-		printexact(num,FDRval ,result2)
+		printExact(num,FDRval ,result2)
 		
 		RowNumSig <- unique(c(sigeneBH$row.num,sigeneBY$row.num,sigeneSS$row.num,sigeneSD$row.num,
 			sigeneHolm$row.num,sigeneHoch$row.num,sigeneBon$row.num) )

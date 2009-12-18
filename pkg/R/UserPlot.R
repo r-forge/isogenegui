@@ -98,7 +98,7 @@ if (cbVal2 =="1") {
 x <-cbind(xaxis ,yaxis)
 colors  <- densCols(x)
   plot (x,col=colors, xlab=xobject ,ylab=yobject )
-    title(paste("Plot of ",xobject , "vs.", yobject ,sep=""))
+    title(paste("Plot of ",yobject , " vs. ", xobject ,sep=""))
 
    }
      Plot2(Userplot,1.2,1.2 ,title="Windows Graph Output: User Defined Scatter Plot")

@@ -125,10 +125,6 @@ metrics, 28, 519-531.
 }
 
 \keyword{IO}
-\seealso{
-\code{\link[<IsoGene>:<IsoGene>-package]{<IsoGene>}} 
-
-}
 \examples{
 library(IsoGeneGUI)
 IsoGeneGUI()

@@ -1,6 +1,7 @@
-`IsoRawpMod` <-
-function (x, y, niter, seed) 
-  {
+IsoRawpMod <-
+function (x, y, niter,seed) 
+{
+
     if (niter > 2500) {
         jmatsize <- 2500
         nmats <- floor(niter/jmatsize)
@@ -15,28 +16,25 @@ function (x, y, niter, seed)
     y <- data.matrix(y, rownames.force = TRUE)
     E <- IsoGenem(x, y)
     obs.E.up <- matrix(E[[1]], nrow(y), 1)
-    obs.W.up <- E[[2]]
-    obs.WC.up <- E[[3]]
-    obs.M.up <- E[[4]]
-    obs.I.up <- E[[5]]
-    obs.E.dn <- E[[6]]
-    obs.W.dn <- E[[7]]
-    obs.WC.dn <- E[[8]]
-    obs.M.dn <- E[[9]]
-    obs.I.dn <- E[[10]]
+    obs.W.up <- matrix(E[[2]], nrow(y), 1)
+    obs.WC.up <- matrix(E[[3]], nrow(y), 1)
+    obs.M.up <- matrix(E[[4]], nrow(y), 1)
+    obs.I.up <- matrix(E[[5]], nrow(y), 1)
+    obs.E.dn <- matrix(E[[6]], nrow(y), 1)
+    obs.W.dn <- matrix(E[[7]], nrow(y), 1)
+    obs.WC.dn <- matrix(E[[8]], nrow(y), 1)
+    obs.M.dn <- matrix(E[[9]], nrow(y), 1)
+    obs.I.dn <- matrix(E[[10]], nrow(y), 1)
     dire <- E[[11]]
     StatVal <- E 
     assign("StatVal",StatVal ,envir=.GlobalEnv)
+
     rm(E)
-
-#### Calculating statistics ##
-CalcStat ()
-
+    CalcStat()
     nchunks <- 10
     chunklength <- floor(nrow(y)/nchunks)
     endpos <- c(1:(nchunks - 1) * chunklength, nrow(y))
     begpos <- c(1, endpos[-length(endpos)] + 1)
-    options(warn = -1)
     exp.E.up <- ff("exp.E.up", vmode = "double", dim = c(nrow(y), 
         niter))
     exp.W.up <- ff("exp.W.up", vmode = "double", dim = c(nrow(y), 
@@ -65,13 +63,15 @@ CalcStat ()
     obsvecs <- c("obs.E.up", "obs.W.up", "obs.WC.up", "obs.M.up", 
         "obs.I.up", "obs.E.dn", "obs.W.dn", "obs.WC.dn", "obs.M.dn", 
         "obs.I.dn")
-    compvec <- c("<", "<", "<", "<", "<", "<", ">", ">", ">", 
-        ">")
-    outnames <- c("raw1.up", "raw2.up", "raw3.up", "raw4.up", 
-        "raw5.up", "raw1.dn", "raw2.dn", "raw3.dn", "raw4.dn", 
-        "raw5.dn")
-    raw1.up <- raw2.up <- raw3.up <- raw4.up <- raw5.up <- raw1.dn <- raw2.dn <- raw3.dn <- raw4.dn <- raw5.dn <- nrow(y)
-    for (ichunk in seq(along = begpos)) {
+    raw.count.up <- raw.count.dn <- matrix(0, nrow(y), 5)
+
+    total <- length(seq(along = begpos))
+   # create progress bar
+    pb <- winProgressBar(title = "Permutations progress bar", min = 0,
+                     max = total, width = 300)
+
+      for (ichunk in seq(along = begpos)) {
+
         begchunk <- begpos[ichunk]
         endchunk <- endpos[ichunk]
         suby <- y[begchunk:endchunk, ]
@@ -81,58 +81,76 @@ CalcStat ()
             ncolmat <- jendmat - jbegmat + 1
             subx.niter <- x.niter[jbegmat:jendmat, ]
             res <- apply(subx.niter, 1, function(x) IsoGenem(x = factor(x), 
-                y = suby))
-            exp.E.up[begchunk:endchunk, jbegmat:jendmat] <- sapply(res, 
-                function(x) x[[1]])
-            exp.W.up[begchunk:endchunk, jbegmat:jendmat] <- sapply(res, 
-                function(x) x[[2]])
-            exp.WC.up[begchunk:endchunk, jbegmat:jendmat] <- sapply(res, 
-                function(x) x[[3]])
-            exp.M.up[begchunk:endchunk, jbegmat:jendmat] <- sapply(res, 
-                function(x) x[[4]])
-            exp.I.up[begchunk:endchunk, jbegmat:jendmat] <- sapply(res, 
-                function(x) x[[5]])
-            exp.E.dn[begchunk:endchunk, jbegmat:jendmat] <- sapply(res, 
-                function(x) x[[6]])
-            exp.W.dn[begchunk:endchunk, jbegmat:jendmat] <- sapply(res, 
-                function(x) x[[7]])
-            exp.WC.dn[begchunk:endchunk, jbegmat:jendmat] <- sapply(res, 
-                function(x) x[[8]])
-            exp.M.dn[begchunk:endchunk, jbegmat:jendmat] <- sapply(res, 
-                function(x) x[[9]])
-            exp.I.dn[begchunk:endchunk, jbegmat:jendmat] <- sapply(res, 
-                function(x) x[[10]])
+              y = suby))
+            exp.E.up[begchunk:endchunk, jbegmat:jendmat] <- matrix(sapply(res, 
+                function(x) x[[1]]), length(begchunk:endchunk), 
+                length(jbegmat:jendmat)) 
+            exp.W.up[begchunk:endchunk, jbegmat:jendmat] <- matrix(sapply(res, 
+                function(x) x[[2]]), length(begchunk:endchunk), 
+                length(jbegmat:jendmat)) 
+            exp.WC.up[begchunk:endchunk, jbegmat:jendmat] <- matrix(sapply(res, 
+                function(x) x[[3]]), length(begchunk:endchunk), 
+                length(jbegmat:jendmat))
+            exp.M.up[begchunk:endchunk, jbegmat:jendmat] <- matrix(sapply(res, 
+                function(x) x[[4]]), length(begchunk:endchunk), 
+                length(jbegmat:jendmat))
+            exp.I.up[begchunk:endchunk, jbegmat:jendmat] <- matrix(sapply(res, 
+                function(x) x[[5]]), length(begchunk:endchunk), 
+                length(jbegmat:jendmat))
+            exp.E.dn[begchunk:endchunk, jbegmat:jendmat] <- matrix(sapply(res, 
+                function(x) x[[6]]), length(begchunk:endchunk), 
+                length(jbegmat:jendmat))
+            exp.W.dn[begchunk:endchunk, jbegmat:jendmat] <- matrix(sapply(res, 
+                function(x) x[[7]]), length(begchunk:endchunk), 
+                length(jbegmat:jendmat))
+            exp.WC.dn[begchunk:endchunk, jbegmat:jendmat] <- matrix(sapply(res, 
+                function(x) x[[8]]), length(begchunk:endchunk), 
+                length(jbegmat:jendmat))
+            exp.M.dn[begchunk:endchunk, jbegmat:jendmat] <- matrix(sapply(res, 
+                function(x) x[[9]]), length(begchunk:endchunk), 
+                length(jbegmat:jendmat))
+            exp.I.dn[begchunk:endchunk, jbegmat:jendmat] <- matrix(sapply(res, 
+                function(x) x[[10]]), length(begchunk:endchunk), 
+                length(jbegmat:jendmat))
+            tclvalue(PermuteText3) <- "Please wait...."
 
-  # if (jmat  < nmats) { tclvalue(PermuteText3 ) <- "Please wait...." }
-  #else {tclvalue(PermuteText3 ) <- "Permutation is finished...."}
-
-  tclvalue(PermuteText3 ) <- "Please wait...."
-
+            Sys.sleep(0.1)
+            setWinProgressBar(pb, ichunk , title=paste("Permutations are in progress ", round(ichunk /total*100, 0),
+                                         "% done"))
         }
-        for (i in seq(along = ffmatrices)) {
-            lhs <- as.list(quote(OBSVEC[begchunk:endchunk]))
-            lhs[[2]] <- as.name(obsvecs[i])
-            rhs <- as.list(quote(FFMAT[begchunk:endchunk, ]))
-            rhs[[2]] <- as.name(ffmatrices[i])
-            rsarg <- as.call(list(as.name(compvec[i]), as.call(lhs), 
-                as.call(rhs)))
-            RHS <- as.call(list(as.name("rowSums"), rsarg))
-            LHS <- as.list(quote(OUTNAME[begchunk:endchunk]))
-            LHS[[2]] <- as.name(outnames[i])
-            finalcall <- as.call(list(as.name("<-"), as.call(LHS), 
-                as.call(RHS)))
-            eval(finalcall)
+     
+        for (i in 1:6) {
+            x1 <- obsvecs[i]
+            x2 <- ffmatrices[i]
+            a1 <- get(x1)[begchunk:endchunk]
+            a2 <- matrix(as.numeric(get(x2)[begchunk:endchunk, 
+                ]), byrow = FALSE, nrow = length(begchunk:endchunk), 
+                ncol = niter)
+            tr <- rowSums(a1 < a2)
+            if (i <= 5) {
+                raw.count.up[begchunk:endchunk, i] <- tr
+            }
+            else {
+                raw.count.dn[begchunk:endchunk, 1] <- tr
+            }
+        }
+        for (i in 7:10) {
+            x1 <- obsvecs[i]
+            x2 <- ffmatrices[i]
+            a1 <- get(x1)[begchunk:endchunk]
+            a2 <- matrix(as.numeric(get(x2)[begchunk:endchunk, 
+                ]), byrow = FALSE, nrow = length(begchunk:endchunk), 
+                ncol = niter)
+            tr <- rowSums(a1 > a2)
+            raw.count.dn[begchunk:endchunk, i - 5] <- tr
         }
     }
+    close(pb)
     rm(suby)
     rm(res)
     rm(subx.niter)
-    raw.p.up <- data.frame(raw1.up/niter, raw2.up/niter, raw3.up/niter, 
-        raw4.up/niter, raw5.up/niter)
-    raw.p.dn <- data.frame(raw1.dn/niter, raw2.dn/niter, raw3.dn/niter, 
-        raw4.dn/niter, raw5.dn/niter)
-    rm(raw1.up, raw2.up, raw3.up, raw4.up, raw5.up, raw1.dn, 
-        raw2.dn, raw3.dn, raw4.dn, raw5.dn)
+    raw.p.up <- data.frame(raw.count.up/niter)
+    raw.p.dn <- data.frame(raw.count.dn/niter)
     rawp.up <- data.frame(row.names(y), raw.p.up)
     rawp.dn <- data.frame(row.names(y), raw.p.dn)
     raw.p.one <- data.frame(row.names(y), apply(cbind(raw.p.up[, 
@@ -147,12 +165,11 @@ CalcStat ()
     colnames(raw.p.one) <- colnames(raw.p.two) <- colnames(rawp.up) <- colnames(rawp.dn) <- c("Probe.ID", 
         "E2", "Williams", "Marcus", "M", "ModM")
     res <- list(raw.p.one = raw.p.one, raw.p.two = raw.p.two, 
-        rawp.up = rawp.up, rawp.dn = rawp.dn, niter=niter)
+        rawp.up = rawp.up, rawp.dn = rawp.dn)
     rm(exp.E.up, exp.W.up, exp.WC.up, exp.M.up, exp.I.up, exp.E.dn, 
         exp.W.dn, exp.WC.dn, exp.M.dn, exp.I.dn)
     gc()
     return(res)
-options(warn = 0)
-tclvalue(PermuteText3 ) <- "Permutation is finished...."
+    tclvalue(PermuteText3) <- "Permutation is finished...."
 }
 

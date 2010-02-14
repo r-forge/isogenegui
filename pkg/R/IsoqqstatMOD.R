@@ -1,4 +1,4 @@
-`IsoqqstatMOD` <-
+IsoqqstatMOD <-
 function (x, y, fudge, niter, seed) 
 {
 
@@ -15,6 +15,12 @@ function (x, y, fudge, niter, seed)
     if (fudge == "no") {
         fudge.factor <- c(rep(0, 5))
     }
+
+    total <-niter
+    # create progress bar
+    pb <- winProgressBar(title = "SAM progress bar", min = 0,
+                     max = total, width = 300)
+
     for (i in 1:niter) {
         yyy0 <- IsoGenemSAM(xiter.index[i, ], as.matrix(y), fudge.factor)
         to1[, i] <- sort(yyy0[[1]])
@@ -22,6 +28,8 @@ function (x, y, fudge, niter, seed)
         to3[, i] <- sort(yyy0[[3]])
         to4[, i] <- sort(yyy0[[4]])
         to5[, i] <- sort(yyy0[[5]])
+        setWinProgressBar(pb, i , title=paste("SAM Permutations are in progress", round(i /total*100, 0),
+                                         "% done"))
  
      tkwm.deiconify(samPermute)
 tkgrab.set(samPermute)
@@ -32,6 +40,7 @@ tkfocus(samPermute)
 
 
     }
+    close(pb)
     L <- IsoGenemSAM(x, as.matrix(y), fudge.factor)
     d <- L[[1]]
     d.sort.list <- sort.list(d)

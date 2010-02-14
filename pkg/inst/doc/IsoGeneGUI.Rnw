@@ -1,11 +1,13 @@
 %\VignetteIndexEntry{IsoGeneGUI Vignette}
+%\VignetteAuthor{Setia Pramana}
 %\VignetteDepends{}
 %\VignetteKeywords{Dose-response microarray data GUI}
 %\VignettePackage{IsoGeneGUI}
 
 
+
 \documentclass[a4paper]{article}
-\usepackage[OT1]{fontenc}
+%\usepackage[OT1]{fontenc}
 \usepackage{Sweave}
 \usepackage{url}
 \begin{document}

@@ -12,7 +12,6 @@
 \alias{ChooseStat}
 \alias{CVPlot}
 \alias{diginum}       
-\alias{EditData}
 \alias{ExactE2}
 \alias{ExactE2Val}
 \alias{exit}
@@ -126,6 +125,8 @@ metrics, 28, 519-531.
 
 \keyword{IO}
 \examples{
+\dontrun{
 library(IsoGeneGUI)
 IsoGeneGUI()
+}
 }

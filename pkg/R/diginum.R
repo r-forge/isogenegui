@@ -1,6 +1,6 @@
 `diginum` <-
-function (y) {
-
+function (res) {
+y <- res
 digit <- strsplit(as.character(y),".",fixed=TRUE)
 c <- sapply(digit, function(x)length(x))
 if (sum(c) == length(y)) { dig  <- NULL }

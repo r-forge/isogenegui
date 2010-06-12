@@ -1,5 +1,6 @@
 `save.result` <-
-function(x) {
+function(object.res) {
+x <- object.res
       saveWin <- tktoplevel()
       tkwm.title(saveWin ,"Save the results" )
 frame1 <- tkframe(saveWin , borderwidth=2)

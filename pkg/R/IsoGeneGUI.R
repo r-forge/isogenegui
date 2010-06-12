@@ -1,15 +1,6 @@
 `IsoGeneGUI` <-
 function () {
-library("tcltk")
-library(tkrplot)
-library(Biobase)
-library(multtest)
-library(relimp)
-library("geneplotter")  ## from BioConductor
-library("RColorBrewer") ## from CRAN
-library("WriteXLS")
-library("gdata")
-library(IsoGene)
+
 #############################################
 # Creating a main window with menu and plot #
 #############################################
@@ -71,7 +62,7 @@ tkadd(PlotsMenu, "cascade", label = "User Defined Scatter Plot", command = UserP
 
 tkadd(topMenu, "cascade", label = "Plots", menu = PlotsMenu)
 tkadd(HelpMenu, "cascade", label = "IsoGene Help", command = onHelpIsoGene )
-tkadd(HelpMenu, "cascade", label = "IsoGeneGUI Help", command = onHelpIsoGeneGUI )
+tkadd(HelpMenu, "cascade", label = "IsoGeneGUI Help", command = IsoGeneGUIHelp)
 
 tkadd(HelpMenu, "cascade", label = "About", command = about )
 tkadd(topMenu, "cascade", label = "Help", menu = HelpMenu)

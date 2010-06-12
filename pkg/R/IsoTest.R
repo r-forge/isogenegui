@@ -1,8 +1,9 @@
 `IsoTest` <-
-function (rp, FDR, type = c("BH", "BY","Bonferroni", "Holm", 
+function (rpval, FDR, type = c("BH", "BY","Bonferroni", "Holm", 
 "Hochberg", "SidakSS", "SidakSD"), stat = c("E2", "Williams", 
     "Marcus", "M", "ModM")) 
 {
+    rp <- rpval
     Probe.ID <- rp[, 1]
     type <- match.arg(type)
     stat <- match.arg(stat)
@@ -15,7 +16,7 @@ function (rp, FDR, type = c("BH", "BY","Bonferroni", "Holm",
     else if (stat == "M") 
         rpraw <- rp[, 5]
     else if( stat == "ModM")
-rpraw <- rp[, 6]
+    rpraw <- rp[, 6]
   
     adjp <- adjustment (rpraw , type ) 
     sig  <- which(adjp[, 2] <= FDR)
@@ -26,9 +27,14 @@ rpraw <- rp[, 6]
       }
   else { 
     sign.Probe.ID <-Probe.ID[sig]
-    sign.genes <- data.frame(sign.Probe.ID ,sig,adjp1)
-    row.names(sign.genes) <- NULL
-    names(sign.genes) <- c("Probe.ID", "row.num", paste (stat, sep = " ", "Raw p-values"), paste (type, sep = " ", "Adjusted p-values"))
+    if (length(sig) == 1 ) 
+    sign.genes <- c(sign.Probe.ID ,sig,adjp1)
+    else {
+         sign.genes <- data.frame(sign.Probe.ID ,sig,adjp1)
+         row.names(sign.genes) <- NULL
+         }
+     names(sign.genes) <- c("Probe.ID", "row.num", paste (stat, sep = "", 
+           "Raw p-values"), paste (type, sep = " ", "Adjusted p-values"))
      }
   return(sign.genes)
 }

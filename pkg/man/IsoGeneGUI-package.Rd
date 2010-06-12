@@ -1,67 +1,6 @@
 \title{IsoGeneGUI Graphical User Interface for the IsoGene package}
 \name{IsoGeneGUI-package}
 \alias{IsoGeneGUI-package}
-\alias{IsoGeneGUI}
-\alias{summ}
-\alias{xfudge}
-\alias{about}            
-\alias{adjustment}      
-\alias{browse}
-\alias{browse2}
-\alias{CalcStat}
-\alias{ChooseStat}
-\alias{CVPlot}
-\alias{diginum}       
-\alias{ExactE2}
-\alias{ExactE2Val}
-\alias{exit}
-\alias{get.ResSAM}
-\alias{getDose}
-\alias{getExprs}
-\alias{IsofudgeMod}
-\alias{IsofudgeMod2}
-\alias{IsoGenemMod}
-\alias{Isomean}    
-\alias{Isoplot}
-\alias{IsoPlot.mod}
-\alias{IsoPlotSldr}
-\alias{IsopvalPlot}   
-\alias{IsopvaluePlot}
-\alias{IsoqqstatMOD}
-\alias{IsoRawpMod}
-\alias{IsoStat}
-\alias{IsoTest}
-\alias{loadDataSet}
-\alias{MeanDiff}      
-\alias{onHelpIsoGene}  
-\alias{onHelpIsoGeneGUI}  
-\alias{openFile}        
-\alias{Permutation}   
-\alias{PermuteSAM}
-\alias{Plot2}         
-\alias{PlotFdrDlt}    
-\alias{PlotFPDlt}    
-\alias{PlotSigDlt}    
-\alias{printExact}    
-\alias{printsummary}     
-\alias{PvalAdj}      
-\alias{samplot2}    
-\alias{save.result}
-\alias{save.result.mult}
-\alias{saveDir}
-\alias{SaveGraph}
-\alias{saveXls}     
-\alias{savingRwd}
-\alias{SeedNum}
-\alias{SEPlot}         
-\alias{Setseed}       
-\alias{showdata}        
-\alias{Signif}          
-\alias{summ}     
-\alias{treeWidget}      
-\alias{UserPlot}  
-\alias{UserPlotting}  
-\alias{xfudge}
 
 \docType{package}
 
@@ -72,9 +11,13 @@ The p-values of the global likelihood ratio test (E2) are obtained using the exa
 
 Several p-values adjustment are provided:  Bonferroni, Holm (1979), Hochberg (1988), and Sidak procedures for controlling the family-wise Type I error rate (FWER), and BH (Benjamini and Hochberg 1995) and BY (Benjamini and Yekutieli 2001) procedures are used for controlling the FDR.
 }
+
+
 \details{
-To run the package, we use the function: IsoGeneGUI().
+The IsoGene Graphical User Interface (IsoGene-GUI) is a user friendly interface of the IsoGene package.
 }
+
+
 \author{
 Author: Setia Pramana
 
@@ -123,7 +66,7 @@ metrics, 28, 519-531.
 
 }
 
-\keyword{IO}
+\keyword{package}
 \examples{
 \dontrun{
 library(IsoGeneGUI)

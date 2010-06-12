@@ -1,8 +1,8 @@
 `printsummary` <-
-function(x,y,z)
+function(x,y,range)
 {
   
-     
+     z <- range
 infoBox  <- tktoplevel()
 tkwm.title(infoBox,"Summary Statistics for gene") 
        xscr <- tkscrollbar(infoBox, repeatinterval=5,orient="horizontal",

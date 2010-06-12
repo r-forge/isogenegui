@@ -1,5 +1,6 @@
 `save.result.mult` <-
-function(x) {
+function(objt) {
+x <- objt
 saveWin <- tktoplevel()
 tkwm.title(saveWin ,"Save the results" )
 frame1 <- tkframe(saveWin , borderwidth=2)
@@ -50,13 +51,11 @@ if (cbVal1 =="0" & cbVal2 =="0") {
   if (cbVal1 =="1") { 
        for (i in 1:length(x)) {
       xlsfilename <- paste(DirName,"/",x[i],".xls",sep="")
-      #write.xls( get(x[i]), file=xlsfilename )   
-WriteXLS(x , ExcelFileName = xlsfilename )
+      WriteXLS(x , ExcelFileName = xlsfilename )
 
  }   
    }
   if (cbVal2 =="1") { 
-     #eval(parse(text=paste("save(",x, ",file =fileRwd)",sep="")))
      try(save(list = x, file =fileRwd))
 
    }

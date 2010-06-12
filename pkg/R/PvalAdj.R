@@ -1,8 +1,9 @@
 `PvalAdj` <-
-function (rp, FDR, type = c("BH", "BY","Bonferroni", "Holm", 
+function (rpval, FDR, type = c("BH", "BY","Bonferroni", "Holm", 
 "Hochberg", "SidakSS", "SidakSD"), stat = c("E2", "Williams", 
     "Marcus", "M", "ModM")) 
 {
+   rp <- rpval
     Probe.ID <- rp[, 1]
     type <- match.arg(type)
     stat <- match.arg(stat)

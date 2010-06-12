@@ -1,6 +1,5 @@
 `ExactE2Val` <-
 function (x,y)
-#
   {
   
 val <- c(

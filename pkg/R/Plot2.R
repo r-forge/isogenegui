@@ -1,7 +1,7 @@
 `Plot2` <-
-function(x,Myhscale,Myvscale,title )
+function(func,Myhscale,Myvscale,title )
 {
-
+x <- func
 winPlot <- tktoplevel()
 tkwm.title(winPlot ,title )
 buttonFramePlot <-tkframe(winPlot ,borderwidth=2)

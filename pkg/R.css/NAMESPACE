@@ -1,0 +1,5 @@
+importFrom(multtest, mt.rawp2adjp)
+importFrom(gdata, read.xls)
+importFrom(WriteXLS, WriteXLS)
+importFrom(relimp, showData)
+export(IsoGeneGUI, IsoGeneGUIHelp)

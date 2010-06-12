@@ -1,0 +1,319 @@
+%\VignetteIndexEntry{IsoGeneGUI Vignette}
+%\VignetteAuthor{Setia Pramana}
+%\VignetteDepends{}
+%\VignetteKeywords{Dose-response microarray data GUI}
+%\VignettePackage{IsoGeneGUI}
+
+
+
+\documentclass[a4paper]{article}
+%\usepackage[OT1]{fontenc}
+\usepackage{Sweave}
+\usepackage{url}
+\begin{document}
+
+\title{IsoGeneGUI Package Vignette}
+\author{Setia Pramana, Dan Lin, Ziv Shkedy}
+\date{April 2, 2010}
+\maketitle
+
+\section{Introduction}
+The IsoGene Graphical User Interface (IsoGeneGUI) is a user friendly interface of the IsoGene package which is aimed to 
+perform analysis of dose-response studies in microarray experiments. 
+The IsoGeneGUI is developed for the user with no or limited knowledge about R programming so he/she can perform 
+the analysis of dose-response in microarray setting  easily. This GUI was developed using tcl/tk package.
+The statistical methodologies (test statistics, etc.)  used in this package are discussed by Lin et.al (2007, 2008, 2010). 
+
+
+\section{Usage}
+To run the package 
+<<open, eval=FALSE >>=
+library(IsoGeneGUI)
+IsoGeneGUI()
+@
+
+
+\section{Menus}
+
+The main window of the IsoGene-UI is presented in Figure \ref{fig:Main}. The package has four main menus: File, Analysis, Plots and Help. In the middle of the main window 
+there is an info box which provides information about the data (availability and summary) and 
+the result summary of the last performed analysis.
+
+
+
+\begin{figure}
+\includegraphics[scale=0.5]{./images/main}
+\caption{\label{fig:Main}The main window of the ISoGeneGUI.}
+\end{figure}
+
+
+
+\begin{enumerate}
+\item  File:
+       \begin{enumerate}
+       \item Open Data
+       		 \begin{enumerate}
+         		 \item R workspace (*.RData files)
+          		 \item Excel or text file (*.xls or *.txt files)
+          	 \end{enumerate}
+      \item  Show Data
+       \item  Exit
+ 		\end{enumerate}
+\item Analysis:  
+ 	\begin{enumerate}
+    \item Set seed
+    \item  Likelihood Ratio Test E2 Analysis
+    \item Permutation Analysis
+    \item Significant Analysis of Microarrays (SAM)
+    	\begin{enumerate}
+         \item  SAM Permutation
+        \item SAM Analysis
+         \end{enumerate}	
+	\end{enumerate}
+\item Plot:    
+	\begin{enumerate}    
+    \item  IsoPlot
+   	\item Permutation Plot
+    \item SAM Plot
+    	\begin{enumerate}   
+          \item  Plot of FDR vs. Delta
+          \item  Plot of number of significant genes vs. Delta
+          \item Plot of number of False Positive vs. Delta
+        \end{enumerate}
+   	\item  User defined scatter plot
+	\end{enumerate}
+\item Help: 
+	\begin{enumerate}    
+   	\item  IsoGene Help
+    \item  IsoGeneGUI Help
+    \item  About
+  	\end{enumerate}
+\end{enumerate}
+
+
+
+\section{Reading the Data}
+In the first step of the analysis, the data is uploaded to the package using the File menu.
+The package can read data in R workspace file (*.RData), excel and text files.
+\subsection{R workspace files}
+ The format of the gene expression data should be a matrix or table where the columns are the arrays 
+ and the rows are the gene names. The dose information should be a vector or table contain the dose 
+ levels which corresponds to the arrays in the expression matrix/table.\newline
+ The package provides an R workspace example dataset called \texttt{dopamine2}. For the dopamine2 data, 
+ the dose levels are given by
+\small
+\begin{center}
+\begin{verbatim}
+> dose
+ [1] 0.00 0.00 0.01 0.01 0.04 0.04 0.16 0.16 0.63 0.63
+[11] 2.50 2.50 0.00 0.00 0.00 0.01 0.01 0.01 0.04 0.04
+[21] 0.16 0.16 0.63 0.63 2.50 2.50
+\end{verbatim}
+
+\end{center}
+\normalsize
+while the expression matrix has the following structure:
+\small
+\begin{center}
+
+\begin{verbatim}
+> dopamine[1:5, 1:6]
+             X1        X2         X3        X4        X5
+201_at  2.579138  2.318749  2.496895  2.456772  2.479480
+202_at  2.140561  2.061804  2.131749  2.107638  2.086722
+203_at  6.988566  6.620562  5.764725  6.326178  7.020716
+204_at 11.081855  9.974999 10.790689 10.702516 10.544664
+205_at 12.104545 12.076975 11.989770 12.151120 12.118520
+\end{verbatim}
+\end{center}
+\normalsize
+
+
+
+Part of the \texttt{dopamine2} can be obtained in folder "exampleData" inside the package. 
+
+
+The full example data in R workspace, text and excel files can be obtained from: \url{http://www.ibiostat.be/software/IsoGeneGUI/index.html}
+
+\subsection{Open the data set}
+
+
+In order to upload the R workspace we choose in the file menu in Figure~\ref{gui3}a the following sequence:
+
+\begin{center}
+
+\begin{verbatim}
+File > Open dataset > R workspace
+\end{verbatim}
+\end{center}
+
+The package will automatically refer to the example data  \texttt{dopamine2} if the option open R workspace is choosen.
+
+
+Text files and Excel files can be uploaded to IsoGene-GUI as well using following sequence in the dialogue box:
+
+\begin{center}
+\begin{verbatim}
+File > Open dataset > Excel or Text files
+\end{verbatim}
+\end{center}
+
+Once the the data is uploaded, information about the data is presented automatically in the info box of the main window.
+
+
+\section{Exploratory Data Analysis}
+\label{explore}
+
+To explore the expression of the genes, the IsoGeneGUI provides the submenu \textbf{IsoPlot} 
+from \textbf{Plots} menu. This feature displays the data points, sample means at each dose and an 
+isotonic regression line. 
+
+There are three input options to draw the isotonic regression plot, using gene name(s), row number(s) or using a range of row numbers. There are also three check boxes:
+ \begin{enumerate}	
+ \item Dose as ordinal.
+  This option will draw the plot and treat dose as ordinal scale. The default will plot with dose as a continuous variable.
+ \item Show isotonic regression curve for both direction.
+ The default plot just display the isotonic trend/curve which is more likely fit the data. By checking this option, the isotonic trend for both directions will be displayed.
+ \item Show summary of the data.
+ This option is to provide a short summary of each selected gene.
+ \end{enumerate}	
+
+
+
+\section{Data Analysis}
+The IsoGene-GUI package provides three options for analysis: (a) analysis with the likelihood 
+ratio test statistic (LRT) using its exact p-values, (2) resampling based analysis and (3) significance analysis of microarrays (SAM).
+
+\subsection{LRT Using exact p-values}
+\label{LRTAsymp}
+To perform the exact LRT we choose the following sequence in the analysis menu:
+
+\begin{verbatim}
+Analysis > Likelihood Ratio Test (E2)
+\end{verbatim}
+
+Then the main dialog box for analysis based on the LRT using exact p-values is shown in Figure 
+\ref{fig:Exact}.
+
+\begin{figure}[!h]
+
+\includegraphics[scale=0.5]{./images/Exact}
+\caption{\label{fig:Exact}The main dialog box of Likelihood Ratio Test $E^{2}$ analysis.}
+\end{figure}
+
+Note that the users can choose to perform the analysis for all the genes on the array or on pre defined subset. 
+In addition, in order to adjust for multiplicity, 
+we need to select from the menu the adjustment method to be used and the overall error rate.
+
+
+\subsection{Resampling Based Methods}
+
+Resampling based analysis can be performed using the main menu for resampling method shown in 
+Figure~\ref{fig:Perm}. We need to specify  the number of permutations, the test statistic(s) to be 
+used and the multiplicity adjustment(s). Similar to the $E^2$ menu, 
+here we can specify default graphical displays.
+
+
+\begin{figure}
+
+\includegraphics[scale=0.5]{./images/permutationMain}
+\caption{\label{fig:Perm}The main dialog box for resampling-based monotone trend test.}
+\end{figure}
+
+
+\subsection{Significance Analysis of Microarrays (SAM)}
+
+The \textbf{IsoGene-GUI} also provides testing for the dose-response relationship under order restricted 
+alternatives using the Significance Analysis of Microarrays procedure (SAM). To perform this analysis 
+there are two main steps: (1) calculating the SAM regularized test statistic using permutation and 
+(2) the SAM analysis. These two steps are performed by 
+two sub menus in the SAM menu.
+Then in the first step several options of the use fudge factor are provided. 
+User can specify  to use \textbf{no Fudge Factor}, \textbf{Automatic Fudge factor} 
+(fudge factor will be calculated using the methods described in the SAM manual), 
+or the \textbf{fudge factor based on a specific percentile}.
+
+After the statistics are computed or loaded from a file, we now can perform the SAM analysis by following the sequence:
+
+\begin{center}
+\begin{verbatim}
+Analysis > Significance Analysis of Microarrays > SAM Analysis
+\end{verbatim}
+\end{center}
+
+After specifying the test statistic, the main dialog box of SAM analysis, 
+which shows the plot of the observed versus the expected test statistics and other options, 
+will be shown (see Figure \ref{fig:SAM}). 
+
+\begin{figure}
+
+\includegraphics[scale=0.5]{./images/SAMAnalysisWindow}
+\caption{\label{fig:SAM}The main dialog box for SAM analysis.}
+\end{figure}
+
+
+Note that, in this plot we can change the delta value (automatically using delta slider or 
+manually using delta input box) and the FDR level. 
+
+
+\section{Saving IsoGeneGUI Outputs}
+Each plot produced from the analysis in IsoGeneGUI can be copied into clipboard which can be 
+easily pasted into MS.Office documents, such as Ms.Word. It can be done by clicking the 
+\textbf{Copy to Clipboard} button located in the bottom of the graph and then paste it directly 
+to the document (or \texttt{Ctrl-V}). Furthermore, the plots can also be saved into several 
+image formats (*.ps, *,png, *.jpeg, *.bmp, *tiff). After the format is selected/highlighted 
+from the list, the user can 
+click \textbf{browse} button to specify the name of the image file and also the file location.
+
+Note that results of all genes and lists of significant genes from the three analysis above can be
+shown and also saved into an \texttt{R-workspace} and/or an excel file by clicking \textbf{Save} button .
+
+
+
+
+\section{Complete users' manual}
+Users can access the IsoGeneGUI documentation  online or by installing the IsoGeneGUI
+package locally. Then the following code can be typed at R prompt:
+
+<<help, eval=FALSE >>=
+if (interactive()) 
+    {
+	browseURL("http://www.ibiostat.be/software/IsoGeneGUI/index.html")
+    }
+	
+@
+or alternatively:
+<<help, eval=FALSE >>=			
+if (interactive()) {
+library(IsoGeneGUI)
+ IsoGeneGUIHelp()
+}
+@
+
+Users can download example dataset and a complete Users' Manual from the site as well.
+
+
+\section*{References}
+
+\begin{enumerate} 
+	\item Lin, D., Shkedy, Z., Yekutieli, D., Burzykowski, T., G¨ohlmann, H., De Bondt, A., Perera, T., Geerts, T. and Bijnens, L. (2007) 
+	Testing for trends in dose-response microarray experiments: A comparison of several testing 
+	procedures, multiplicity and resamplingbased inference. 
+	\textit{Statistical Applications in Genetics and Molecular Biology}, \textbf{6(1)}, Article 26.
+ 
+	\item Lin, D., Shkedy, Z., Burzykowki, R., Ion,
+	T., G\"{o}hlmann, H.W.H., De Bondt, A., Perera, T., Geerts, T. and
+	Bijnens, L. (2008) An investigation on performance of Significance
+	Analysis of Microarray (SAM) for the comparisons of several
+	treatments with one control in the presence of small variance genes.
+	\textit{Biometrical Journal}, Multiple Comparison Problem, Special Issue,
+	\textbf{50(5)}, 801--823.
+
+\item Lin, D., Shkedy, Z., Yekutieli, D., Amaratunga, D. and
+Bijnens, L., editors. \textit{Modeling Dose-response Microarray Data in Early Drug Development Experiments Using R}. 
+Springer, (to be published in 2010).
+
+
+\end{enumerate}
+
+\end{document}

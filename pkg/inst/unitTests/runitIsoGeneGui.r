@@ -25,11 +25,12 @@ test.MeanDiff <- function() {
 
 
 test.PvalAdj <- function() {
-pvl <- cbind(1:100,runif(100),runif(100),runif(100),runif(100) )
+pvl <- cbind(1:10,c(0.001,0.001,0.001,0.001,0.001,0.001,0.001,0.001,0.001,
+        0.001),runif(10),runif(10),runif(10) )
 res <- mt.rawp2adjp(pvl[,2], "BH")
 adjp <- res$adjp[order(res$index), ]
-checkTrue(is.numeric(IsoGeneGUI:::PvalAdj (pvl ,FDR=0.05,"BH","E2")))
-checkEqualsNumeric(IsoGeneGUI:::PvalAdj (pvl ,FDR=0.05,"BH","E2") , adjp  )
+checkTrue(is.numeric(IsoGeneGUI:::PvalAdj (pvl ,FDR=0.5,"BH","E2")))
+checkEqualsNumeric(IsoGeneGUI:::PvalAdj (pvl ,FDR=0.5,"BH","E2") , adjp  )
  }
 
 
@@ -50,9 +51,10 @@ y <- data.frame(rbind(y1,y2)) # y needs to be a data frame
  checkEquals(length(IsoGeneGUI:::IsoGenemMod (x,y) ) ,20 )
  }
 
-test.IsoTest<- function() {
-set.seed(123)
-pvl <- cbind(1:100,runif(100,max=0.002),runif(100),runif(100),runif(100) )
+test.IsoTest <- function() {
+
+pvl <- cbind(1:10,c(0.00001,0.001,0.001,0.001,0.001,0.001,0.001,0.001,0.001,
+        0.001),runif(10),runif(10),runif(10) )
 res <- mt.rawp2adjp(pvl[,2], "BH")
 adjp <- res$adjp[order(res$index), ]
 checkEqualsNumeric( t(IsoGeneGUI:::IsoTest(pvl ,FDR=0.05,type="BH",stat="E2")[4]), 

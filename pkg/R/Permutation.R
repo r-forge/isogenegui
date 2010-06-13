@@ -83,8 +83,8 @@ if (!exists("exprs")&!exists("dose"))
      tclvalue(PermuteText4 ) <- " "
 
   if (rbVal2 == "old") { 
-ReturnVal <- tkmessageBox(title="Error Message",message="You have choosen the wrong option !",icon="info",type="ok")
-  if (tclvalue(ReturnVal)== "ok") tkfocus(iso)
+      ReturnVal <- tkmessageBox(title="Error Message",message="You have choosen the wrong option !",icon="info",type="ok")
+      if (tclvalue(ReturnVal)== "ok") tkfocus(iso)
                 }
   if (rbVal2 == "new") {
 RawPval <- NULL
@@ -102,11 +102,12 @@ ProbeID <- rownames(exprs2Perm )
 assign("matchID",matchID ,envir=.GlobalEnv)
 
 ## Calculating the Raw P values ### 
-RawPval <- IsoRawpMod (dose, exprs2Perm , niter = NumPerm, seed = SeedNum)
-      assign("RawPval",RawPval ,envir=.GlobalEnv)
-N <- length(ProbeID )
-try(tkdelete(treeWidget,"nodePerm") , silent = T )
-try( tkdelete(treeWidget,"RawPermNode"), silent = T )
+ RawPval <- IsoRawpMod (dose, exprs2Perm , niter = NumPerm, seed = SeedNum)
+ assign("RawPval",RawPval ,envir=.GlobalEnv)
+ 
+ N <- length(ProbeID )
+ try(tkdelete(treeWidget,"nodePerm") , silent = T )
+ try( tkdelete(treeWidget,"RawPermNode"), silent = T )
 
 tkinsert(treeWidget,"end","Record3Node","RawPermNode",text="Permutation (raw) P-values")
 tkinsert(treeWidget,"end","RawPermNode","NumgeneNode",text=paste("Number gene analized: ",N) )

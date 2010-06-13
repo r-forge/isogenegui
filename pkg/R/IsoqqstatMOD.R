@@ -18,8 +18,10 @@ function (x, y, fudge, niter, seed)
 
     total <-niter
     # create progress bar
-    pb <- winProgressBar(title = "SAM progress bar", min = 0,
-                     max = total, width = 300)
+    #pb <- winProgressBar(title = "SAM progress bar", min = 0,
+     #                max = total, width = 300)
+    pb <- tkProgressBar(title = "SAM progress bar", "Permutations are started",min = 0, max = total, 
+         width = 300)
 
     for (i in 1:niter) {
         yyy0 <- IsoGenemSAM(xiter.index[i, ], as.matrix(y), fudge.factor)
@@ -28,15 +30,18 @@ function (x, y, fudge, niter, seed)
         to3[, i] <- sort(yyy0[[3]])
         to4[, i] <- sort(yyy0[[4]])
         to5[, i] <- sort(yyy0[[5]])
-        setWinProgressBar(pb, i , title=paste("SAM Permutations are in progress", round(i /total*100, 0),
-                                         "% done"))
- 
+        #setTkProgressBar(pb, i , title=paste("SAM Permutations are in progress", round(i /total*100, 0),
+        #                                 "% done"))
+        info <- sprintf("%d%% done", round(i /total*100, 0))
+        setTkProgressBar(pb, i , title=paste("SAM permutations are in progress "), info)
+
+
      tkwm.deiconify(samPermute)
-tkgrab.set(samPermute)
-tkfocus(samPermute)
-  if (i < niter ) { tclvalue(PermuteText1 ) <- "Please wait...." }
-  else {tclvalue(PermuteText1 ) <- "Permutation is finished...."}
-  tclvalue(PermuteText2 ) <- paste( "Performing",i,"/",NumPermval,"permutations",sep = " " )
+     tkgrab.set(samPermute)
+     tkfocus(samPermute)
+     if (i < niter ) { tclvalue(PermuteText1 ) <- "Please wait...." }
+     else {tclvalue(PermuteText1 ) <- "Permutation is finished...."}
+     tclvalue(PermuteText2 ) <- paste( "Performing",i,"/",NumPermval,"permutations",sep = " " )
 
 
     }

@@ -67,14 +67,18 @@ function (x, y, niter,seed)
 
     total <- length(seq(along = begpos))
    # create progress bar
-    pb <- winProgressBar(title = "Permutations progress bar", min = 0,
-                     max = total, width = 300)
+   # pb <- winProgressBar(title = "Permutations progress bar", min = 0,
+    #                 max = total, width = 300)
+    pb <- tkProgressBar(title = "Permutations progress bar", "Permutations are started",
+       min = 0, max = total, width = 300)
 
       for (ichunk in seq(along = begpos)) {
 
         begchunk <- begpos[ichunk]
         endchunk <- endpos[ichunk]
         suby <- y[begchunk:endchunk, ]
+        if (nrow(y)<= 10)  suby <- y
+     
         for (jmat in 1:nmats) {
             jbegmat <- begmat[jmat]
             jendmat <- endmat[jmat]
@@ -115,8 +119,12 @@ function (x, y, niter,seed)
             tclvalue(PermuteText3) <- "Please wait...."
 
             Sys.sleep(0.1)
-            setWinProgressBar(pb, ichunk , title=paste("Permutations are in progress ", round(ichunk /total*100, 0),
-                                         "% done"))
+            #setTkProgressBar(pb, ichunk , title=paste("Permutations are in progress ", 
+            #   round(ichunk /total*100, 0),  "% done"))
+ 
+          info <- sprintf("%d%% done", round(ichunk /total*100, 0))
+          setTkProgressBar(pb, ichunk , title=paste("Permutations are in progress "), info)
+            
         }
      
         for (i in 1:6) {

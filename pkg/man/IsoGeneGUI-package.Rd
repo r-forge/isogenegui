@@ -17,13 +17,15 @@ Several p-values adjustment are provided:  Bonferroni, Holm (1979), Hochberg (19
 The IsoGene Graphical User Interface (IsoGene-GUI) is a user friendly interface of the IsoGene package.
 }
 
-
 \author{
 Author: Setia Pramana
 
-Maintainer: Setia Pramana <setia.pramana@uhasselt.be>
+Maintainer: Setia Pramana <setia.pramana@ki.se>
 }
 \references{
+
+Pramana S., Haldermans P., and Verbeke, T. (2012) A User Friendly Interface for Analyzing Dose-response Studies in Microarray Experiments: The IsoGeneGUI package. A Book Chapter in Lin, D., Shkedy, Z., Amaratunga,D., Yekutieli, D and Bijnens, L. (Editors), "Modeling of Dose-response Microarray Data in Early Drug Development Experiments Using R", Springer.
+
 Barlow, R., Bartholomew, D., Bremner, M. and Brunk, H. (1972) Statistical Inference
 Under Order Restriction. New York: Wiley.
 

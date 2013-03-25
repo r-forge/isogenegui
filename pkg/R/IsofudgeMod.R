@@ -7,7 +7,7 @@ function(x,y, stat ,fudge){
     y <- y[,ordx]  # reverse order (sorted two times)
     unx <- unique(x) # compute once
     ydf <- as.data.frame(t(y))
-    y.m <- do.call("cbind", unclass(by(ydf, x, mean)))
+    y.m <- do.call("cbind", unclass(by(ydf, x, colMeans)))
    y.m.tot <- matrix(rep(rowMeans(y), length(x)), ncol = length(x))
     n.p <- table(x)
     n.g <- length(n.p)

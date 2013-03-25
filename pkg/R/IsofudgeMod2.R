@@ -11,7 +11,7 @@ function(x,y, fudge){
     unx <- unique(x) # compute once
     
     ydf <- as.data.frame(t(y))
-    y.m <- do.call("cbind", unclass(by(ydf, x, mean)))
+    y.m <- do.call("cbind", unclass(by(ydf, x, colMeans)))
     
     y.m.tot <- matrix(rep(rowMeans(y), length(x)), ncol = length(x))
     n.p <- table(x)
@@ -69,8 +69,6 @@ function(x,y, fudge){
     fudge.M <- xfudge(M.dif,M.si2,fudge)
     fudge.I <- xfudge(I.dif, I.si2,fudge)  
     fudgeAll <- as.numeric(c(fudge.E2[[1]], fudge.Williams[[1]], fudge.Marcus[[1]], fudge.M[[1]], fudge.I[[1]]))
-    #CVAll <- cbind(fudge.E2[[2]], fudge.Williams[[2]], fudge.Marcus[[2]], fudge.M[[2]], fudge.I[[2]])
-    #fudgeRes <- list(fudgeAll,CVAll)
     return(fudgeAll)
   }
 

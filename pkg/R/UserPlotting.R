@@ -51,19 +51,27 @@ PermutationPval.ModM  <<- twosided.RawPval[,6]
 
   for (i in (1:length(stat.ls)))
    { 
-AllFDR <- Isoallfdr(SAMRes, , stat=stat.ls[i])
-Delta.table <- data.frame(AllFDR) 
-Delta <- Delta.table[1,1]
-qval <- Isoqval(Delta, AllFDR, SAMRes, stat=stat.ls[i])
-qvalue <-  qval [[1]]
-qvalue <- qvalue [order(qvalue [,1]),]
-if (nrow (qvalue) > nrow(exprs2SAM) ) {
-reprow <- which(table(qvalue[,1])==2)
-delrow <- which(qvalue[,1]== reprow )[1]
-qvalue2 <- qvalue [-delrow ,]
-  }
-else { qvalue2 <-  qvalue }
-Qval.mat[,i] <- qvalue2 [,3]
+	AllFDR <- Isoallfdr(SAMRes, , stat=stat.ls[i])
+	Delta.table <- data.frame(AllFDR) 
+	Delta <- Delta.table[1,1]
+	qval <- Isoqval(Delta, AllFDR, SAMRes, stat=stat.ls[i])
+	qvalue <-  qval [[1]]
+	qvalue <- qvalue [order(qvalue [,1]),]
+	if (nrow (qvalue) > nrow(exprs2SAM) ) {
+		reprow <- which(table(qvalue[,1])==2)
+		delrow <- which(qvalue[,1]== reprow )[1]
+		qvalue2 <- qvalue [-delrow ,]
+  	}
+
+     if (nrow (qvalue) < nrow(exprs2SAM) ) {
+     	 qvalue <- data.frame(qvalue)
+	 misrow <- min(which (qvalue[,1] != as.numeric(rownames(qvalue)) ))
+	 qvalue2 <- rbind(qvalue[1:misrow-1 ,],c(misrow ,NA,NA), qvalue[misrow:nrow(qvalue) ,])
+	 }
+	else { 
+ 	qvalue2 <-  qvalue 
+ 	}
+Qval.mat[,i] <- as.numeric(qvalue2 [,3])
 StatSAM.mat[,i] <- qvalue2 [,2]
 }
 
@@ -78,7 +86,7 @@ M.q.value <<-Qval.mat[,1]
 E2.q.value <<-Qval.mat[,2]
 Marcus.q.value <<-Qval.mat[,3]
 Williams.q.value <<-Qval.mat[,4]
-  ModifiedM.q.value <<-Qval.mat[,5]
+ModifiedM.q.value <<-Qval.mat[,5]
 
   object.list.SAM <- c("SAM.M.value","SAM.E2.value","SAM.Marcus.value","SAM.Williams.value","SAM.ModifiedM.value",
      "ExactPval.E2","E2.q.value","M.q.value","Williams.q.value","Marcus.q.value","ModifiedM.q.value")

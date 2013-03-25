@@ -27,6 +27,7 @@ HelpMenu<- tkmenu(topMenu, tearoff = FALSE)
 loadMenu<- tkmenu(fileMenu,tearoff = FALSE)
 SamMenu <- tkmenu(analysisMenu, tearoff = FALSE)
 SamPlotMenu <- tkmenu(PlotsMenu, tearoff = FALSE)
+IsoGeneHelpMenu<- tkmenu(HelpMenu, tearoff = FALSE)
 
 
 tkadd(fileMenu,"cascade", label = "Open dataset", menu= loadMenu)
@@ -62,10 +63,16 @@ tkadd(PlotsMenu, "cascade", label = "User Defined Scatter Plot", command = UserP
 
 tkadd(topMenu, "cascade", label = "Plots", menu = PlotsMenu)
 tkadd(HelpMenu, "cascade", label = "IsoGene Help", command = onHelpIsoGene )
-tkadd(HelpMenu, "cascade", label = "IsoGeneGUI Help", command = IsoGeneGUIHelp)
+#tkadd(HelpMenu, "cascade", label = "IsoGeneGUI Help", command = IsoGeneGUIHelp)
+
+tkadd(HelpMenu, "cascade", label = "IsoGeneGUI Help", menu=IsoGeneHelpMenu)
+tkadd(IsoGeneHelpMenu, "command", label = "IsoGeneGUI Help", command = IsoGeneGUIHelp)
+tkadd(IsoGeneHelpMenu, "command", label = "IsoGeneGUI Vignette", command = IsoGeneGUIVignette)
+
 
 tkadd(HelpMenu, "cascade", label = "About", command = about )
 tkadd(topMenu, "cascade", label = "Help", menu = HelpMenu)
+
 
 
 fontHeading <- tkfont.create(family="times",size=22,weight="bold",slant="italic")

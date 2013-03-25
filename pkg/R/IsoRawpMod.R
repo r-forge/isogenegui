@@ -35,26 +35,26 @@ function (x, y, niter,seed)
     chunklength <- floor(nrow(y)/nchunks)
     endpos <- c(1:(nchunks - 1) * chunklength, nrow(y))
     begpos <- c(1, endpos[-length(endpos)] + 1)
-    exp.E.up <- ff("exp.E.up", vmode = "double", dim = c(nrow(y), 
-        niter))
-    exp.W.up <- ff("exp.W.up", vmode = "double", dim = c(nrow(y), 
-        niter))
-    exp.WC.up <- ff("exp.WC.up", vmode = "double", dim = c(nrow(y), 
-        niter))
-    exp.M.up <- ff("exp.M.up", vmode = "double", dim = c(nrow(y), 
-        niter))
-    exp.I.up <- ff("exp.I.up", vmode = "double", dim = c(nrow(y), 
-        niter))
-    exp.E.dn <- ff("exp.E.dn", vmode = "double", dim = c(nrow(y), 
-        niter))
-    exp.W.dn <- ff("exp.W.dn", vmode = "double", dim = c(nrow(y), 
-        niter))
-    exp.WC.dn <- ff("exp.WC.dn", vmode = "double", dim = c(nrow(y), 
-        niter))
-    exp.M.dn <- ff("exp.M.dn", vmode = "double", dim = c(nrow(y), 
-        niter))
-    exp.I.dn <- ff("exp.I.dn", vmode = "double", dim = c(nrow(y), 
-        niter))
+    suppressWarnings(exp.E.up <- ff("exp.E.up", vmode = "double", 
+        dim = c(nrow(y), niter)))
+    suppressWarnings(exp.W.up <- ff("exp.W.up", vmode = "double", 
+        dim = c(nrow(y), niter)))
+    suppressWarnings(exp.WC.up <- ff("exp.WC.up", vmode = "double", 
+        dim = c(nrow(y), niter)))
+    suppressWarnings(exp.M.up <- ff("exp.M.up", vmode = "double", 
+        dim = c(nrow(y), niter)))
+    suppressWarnings(exp.I.up <- ff("exp.I.up", vmode = "double", 
+        dim = c(nrow(y), niter)))
+    suppressWarnings(exp.E.dn <- ff("exp.E.dn", vmode = "double", 
+        dim = c(nrow(y), niter)))
+    suppressWarnings(exp.W.dn <- ff("exp.W.dn", vmode = "double", 
+        dim = c(nrow(y), niter)))
+    suppressWarnings(exp.WC.dn <- ff("exp.WC.dn", vmode = "double", 
+        dim = c(nrow(y), niter)))
+    suppressWarnings(exp.M.dn <- ff("exp.M.dn", vmode = "double", 
+        dim = c(nrow(y), niter)))
+    suppressWarnings(exp.I.dn <- ff("exp.I.dn", vmode = "double", 
+        dim = c(nrow(y), niter)))
     set.seed(seed)
     x.niter <- t(replicate(niter, sample(x)))
     ffmatrices <- c("exp.E.up", "exp.W.up", "exp.WC.up", "exp.M.up", 
@@ -66,9 +66,7 @@ function (x, y, niter,seed)
     raw.count.up <- raw.count.dn <- matrix(0, nrow(y), 5)
 
     total <- length(seq(along = begpos))
-   # create progress bar
-   # pb <- winProgressBar(title = "Permutations progress bar", min = 0,
-    #                 max = total, width = 300)
+   ## create progress bar ##
     pb <- tkProgressBar(title = "Permutations progress bar", "Permutations are started",
        min = 0, max = total, width = 300)
 
@@ -119,9 +117,6 @@ function (x, y, niter,seed)
             tclvalue(PermuteText3) <- "Please wait...."
 
             Sys.sleep(0.1)
-            #setTkProgressBar(pb, ichunk , title=paste("Permutations are in progress ", 
-            #   round(ichunk /total*100, 0),  "% done"))
- 
           info <- sprintf("%d%% done", round(ichunk /total*100, 0))
           setTkProgressBar(pb, ichunk , title=paste("Permutations are in progress "), info)
             

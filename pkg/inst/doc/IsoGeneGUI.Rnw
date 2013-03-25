@@ -296,7 +296,7 @@ Users can download example dataset and a complete Users' Manual from the site as
 \section*{References}
 
 \begin{enumerate} 
-	\item Lin, D., Shkedy, Z., Yekutieli, D., Burzykowski, T., G¨ohlmann, H., De Bondt, A., Perera, T., Geerts, T. and Bijnens, L. (2007) 
+	\item Lin, D., Shkedy, Z., Yekutieli, D., Burzykowski, T., G\"{o}hlmann, H., De Bondt, A., Perera, T., Geerts, T. and Bijnens, L. (2007) 
 	Testing for trends in dose-response microarray experiments: A comparison of several testing 
 	procedures, multiplicity and resamplingbased inference. 
 	\textit{Statistical Applications in Genetics and Molecular Biology}, \textbf{6(1)}, Article 26.

@@ -17,9 +17,8 @@ function (x, y, fudge, niter, seed)
     }
 
     total <-niter
-    # create progress bar
-    #pb <- winProgressBar(title = "SAM progress bar", min = 0,
-     #                max = total, width = 300)
+    # create progress bar ###
+  
     pb <- tkProgressBar(title = "SAM progress bar", "Permutations are started",min = 0, max = total, 
          width = 300)
 
@@ -50,27 +49,27 @@ function (x, y, fudge, niter, seed)
     d <- L[[1]]
     d.sort.list <- sort.list(d)
     d.sort <- d[d.sort.list]
-    perm.mean <- apply(to1, 1, mean)
+    perm.mean <- rowMeans(to1)
     aa1 = cbind(d.sort, perm.mean, d.sort - perm.mean, d.sort.list)
     d <- L[[2]]
     d.sort.list <- sort.list(d)
     d.sort <- d[d.sort.list]
-    perm.mean <- apply(to2, 1, mean)
+    perm.mean <- rowMeans(to2)
     aa2 = cbind(d.sort, perm.mean, d.sort - perm.mean, d.sort.list)
     d <- L[[3]]
     d.sort.list <- sort.list(d)
     d.sort <- d[d.sort.list]
-    perm.mean <- apply(to3, 1, mean)
+    perm.mean <- rowMeans(to3)
     aa3 = cbind(d.sort, perm.mean, d.sort - perm.mean, d.sort.list)
     d <- L[[4]]
     d.sort.list <- sort.list(d)
     d.sort <- d[d.sort.list]
-    perm.mean <- apply(to4, 1, mean)
+    perm.mean <- rowMeans(to4)
     aa4 = cbind(d.sort, perm.mean, d.sort - perm.mean, d.sort.list)
     d <- L[[5]]
     d.sort.list <- sort.list(d)
     d.sort <- d[d.sort.list]
-    perm.mean <- apply(to5, 1, mean)
+    perm.mean <- rowMeans(to5)
     aa5 <- cbind(d.sort, perm.mean, d.sort - perm.mean, d.sort.list)
     Direction <- L[[6]]
     res <- list(aa1 = aa1, to1 = to1, aa2 = aa2, to2 = to2, aa3 = aa3, 

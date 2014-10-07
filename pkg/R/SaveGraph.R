@@ -24,13 +24,13 @@ dev.off()
 
 if(unlist(splitted)[2] == "jpeg")
 {
-jpeg(file=fileName)
+jpeg(filename=fileName)
 x()
 dev.off()
 }
 if(unlist(splitted)[2] == "png")
 {
-png(file=fileName)
+png(filename=fileName)
 x()
 dev.off()
 }

@@ -35,9 +35,9 @@ function (x, y, fudge, niter, seed)
         setTkProgressBar(pb, i , title=paste("SAM permutations are in progress "), info)
 
 
-     tkwm.deiconify(samPermute)
+     #tkwm.deiconify(samPermute)
      tkgrab.set(samPermute)
-     tkfocus(samPermute)
+     #tkfocus(samPermute)
      if (i < niter ) { tclvalue(PermuteText1 ) <- "Please wait...." }
      else {tclvalue(PermuteText1 ) <- "Permutation is finished...."}
      tclvalue(PermuteText2 ) <- paste( "Performing",i,"/",NumPermval,"permutations",sep = " " )

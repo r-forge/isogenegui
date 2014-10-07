@@ -70,7 +70,7 @@ inputDelta <- function() {
          Deltaval <- as.numeric(tclvalue(deltaval ))
     pos1 <- match(Deltaval,Delta.table[,1])
     if (is.na(pos1)) { 
-  tkmessageBox(message="The delta value is not valid! Check the delta table !",icon="error",type="ok")
+  tkmessageBox(message="The delta value is not valid! Check the delta table!",icon="error",type="ok")
   }
     else { 
   pos <<- pos1 
@@ -78,12 +78,17 @@ inputDelta <- function() {
  }
     }
         else {
-    FDRval <- as.numeric(tclvalue(FDR))
-    Deltaval <<- min(na.exclude(Delta.table [Delta.table [, 5] <= FDRval , 1]))
-        delta.now <<- Deltaval 
-    pos <<- match(Deltaval,Delta.table[,1])
-        }
-       img <- tkrreplot(img,fun=samplot2 , 1.5,1.5)
+			FDRval <- as.numeric(tclvalue(FDR))
+			if (FDRval < min(Delta.table [, 5])) { 
+				tkmessageBox(message="The FDR value is not valid: too small! Check the delta table!",icon="error",type="ok")
+			} else {
+				Deltaval <<- min(na.exclude(Delta.table [Delta.table [, 5] <= FDRval , 1]))
+				delta.now <<- Deltaval 
+				pos <<- match(Deltaval,Delta.table[,1])
+			}
+			img <- tkrreplot(img,fun=samplot2 , 1.5,1.5)
+				
+			}   
 
 }
 

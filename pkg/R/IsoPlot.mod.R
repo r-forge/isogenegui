@@ -1,7 +1,8 @@
 `IsoPlot.mod` <-
 function (x, y, type = c("continuous", "ordinal"), add.curve = FALSE) 
 {
-    y <- as.numeric(y)
+    Probe.ID <- rownames(y)
+	y <- as.numeric(y)
     type <- match.arg(type)
     if (!(type %in% c("continuous", "ordinal"))) 
         stop("The dose can be only continuous or ordinal")
@@ -61,6 +62,6 @@ function (x, y, type = c("continuous", "ordinal"), add.curve = FALSE)
        lty = 1, lwd=2, merge = TRUE, cex=0.6)
 
 
-    title(paste("Gene: ", row.names(y), sep = ""))
+    title(paste("Gene: ", Probe.ID, sep = ""))
 }
 

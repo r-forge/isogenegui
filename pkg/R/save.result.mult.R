@@ -7,9 +7,9 @@ frame1 <- tkframe(saveWin , borderwidth=2)
 frame2 <- tkframe(saveWin , borderwidth=2)
 But.frame <- tkframe(saveWin , borderwidth=2)
 
- labelSave<- tklabel(saveWin ,text="Save the list of significant genes: ")
+ labelSave <- tklabel(saveWin ,text="Save the list of significant genes: ")
  labelSaveXls<- tklabel(frame1,text="Excel files into folder: ")
- labelSaveR<- tklabel(frame2,  text="R dataset                : ")
+ labelSaveR <- tklabel(frame2,  text="R dataset                : ")
 
 cb1 <- tkcheckbutton(frame1)
 cbValue1 <- tclVar("1")
@@ -31,8 +31,8 @@ tkgrid.configure(labelSave,sticky="w")
 
 tkgrid(labelSave)
 
-tkgrid(cb1 ,SaveDirEdit ,SaveDir.but )
-tkgrid(cb2 ,SavefileEdit ,Save.but  )
+tkgrid(cb1, SaveDirEdit, SaveDir.but)
+tkgrid(cb2, SavefileEdit, Save.but)
 
 tkgrid.configure(frame1,sticky="w")
 tkgrid.configure(frame2,sticky="w")
@@ -51,8 +51,8 @@ if (cbVal1 =="0" & cbVal2 =="0") {
   if (cbVal1 =="1") { 
        for (i in 1:length(x)) {
       xlsfilename <- paste(DirName,"/",x[i],".xls",sep="")
-      WriteXLS(x , ExcelFileName = xlsfilename )
-
+	  write.xlsx(x = x, file = xlsfilename,
+			  sheetName = "Results", row.names = TRUE)
  }   
    }
   if (cbVal2 =="1") { 

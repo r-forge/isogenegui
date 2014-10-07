@@ -113,6 +113,8 @@ lengthplot [nrange <= 2] <- 1
               if (cbVal3 =="1") IsoPlot.mod(dose,exprs[range[i],],type=xaxis,add.curve=TRUE)
     else {
          IsoPlot(dose,exprs[range[i],],type=xaxis,add.curve=T)
+		 title("Gene: ", col.main="white")
+		 title(paste("Gene: ", rownames(exprs[range[i],]), sep = ""))
          }
           }
 }
@@ -155,6 +157,8 @@ lengthplot [nrange <= 2] <- 1
     if (cbVal3 =="1") IsoPlot.mod(dose,exprs[range[i],],type=xaxis,add.curve=TRUE)
     else {
          IsoPlot(dose,exprs[range[i],],type=xaxis,add.curve=T)
+		 title("Gene: ", col.main="white")
+		 title(paste("Gene: ", rownames(exprs[range[i],]), sep = ""))
          }
 
           }
@@ -214,6 +218,8 @@ lengthplot [nrange <= 2] <- 1
     if (cbVal3 =="1") IsoPlot.mod(dose,exprs[range[i],],type=xaxis,add.curve=TRUE)
     else {
          IsoPlot(dose,exprs[range[i],],type=xaxis,add.curve=T)
+		 title("Gene: ", col.main="white")
+		 title(paste("Gene: ", rownames(exprs[range[i],]), sep = ""))
          }
 
          }

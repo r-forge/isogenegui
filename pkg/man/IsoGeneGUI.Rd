@@ -1,4 +1,4 @@
-\title{IsoGeneGUI }
+\title{IsoGeneGUI}
 \name{IsoGeneGUI}
 \alias{IsoGeneGUI}
 

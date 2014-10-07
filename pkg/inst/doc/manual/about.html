@@ -1,0 +1,166 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+    <title>IsoGeneGUI Manual</title>
+    <meta name="keywords" content="IsoGene Monotone Dose-response Microarray GUI Gene expression functional genomics">
+    <meta name="author" content="Setia and Martin">
+    <meta name="generator" content="Web Page Maker">
+    <style type="text/css">
+/*----------Text Styles----------*/
+.ws6 {font-size: 8px;}
+.ws7 {font-size: 9.3px;}
+.ws8 {font-size: 11px;}
+.ws9 {font-size: 12px;}
+.ws10 {font-size: 13px;}
+.ws11 {font-size: 15px;}
+.ws12 {font-size: 16px;}
+.ws14 {font-size: 19px;}
+.ws16 {font-size: 21px;}
+.ws18 {font-size: 24px;}
+.ws20 {font-size: 27px;}
+.ws22 {font-size: 29px;}
+.ws24 {font-size: 32px;}
+.ws26 {font-size: 35px;}
+.ws28 {font-size: 37px;}
+.ws36 {font-size: 48px;}
+.ws48 {font-size: 64px;}
+.ws72 {font-size: 96px;}
+.wpmd {font-size: 13px;font-family: Arial,Helvetica,Sans-Serif;font-style: normal;font-weight: normal;}
+/*----------Para Styles----------*/
+DIV,UL,OL /* Left */
+{
+ margin-top: 0px;
+ margin-bottom: 0px;
+}
+</style> </head>
+  <body class="ws12">&nbsp;&nbsp; <span style="font-family: Times New Roman;">&nbsp;
+      </span> <div id="text1" style="position:absolute; overflow:hidden; left:31px; top:41px; width:1112px; height:51px; z-index:0">
+      <div class="wpmd">
+        <div><span style="font-family: Times New Roman;"><font class="ws20" color="#0000FF"><b>About
+                the IsoGeneGUI</b></font></span></div>
+      </div>
+    </div>
+    <span style="font-family: Times New Roman;"> </span>
+    <div id="text2" style="position:absolute; overflow:hidden; left:31px; top:121px; width:1021px; height:157px; z-index:1">
+      <div class="wpmd">
+        <div align="justify"><span style="font-family: Times New Roman;"><font class="ws12">The
+              IsoGene Graphical User Interface (IsoGeneGUI) is a user friendly
+              interface of the IsoGene package which is aimed to perform
+              analysis of dose-response studies in microarray experiments.
+              Additionally, the GUI contains extra methods from packages orQA,
+              ORIClust and ORCME. The IsoGeneGUI is developed for the user with
+              no or limited knowledge about R programming so he/she can perform
+              the analysis of dose-response in microarray setting easily. This
+              GUI was developed using tcl/tk.</font></span></div>
+        <div align="justify"><span style="font-family: Times New Roman;"><font class="ws12"><br>
+            </font></span></div>
+        <div align="justify"><span style="font-family: Times New Roman;"><font class="ws12">The
+              main window of the package is presented below. </font></span></div>
+        <div><span style="font-family: Times New Roman;"><font class="ws12"><br>
+            </font></span></div>
+        <div><span style="font-family: Times New Roman;"><font class="ws12" color="#0000FF"><b>Screenshot
+                of the main IsoGeneGUI window</b></font></span></div>
+      </div>
+    </div>
+    <span style="font-family: Times New Roman;"> </span>
+    <div id="hr1" style="position:absolute; overflow:hidden; left:29px; top:83px; width:1027px; height:17px; z-index:2">
+      <hr size="2" width="1027"> </div>
+    <span style="font-family: Times New Roman;"> </span>
+    <div id="text3" style="position: absolute; overflow: hidden; left: 22px; top: 895px; width: 1171px; height: 788px; z-index: 3;"><span
+        style="font-family: Times New Roman;"> </span>
+      <div class="wpmd"><span style="font-family: Times New Roman;"> </span>
+        <div><span style="font-family: Times New Roman;"><font class="ws12">The
+              GUI has five main menus and in the middle of the window there is
+              an info box. The package has five main menus: File, Analysis,
+              Clustering, Plots and Help.</font></span></div>
+        <div><span style="font-family: Times New Roman;"><font class="ws12"><br>
+              File:</font></span></div>
+        <span style="font-family: Times New Roman;"> </span>
+        <div><span style="font-family: Times New Roman;"><font class="ws12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              1. Open dataset</font></span></div>
+        <span style="font-family: Times New Roman;"> </span>
+        <div><span style="font-family: Times New Roman;"><font class="ws12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              a. R workspace (*.RData files)</font></span></div>
+        <span style="font-family: Times New Roman;"> </span>
+        <div><span style="font-family: Times New Roman;"><font class="ws12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              b. Excel or Text files (*.xls or *.txt files)</font></span></div>
+        <span style="font-family: Times New Roman;"> </span>
+        <div><span style="font-family: Times New Roman;"><font class="ws12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              2. Show dataset</font></span></div>
+        <span style="font-family: Times New Roman;"> </span>
+        <div><span style="font-family: Times New Roman;"><font class="ws12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              3. Exit<br>
+              <br>
+            </font></span></div>
+        <span style="font-family: Times New Roman;"> </span>
+        <div><span style="font-family: Times New Roman;"><font class="ws12"> </font></span></div>
+        <span style="font-family: Times New Roman;"> </span>
+        <div><span style="font-family: Times New Roman;"><font class="ws12">Analysis:&nbsp;
+              </font></span></div><span style="font-family: Times New Roman;"> </span>
+        <div><span style="font-family: Times New Roman;"><font class="ws12">&nbsp;&nbsp;&nbsp;&nbsp;
+              1. Set Seed</font></span></div>
+        <span style="font-family: Times New Roman;"> </span>
+        <div><span style="font-family: Times New Roman;"><font class="ws12">&nbsp;&nbsp;&nbsp;&nbsp;
+              2. Likelihood Ratio Test (E2): Asymptotic<br>
+            </font></span></div>
+        <span style="font-family: Times New Roman;"> </span>
+        <div><span style="font-family: Times New Roman;"><font class="ws12">&nbsp;&nbsp;&nbsp;&nbsp;
+              3. Permutation <br>
+            </font></span></div>
+        <span style="font-family: Times New Roman;"> </span>
+        <div><span style="font-family: Times New Roman;"><font class="ws12">&nbsp;&nbsp;&nbsp;&nbsp;
+              4. Significant Analysis of Microarrays (SAM)</font></span></div>
+        <span style="font-family: Times New Roman;"> </span>
+        <div><span style="font-family: Times New Roman;"><font class="ws12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              a. SAM Permutation</font></span></div>
+        <span style="font-family: Times New Roman;"> </span>
+        <div class="ws12"><span style="font-family: Times New Roman;"><font class="ws12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              b. SAM Analysis<br>
+            </font><font class="ws12">&nbsp;&nbsp;&nbsp; 5. Likelihood Ratio
+              Test</font><font class="ws12"><font class="ws12"> (E2): orQA</font><br>
+            </font><font class="ws12">&nbsp;&nbsp;&nbsp; 6. G</font>ORIC<br>
+            <br>
+            Clustering:<br>
+            &nbsp;&nbsp;&nbsp; 1. ORCME<br>
+            &nbsp;&nbsp;&nbsp; 2. ORIClust</span></div>
+        <div><font class="ws12" face="Times New Roman"><br>
+          </font></div>
+        <div><font class="ws12" face="Times New Roman">Plot:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </font></div>
+        <div><font class="ws12" face="Times New Roman">&nbsp;&nbsp;&nbsp; 1.
+            IsoPlot</font></div>
+        <div><font class="ws12" face="Times New Roman">&nbsp;&nbsp;&nbsp; 2.
+            Permutation P-values Plots</font></div>
+        <div><font class="ws12" face="Times New Roman">&nbsp;&nbsp;&nbsp; 3. SAM
+            Plot</font></div>
+        <div><font class="ws12" face="Times New Roman">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            a. Plot of FDR vs. Delta</font></div>
+        <div><font class="ws12" face="Times New Roman">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            b. Plot of number of significant genes vs. Delta</font></div>
+        <div><font class="ws12" face="Times New Roman">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            c. Plot of number of False Positive vs. Delta</font></div>
+        <div><font class="ws12" face="Times New Roman">&nbsp;&nbsp;&nbsp; 4.
+            User Defined Scatter Plot<br>
+            &nbsp;&nbsp;&nbsp; 5. Plot ORCME clusters<br>
+          </font></div>
+        <div><font class="ws12" face="Times New Roman"><br>
+          </font></div>
+        <div><font class="ws12" face="Times New Roman">Help:&nbsp;&nbsp;&nbsp; </font></div>
+        <div><font class="ws12" face="Times New Roman">&nbsp; 1. IsoGene Help</font></div>
+        <div><font class="ws12" face="Times New Roman">&nbsp; 2. IsoGeneGUI Help</font></div>
+        <div><font class="ws12" face="Times New Roman">&nbsp; 3. About</font></div>
+        <br>
+        <div><font class="ws12" face="Times New Roman"><a href="index.html" title="">Home</a></font></div>
+        <div><font class="ws12" face="Times New Roman">&nbsp;&nbsp;&nbsp;&nbsp;
+          </font></div>
+        <div><font class="ws12" face="Times New Roman"><br>
+          </font></div>
+        <div><font class="ws12" face="Times New Roman"><br>
+          </font></div>
+      </div>
+    </div>
+    <div id="image2" style="position:absolute; overflow:hidden; left:33px; top:295px; width:510px; height485px; z-index:4"><img
+        src="images/main.jpg" alt="" title="" border="0" height="510" width="485"></div>
+  </body>
+</html>

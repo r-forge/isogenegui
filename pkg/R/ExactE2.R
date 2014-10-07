@@ -13,7 +13,7 @@ else {
 
 
 	asym<-tktoplevel()
-	tkwm.title(asym,"Global Likelihood Ratio Test (E2) Analysis") 
+	tkwm.title(asym,"Global Likelihood Ratio Test (E2) Analysis: Asymptotic") 
 
       spec.frm <- tkframe(asym,borderwidth=2)
 	frame1 <- tkframe(spec.frm, relief="groove", borderwidth=2)
@@ -70,7 +70,7 @@ Calc.Asymp <- function ()
 	try(tkdelete(treeWidget,"nodeAsymp") , silent = T )
 	try( tkdelete(treeWidget,"AsymPvalNode"), silent = T )
 	tkinsert(treeWidget,"end","Record2Node","AsymPvalNode",text="Raw P-values")
-	tkinsert(treeWidget,"end","AsymPvalNode","NumGeneNode",text=paste("Number gene analized: ",N) )
+	tkinsert(treeWidget,"end","AsymPvalNode","NumGeneNode",text=paste("Number gene analyzed: ",N) )
 
       }
 }
@@ -277,15 +277,15 @@ AdjustBut <- function()
 			orderedRowNum <- RowNumSig [order(PvalSig )]
 			}
 		else {
-			sumSig <- apply(AdjPvalAll [RowNumSig ,] ,1,sum)
-			orderedRowNum <- RowNumSig [order(sumSig)]
+			sumSig <- apply(AdjPvalAll[RowNumSig, ], 1, sum)
+			orderedRowNum <- RowNumSig[order(sumSig)]
 			}	
 	
 		AdjPvalAll <-round(AdjPvalAll , digits = 6)
 
  		Mu.Diff <-  Mu.Diff.Asymp
 		row.num <- 1:nrow(exprs2Asymp)
-		Res.Asymtot <<- data.frame(ProbeID,row.num  ,Mu.Diff,Direction ,E2Val,pval.Asymp,AdjPvalAll )
+		Res.Asymtot <<- data.frame(ProbeID, row.num, Mu.Diff,Direction, E2Val, pval.Asymp,AdjPvalAll)
       	rownames(Res.Asymtot) <<- NULL
 		
 		AsymtotSigGenes1  <- Res.Asymtot[orderedRowNum,]
@@ -311,9 +311,9 @@ tkgrid(tklabel(frame2,text="                             "),run.but)
 tkgrid(tklabel(frame2,text="                             "))
 
 savesiggene <- function() {
-	save.result("SigGenes.AsymptotE2")
+	save.result(SigGenes.AsymptotE2)
 }
-savesiggene.but <- tkbutton(frame2,text="Save significant genes",command=savesiggene)
+savesiggene.but <- tkbutton(frame2,text="Save significant genes", command=savesiggene)
 
 
 saveallgene <- function() {

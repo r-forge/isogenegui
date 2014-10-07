@@ -1,0 +1,165 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+    <title>IsoGeneGUI Manual</title>
+    <meta name="keywords" content="IsoGene Monotone Dose-response Microarray GUI Gene expression functional genomics">
+    <meta name="author" content="Setia and Martin">
+    <meta name="generator" content="Web Page Maker">
+    <style type="text/css">
+/*----------Text Styles----------*/
+.ws6 {font-size: 8px;}
+.ws7 {font-size: 9.3px;}
+.ws8 {font-size: 11px;}
+.ws9 {font-size: 12px;}
+.ws10 {font-size: 13px;}
+.ws11 {font-size: 15px;}
+.ws12 {font-size: 16px;}
+.ws14 {font-size: 19px;}
+.ws16 {font-size: 21px;}
+.ws18 {font-size: 24px;}
+.ws20 {font-size: 27px;}
+.ws22 {font-size: 29px;}
+.ws24 {font-size: 32px;}
+.ws26 {font-size: 35px;}
+.ws28 {font-size: 37px;}
+.ws36 {font-size: 48px;}
+.ws48 {font-size: 64px;}
+.ws72 {font-size: 96px;}
+.wpmd {font-size: 13px;font-family: Arial,Helvetica,Sans-Serif;font-style: normal;font-weight: normal;}
+/*----------Para Styles----------*/
+DIV,UL,OL /* Left */
+{
+ margin-top: 0px;
+ margin-bottom: 0px;
+}
+</style> </head>
+  <body><br>
+    <div id="text1" style="position:absolute; overflow:hidden; left:39px; top:42px; width:1112px; height:51px; z-index:0">
+      <div class="wpmd">
+        <div><font class="ws20" color="#0000FF" face="Times New Roman"><b>Likelihood
+              Ratio Test Statistic (E2)</b></font></div>
+      </div>
+    </div>
+    <div id="text2" style="position: absolute; overflow: hidden; left: 42px; top: 101px; width: 968px; height: 301px; z-index: 1;">
+      <div class="wpmd">
+        <div style="height: 146px;" align="justify">
+          <p><font class="ws12" face="Times New Roman"><a><span class="ws12">There
+                  are three methods for computing E2 in the ISOGeneGUI. First is
+                  asymptotic, second is using permutations and last is using
+                  faster implementation of permutation testing from package
+                  orQA. </span></a></font></p>
+          <font class="ws12" face="Times New Roman"><span style="font-weight: bold;"></span></font><font
+            class="ws12" face="Times New Roman"><span class="ws14" style="font-weight: bold;">1.
+              Asymptotic method</span></font> <font class="ws12" face="Times New Roman"><span
+              style="font-weight: bold;"></span></font><font class="ws12" face="Times New Roman"><br>
+            <br>
+            This options provides the analysis using the E2 test statistics
+            based on p-values obtained from its exact distribution. The provided
+            p-values adjustment methods are BH, BY, Holm, SidakSS, Sidak SD,
+            Holm, Hochberg and Bonferroni. Based on the specified adjustment
+            methods and overall significant level, the list of significant genes
+            along isotonic means difference, test statistic value, raw and
+            adjusted p-values, will be produced.</font></div>
+        <br>
+        <div><font class="ws12" face="Times New Roman"><b><br>
+              <br>
+              Analysis &gt; Likelihood Ratio Test (E2): Asymptotic<br>
+            </b></font></div>
+        <div><font class="ws12" face="Times New Roman"><br>
+          </font></div>
+        <div><font class="ws12" color="#0000FF" face="Bookman Old Style"><b>Screenshot
+              of the main dialog box of Likelihood Ratio Test (E2) analysis:
+              Asymptotic<br>
+            </b></font></div>
+      </div>
+    </div>
+    <div id="hr1" style="position:absolute; overflow:hidden; left:38px; top:82px; width:979px; height:17px; z-index:2">
+      <hr size="2" width="979"> </div>
+    <div id="text3" style="position:absolute; overflow:hidden; left:42px; top:2398px; width:78px; height:42px; z-index:3">
+      <div class="wpmd">
+        <div><font class="ws12"><a href="index.html" title="">Home</a></font></div>
+        <div><font class="ws12">&nbsp;&nbsp;&nbsp;&nbsp; </font></div>
+        <div><font class="ws12"><br>
+          </font></div>
+        <div><font class="ws12"><br>
+          </font></div>
+      </div>
+    </div>
+    <div id="text4" style="position: absolute; overflow: hidden; left: 41px; top: 1000px; width: 568px; height: 35px; z-index: 4;">
+      <div class="wpmd">
+        <div style="height: 32px;"><font class="ws12" color="#0000FF" face="Bookman Old Style"><b>Screenshot
+              of the list of significant genes</b></font></div>
+      </div>
+    </div>
+    <div id="image1" style="position: absolute; overflow: hidden; left: 46px; top: 394px; width: 567px; height: 578px; z-index: 5;"><img
+        src="images/Exact.jpg" alt="" title="" border="0" height="578" width="567"></div>
+    <div id="image2" style="position:absolute; overflow:hidden; left:37px; top:1050px; width:754px; height:548px; z-index:6"><img
+        src="images/sigGenesAsymp.jpg" alt="" title="" border="0" height="548" width="754"></div>
+    <div id="image3" style="position:absolute; overflow:hidden; left:24px; top:1782px; width:637px; height:723px; z-index:7"><img
+        src="images/FCvsE2.jpg" alt="" title="" border="0" height="723" width="637"></div>
+    <div id="text6" style="position:absolute; overflow:hidden; left:31px; top:1640px; width:973px; height:143px; z-index:8">
+      <div class="wpmd">
+        <div align="justify"><font class="ws12" face="Times New Roman"><strong>Plots</strong><br>
+            After the raw p-values and adjusted p-values are calculated, there
+            are three plot that can be produced. After choose the option and
+            click the </font><font class="ws12" face="Times New Roman"><b>Produce
+              plots</b></font><font class="ws12" face="Times New Roman"> button
+            the plot will be displayed. </font></div>
+        <div><font class="ws12" face="Times New Roman"><br>
+          </font></div>
+        <div><font class="ws12" face="Times New Roman"><br>
+          </font></div>
+        <div><font class="ws12" color="#0000FF" face="Bookman Old Style"><b>Screenshot
+              of the plot of Fold change vs. E2</b></font></div>
+      </div>
+    </div>
+    <div id="text7" style="position: absolute; overflow: hidden; left: 25px; top: 2548px; width: 968px; height: 77px; z-index: 1;">
+      <div class="wpmd"> <font class="ws12" face="Times New Roman"><span style="font-weight: bold;"></span></font><font
+          class="ws12" face="Times New Roman"><span class="ws14" style="font-weight: bold;">2.
+            Permutation (IsoGene)</span></font><br>
+        <br>
+        <font class="ws12" face="Times New Roman">This options is described in <a
+            href="permutation.html">Permutation method</a>.</font></div>
+      <br>
+    </div>
+    <div id="text7" style="position: absolute; overflow: hidden; left: 25px; top: 2650px; width: 968px; height: 180px; z-index: 1;">
+      <div class="wpmd"> <font class="ws12" face="Times New Roman"><span style="font-weight: bold;"></span></font><font
+          class="ws12" face="Times New Roman"><span class="ws14" style="font-weight: bold;">3.
+            Permutation (orQA)</span></font><br>
+        <br>
+        <div style="text-align: justify;"><font class="ws12" face="Times New Roman">Last
+            option is using implementation from package orQA. The function
+            e2test is used. The function is originally aimed for resampling
+            within one mouse (in the context of experiment described in orQA
+            package). However, we are using the method in the way that
+            resampling is done across all observation, i.e. considering all our
+            observations independent.</font></div>
+        <font class="ws12" face="Times New Roman"> <br>
+        </font><font class="ws12" color="#0000FF" face="Bookman Old Style"><b>Screenshot
+            of the main dialog box of Likelihood Ratio Test (E2) analysis: orQA<br>
+          </b></font></div>
+      <br>
+    </div>
+    <div id="image4" style="position:absolute; overflow:hidden; left:24px; top:2810px; width:522px; height:529px; z-index:7"><img
+        src="images/orQAMenu.jpg" alt="" title="" border="0" height="522" width="529"></div>
+    <div id="text8" style="position: absolute; overflow: hidden; left: 22px; top: 3367px; width: 973px; height: 152px; z-index: 8;">
+      <div class="wpmd">
+        <div align="justify"><font class="ws12" face="Times New Roman"><strong>Plots</strong><br>
+            After the raw p-values and adjusted p-values are calculated, there
+            are two plot that can be produced. After choose the option and click
+            the Produce plots button the plot will be displayed.<br>
+            <br>
+          </font><br>
+          <font class="ws12" color="#0000FF" face="Bookman Old Style"><b>Screenshot
+              of the plot of the p-values<br>
+            </b></font></div>
+      </div>
+    </div>
+    <div id="image5" style="position: absolute; overflow: hidden; left: 13px; top: 3516px; width: 637px; height: 723px; z-index: 7;"><br>
+      <img src="images/pvalsORQA.jpg" alt="" title="" border="0" height="723" width="637"></div>
+    <div id="text7" style="position: absolute; overflow: hidden; left: 16px; top: 4305px; width: 968px; height: 50px; z-index: 1;">
+      <div><font class="ws12" face="Times New Roman"><a href="index.html" title="">Home</a></font></div>
+    </div>
+  </body>
+</html>

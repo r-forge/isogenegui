@@ -1,5 +1,5 @@
 import(IsoGene, ORCME, ORIClust, orQA, goric)
-import(RColorBrewer, biOps, xlsx, geneplotter)
+import(RColorBrewer, xlsx, geneplotter)
 import(tkrplot)
 import(Rcpp)
 import(ff)

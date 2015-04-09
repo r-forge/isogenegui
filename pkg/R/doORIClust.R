@@ -225,13 +225,15 @@ if (!exists("exprs") | !exists("dose"))
 		
 		if (showplots.par==1 & plotformat.par=="jpg"){
 			if (onefile.par==1){
-				clusters <- readJpeg("cluster of fitted mean data.jpg")
-				plot(clusters)
+				clusters <- readJPEG("cluster of fitted mean data.jpg")
+				plot(1, type="n", axes=F, xlab="", ylab="")
+				rasterImage(clusters, 0.5, 0.5, 1.45, 1.45)
 			} else {
 				for (i in 1:nClustersORICC){
-					clusters <- readJpeg(paste("cluster ", i," of fitted mean data.jpg", sep=""))
+					clusters <- readJPEG(paste("cluster ", i," of fitted mean data.jpg", sep=""))
 					x11()
-					plot(clusters)
+					plot(1, type="n", axes=F, xlab="", ylab="")
+					rasterImage(clusters, 0.5, 0.5, 1.45, 1.45)
 				}
 			}
 		}

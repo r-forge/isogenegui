@@ -14,7 +14,7 @@ To run the package, we use the function: IsoGeneGUI().
 }
 
 \author{
-Author: Setia Pramana
+Author: Setia Pramana, Dan Lin, Philippe Haldermans, Tobias Verbeke, Martin Otava
 Maintainer: Setia Pramana <setia.pramana@ki.be>
 }
 

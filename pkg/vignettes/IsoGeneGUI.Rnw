@@ -14,7 +14,7 @@
 
 \title{IsoGeneGUI Package Vignette}
 \author{Setia Pramana, Martin Otava, Dan Lin, Ziv Shkedy}
-\date{September 25, 2014}
+\date{\today}
 \maketitle
 
 \section{Introduction}
@@ -28,13 +28,20 @@ IsoGeneGUI is developed for the user with no or limited knowledge about R progra
 The statistical methodologies (test statistics, etc.)  used in this package are discussed by Lin et.al (2007, 2008, 2010). 
 
 
+\section{Installation}
+The package can be installed directly from R environment. For proper installation, both CRAN and Bioconductor repositories need to be specified. 
+<<install, eval=FALSE >>=
+setRepository()
+install.packages("IsoGeneGUI")
+@
+
+
 \section{Usage}
 To run the package 
 <<open, eval=FALSE >>=
 library(IsoGeneGUI)
 IsoGeneGUI()
 @
-
 
 \section{Menus}
 
@@ -107,10 +114,11 @@ middle of the main window there is an info box which provides information about 
 \section{Reading the Data}
 In the first step of the analysis, the data is uploaded to the package using the File menu.
 The package can read data in R workspace file (*.RData), Microsoft Excel and
-text files.
+text files. Once the the data is uploaded, information about the data is presented automatically in the info box of the main window.
+
 \subsection{R workspace files}
  The format of the gene expression data should be a matrix or table where the columns are the arrays 
- and the rows are the gene names. The dose information should be a vector or table contain the dose 
+ and the rows are the genes. The dose information should be a vector or table that contains the dose 
  levels which corresponds to the arrays in the expression matrix/table.\newline
  The package provides an R workspace example dataset called \texttt{dopamine2}. For the dopamine2 data, 
  the dose levels are given by
@@ -141,13 +149,11 @@ while the expression matrix has the following structure:
 \end{center}
 \normalsize
 
-
-
 Part of the \texttt{dopamine2} can be obtained in folder "exampleData" inside the package. 
 
 
 The full example data in R workspace, text and Excel files can be obtained
-from: \url{http://ibiostat.be/software/isogenegui}
+from: \url{http://ibiostat.be/online-resources/online-resources/isogenegui}
 
 
 \subsection{Open the data set}
@@ -163,6 +169,7 @@ File > Open dataset > R workspace
 The package will automatically refer to the example data \texttt{dopamine2} if
 the option to open R workspace is choosen.
 
+\subsection{Text and Excel files}
 
 Text files and Excel files can be uploaded to IsoGene-GUI as well
 using following sequence in the dialogue box:
@@ -173,7 +180,9 @@ File > Open dataset > Excel or Text files
 \end{verbatim}
 \end{center}
 
-Once the the data is uploaded, information about the data is presented automatically in the info box of the main window.
+The format of the Text and Excel files should be a matrix where the columns are the arrays and the rows are the genes. Optionally, the first 
+column can contain gene names and header can be used. The dose information should be a single column 
+containing the dose levels which corresponds to the arrays in the expression matrix/table. 
 
 
 \section{Exploratory Data Analysis}
@@ -359,13 +368,13 @@ clicking \textbf{Save} button.
 
 
 \section{Complete users' manual}
-Users can access the IsoGeneGUI documentation  online or by installing the IsoGeneGUI
+Users can access the IsoGeneGUI documentation online or by installing the IsoGeneGUI
 package locally. Then the following code can be typed at R prompt:
 
 <<help, eval=FALSE >>=
 if (interactive()) 
     {
-	browseURL("http://ibiostat.be/software/isogenegui")
+	browseURL("http://ibiostat.be/online-resources/online-resources/isogenegui")
     }
 	
 @

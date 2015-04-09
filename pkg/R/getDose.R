@@ -1,7 +1,7 @@
 `getDose` <-
 function() {
  fileName <- tclvalue(tkgetOpenFile(filetypes=
-        gettext('{"text" {".txt"}} {"Excel Files" {".xls"}}
+        gettext('{"text" {".txt"}} {"Excel Files" {".xlsx"}}
 {"All Files" {"*"}}')))
 tclvalue(fileDose) <<- fileName
 if (!nchar(fileName)) 
@@ -18,13 +18,13 @@ assign("dose",dose,envir=.GlobalEnv)
 }
 else
 { 
-if(unlist(splitted)[2] == "xls")
+if(unlist(splitted)[2] == "xls" | unlist(splitted)[2] == "xlsx")
 {
-dose <- unlist(read.xls(fileName))
+dose <- unlist(read.xlsx2(fileName, 1, header =FALSE, colClasses="numeric"))
 assign("dose",dose,envir=.GlobalEnv)
 }
 else {
-tkmessageBox(message = "The files is not either txt or excel file")
+tkmessageBox(message = "The files is not either txt or Excel file")
 }
 }
       }

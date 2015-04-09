@@ -23,7 +23,7 @@ a microarray setting  easily. The package is developed and maintained by Setia P
 
 
 tkgrid(tklabel(text3 ,text="             More detail information of the IsoGene project can be found in:  
-                http://www.ibiostat.be/software/IsoGeneGUI/IsoGeneGUI.html     ",font=fontinfo))
+                http://ibiostat.be/online-resources/online-resources/isogenegui/isogenegui-package     ",font=fontinfo))
 
 tkgrid.configure(text1 ,sticky="nsw")
 tkgrid.configure(text2 ,sticky="nsw")

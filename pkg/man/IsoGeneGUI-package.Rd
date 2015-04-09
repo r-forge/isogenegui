@@ -14,11 +14,11 @@ Clustering methods are outsourced from CRAN packages ORCME, ORIClust. The packag
 
 
 \details{
-The IsoGene Graphical User Interface (IsoGene-GUI) is a user friendly interface of the IsoGene package.
+The IsoGene Graphical User Interface (IsoGene-GUI) is a user friendly interface of the IsoGene package enriched by methods from packages ORIClust, ORCME, orQA and goric.
 }
 
 \author{
-Author: Setia Pramana and Martin Otava
+Author: Setia Pramana, Dan Lin, Philippe Haldermans, Tobias Verbeke, Martin Otava
 
 Maintainer: Setia Pramana <setia.pramana@ki.se>
 }
@@ -37,7 +37,6 @@ Cheng, Y. and Church, G. M. (2000). Biclustering of expression data. In: Proceed
 Hu, J., Kapoor, M., Zhang, W., Hamilton, S. and Coombes, K. (2005) Analysis of dose
 response effects on gene expression data with comparison of two microarray platforms.
 Bioinformatics, 21(17), 3524-3529.
-
 
 Kuiper, R. M., Gerhard, D., and Hothorn, L. A. (2014), Identification of the Minimum Efeective Dose for Normally Distributed Endpoints Using a Model Selection Approach. Statistics in Biopharmaceutical Research, 6(1), 55-66.
 

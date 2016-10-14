@@ -1,4 +1,4 @@
-IsoRawpMod <-
+IsoRawpModVec <-
 function (x, y, niter,seed) 
 {
 
@@ -32,7 +32,7 @@ function (x, y, niter,seed)
     rm(E)
     CalcStat()
     nchunks <- 10
-    chunklength <- floor(nrow(y)/nchunks)
+    chunklength <- 1 #floor(nrow(y)/nchunks)
     endpos <- c(1:(nchunks - 1) * chunklength, nrow(y))
     begpos <- c(1, endpos[-length(endpos)] + 1)
     suppressWarnings(exp.E.up <- ff("exp.E.up", vmode = "double", 
@@ -68,84 +68,69 @@ function (x, y, niter,seed)
     total <- length(seq(along = begpos))
    ## create progress bar ##
     pb <- tkProgressBar(title = "Permutations progress bar", "Permutations are started",
-       min = 0, max = total, width = 300)
+      min = 0, max = total, width = 300)
 
       for (ichunk in seq(along = begpos)) {
+        
+       # print(ichunk)
+
         begchunk <- begpos[ichunk]
         endchunk <- endpos[ichunk]
-        suby <- y[begchunk:endchunk, ]
-        if (nrow(y)<= 10)  suby <- y
+        #suby <- y[begchunk:endchunk, ]
+        suby <- y
      
-        for (jmat in 1:nmats) {
+    #    for (jmat in 1:nmats) {
           
-            jbegmat <- begmat[jmat]
-            jendmat <- endmat[jmat]
+      #    print(jmat)
+          
+            jbegmat <- begmat
+            jendmat <- endmat
             ncolmat <- jendmat - jbegmat + 1
             subx.niter <- x.niter[jbegmat:jendmat, ]
-            res <- apply(subx.niter, 1, function(x) IsoGenem(x = factor(x), 
-              y = suby))
-            exp.E.up[begchunk:endchunk, jbegmat:jendmat] <- matrix(sapply(res, 
-                function(x) x[[1]]), length(begchunk:endchunk), 
-                length(jbegmat:jendmat)) 
-            exp.W.up[begchunk:endchunk, jbegmat:jendmat] <- matrix(sapply(res, 
-                function(x) x[[2]]), length(begchunk:endchunk), 
-                length(jbegmat:jendmat)) 
-            exp.WC.up[begchunk:endchunk, jbegmat:jendmat] <- matrix(sapply(res, 
-                function(x) x[[3]]), length(begchunk:endchunk), 
-                length(jbegmat:jendmat))
-            exp.M.up[begchunk:endchunk, jbegmat:jendmat] <- matrix(sapply(res, 
-                function(x) x[[4]]), length(begchunk:endchunk), 
-                length(jbegmat:jendmat))
-            exp.I.up[begchunk:endchunk, jbegmat:jendmat] <- matrix(sapply(res, 
-                function(x) x[[5]]), length(begchunk:endchunk), 
-                length(jbegmat:jendmat))
-            exp.E.dn[begchunk:endchunk, jbegmat:jendmat] <- matrix(sapply(res, 
-                function(x) x[[6]]), length(begchunk:endchunk), 
-                length(jbegmat:jendmat))
-            exp.W.dn[begchunk:endchunk, jbegmat:jendmat] <- matrix(sapply(res, 
-                function(x) x[[7]]), length(begchunk:endchunk), 
-                length(jbegmat:jendmat))
-            exp.WC.dn[begchunk:endchunk, jbegmat:jendmat] <- matrix(sapply(res, 
-                function(x) x[[8]]), length(begchunk:endchunk), 
-                length(jbegmat:jendmat))
-            exp.M.dn[begchunk:endchunk, jbegmat:jendmat] <- matrix(sapply(res, 
-                function(x) x[[9]]), length(begchunk:endchunk), 
-                length(jbegmat:jendmat))
-            exp.I.dn[begchunk:endchunk, jbegmat:jendmat] <- matrix(sapply(res, 
-                function(x) x[[10]]), length(begchunk:endchunk), 
-                length(jbegmat:jendmat))
+            res <- apply(subx.niter, 1, function(x) IsoGenem(x = factor(x), y = suby))
+              
+          exp.E.up[1, jbegmat:jendmat] <- matrix(sapply(res, function(x) x[[1]]), 1, length(jbegmat:jendmat))
+          exp.W.up[1, jbegmat:jendmat] <- matrix(sapply(res, function(x) x[[2]]), 1, length(jbegmat:jendmat)) 
+          exp.WC.up[1, jbegmat:jendmat] <- matrix(sapply(res,function(x) x[[3]]), 1, length(jbegmat:jendmat))
+          exp.M.up[1, jbegmat:jendmat] <- matrix(sapply(res, function(x) x[[4]]), 1, length(jbegmat:jendmat))
+          exp.I.up[1, jbegmat:jendmat] <- matrix(sapply(res, function(x) x[[5]]), 1, length(jbegmat:jendmat))
+          exp.E.dn[1, jbegmat:jendmat] <- matrix(sapply(res,function(x) x[[6]]), 1,length(jbegmat:jendmat))
+          exp.W.dn[1, jbegmat:jendmat] <- matrix(sapply(res,function(x) x[[7]]), 1,length(jbegmat:jendmat))
+          exp.WC.dn[1, jbegmat:jendmat] <- matrix(sapply(res, function(x) x[[8]]), 1, length(jbegmat:jendmat))
+          exp.M.dn[1, jbegmat:jendmat] <- matrix(sapply(res, function(x) x[[9]]), 1, length(jbegmat:jendmat))
+          exp.I.dn[1, jbegmat:jendmat] <- matrix(sapply(res, function(x) x[[10]]), 1,length(jbegmat:jendmat))
             tclvalue(PermuteText3) <- "Please wait...."
 
             Sys.sleep(0.1)
           info <- sprintf("%d%% done", round(ichunk /total*100, 0))
-          setTkProgressBar(pb, ichunk , title=paste("Permutations are in progress "), info)
+         setTkProgressBar(pb, ichunk , title=paste("Permutations are in progress "), info)
             
-        }
+     #   }
      
         for (i in 1:6) {
             x1 <- obsvecs[i]
             x2 <- ffmatrices[i]
-            a1 <- get(x1)[begchunk:endchunk]
-            a2 <- matrix(as.numeric(get(x2)[begchunk:endchunk, 
-                ]), byrow = FALSE, nrow = length(begchunk:endchunk), 
+            a1 <- get(x1)[1]
+            a2 <- matrix(as.numeric(get(x2)[1, 
+                ]), byrow = FALSE, nrow = 1, 
                 ncol = niter)
             tr <- rowSums(a1 < a2)
             if (i <= 5) {
-                raw.count.up[begchunk:endchunk, i] <- tr
+                raw.count.up[1, i] <- tr
             }
             else {
-                raw.count.dn[begchunk:endchunk, 1] <- tr
+                raw.count.dn[1, 1] <- tr
             }
         }
         for (i in 7:10) {
             x1 <- obsvecs[i]
             x2 <- ffmatrices[i]
-            a1 <- get(x1)[begchunk:endchunk]
-            a2 <- matrix(as.numeric(get(x2)[begchunk:endchunk, 
-                ]), byrow = FALSE, nrow = length(begchunk:endchunk), 
+            a1 <- get(x1)[1]
+            a2 <- matrix(as.numeric(get(x2)[1, 
+                ]), byrow = FALSE, nrow = 1, 
                 ncol = niter)
             tr <- rowSums(a1 > a2)
-            raw.count.dn[begchunk:endchunk, i - 5] <- tr
+            raw.count.dn[1, i - 5] <- tr
         }
     }
     close(pb)
@@ -154,19 +139,23 @@ function (x, y, niter,seed)
     rm(subx.niter)
     raw.p.up <- data.frame(raw.count.up/niter)
     raw.p.dn <- data.frame(raw.count.dn/niter)
-    rawp.up <- data.frame(row.names(y), raw.p.up)
-    rawp.dn <- data.frame(row.names(y), raw.p.dn)
-    raw.p.one <- data.frame(row.names(y), apply(cbind(raw.p.up[, 
-        1], raw.p.dn[, 1]), 1, min), apply(cbind(raw.p.up[, 2], 
-        raw.p.dn[, 2]), 1, min), apply(cbind(raw.p.up[, 3], raw.p.dn[, 
-        3]), 1, min), apply(cbind(raw.p.up[, 4], raw.p.dn[, 4]), 
-        1, min), apply(cbind(raw.p.up[, 5], raw.p.dn[, 5]), 1, 
-        min))
+    rawp.up <- data.frame(raw.p.up)#data.frame(row.names(y), raw.p.up)
+    rawp.dn <- data.frame(raw.p.dn) #row.names(y), raw.p.dn)
+#     raw.p.one <- data.frame(row.names(y), apply(cbind(raw.p.up[, 
+#         1], raw.p.dn[, 1]), 1, min), apply(cbind(raw.p.up[, 2], 
+#         raw.p.dn[, 2]), 1, min), apply(cbind(raw.p.up[, 3], raw.p.dn[, 
+#         3]), 1, min), apply(cbind(raw.p.up[, 4], raw.p.dn[, 4]), 
+#         1, min), apply(cbind(raw.p.up[, 5], raw.p.dn[, 5]), 1, 
+#         min))
+
+raw.p.one <- data.frame(cbind(min(raw.p.up[,1], raw.p.dn[, 1]),min(raw.p.up[, 2], raw.p.dn[, 2]),
+                        min(raw.p.up[, 3],raw.p.dn[,3]), min(raw.p.up[, 4], raw.p.dn[, 4]), 
+                        min(raw.p.up[, 5], raw.p.dn[, 5])))
+
     raw.p.two <- raw.p.one
-    raw.p.two[, 2:6] <- 2 * (raw.p.one[, 2:6])
-    raw.p.two[, 2:6][raw.p.two[, 2:6] > 1] <- 1
-    colnames(raw.p.one) <- colnames(raw.p.two) <- colnames(rawp.up) <- colnames(rawp.dn) <- c("Probe.ID", 
-        "E2", "Williams", "Marcus", "M", "ModM")
+    raw.p.two[, 1:5] <- 2 * (raw.p.one[, 1:5])
+    raw.p.two[, 1:5][raw.p.two[, 1:5] > 1] <- 1
+    colnames(raw.p.one) <- colnames(raw.p.two) <- colnames(rawp.up) <- colnames(rawp.dn) <- c("E2", "Williams", "Marcus", "M", "ModM")
     res <- list(raw.p.one = raw.p.one, raw.p.two = raw.p.two, 
         rawp.up = rawp.up, rawp.dn = rawp.dn)
     rm(exp.E.up, exp.W.up, exp.WC.up, exp.M.up, exp.I.up, exp.E.dn, 

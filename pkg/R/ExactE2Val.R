@@ -26,10 +26,23 @@ val <- c(
 
 )
 
-plevel <- t(matrix(val,18,20))
+plevel <- t(matrix(val,18,20)) ## ?? why fixed dimension ??? 
 dose <- x
+#if(is.matrix(y) == TRUE){
+#	data <- y
+#	stat <- IsoGenem(dose,data) 
+#	} else if(is.matrix(y) == FALSE){
+#	#ymat <- rbind(y,y)
+#	#data <- ymat[1,,drop=FALSE]
+#	data <- y
+#	stat <- IsoGene1(dose,data) 
+#	}
+
+#ymat <- rbind(y,y)
+#data <- ymat[1,,drop=FALSE]
 data <- y
-stat <- IsoGenem(dose,data) 
+stat <- IsoGenem(dose,data)
+
 E2 <- cbind(stat[[1]],stat[[6]]) ## TAKING THE E^2 VALUE ##
 E2max  <- apply(E2,1,max)
 Dir <-  stat [[11]]

@@ -1,4 +1,4 @@
-`doGORIC` <-
+`doGORICVec` <-
 function() {
 
 if (!exists("exprs") | !exists("dose"))  
@@ -20,13 +20,13 @@ if (!exists("exprs") | !exists("dose"))
 	frame1 <- tkframe(spec.frm, relief="groove", borderwidth=2)
 	buttonFrameasym <-tkframe(gor, borderwidth=2)
 	
-	tkgrid(tklabel(frame1,text="    "))
+	#tkgrid(tklabel(frame1,text="    "))
 	gene <- tclVar("1")
-	entry.gene <- tkentry(frame1, width="5", textvariable=gene)
-	gene.label <- tklabel(frame1, text="Gene of interest:   ")
-	tkgrid(gene.label, entry.gene)
-	tkgrid.configure(gene.label, entry.gene, sticky="w")
-	tkgrid(tklabel(frame1,text="    "))
+	#entry.gene <- tkentry(frame1, width="5", textvariable=gene)
+	#gene.label <- tklabel(frame1, text="Gene of interest: 1 ")
+	#tkgrid(gene.label, entry.gene)
+	#tkgrid.configure(gene.label, entry.gene, sticky="w")
+	#tkgrid(tklabel(frame1,text="    "))
 	
 	direction <- tkradiobutton(frame1)
 	direction2 <- tkradiobutton(frame1)
@@ -149,7 +149,7 @@ if (!exists("exprs") | !exists("dose"))
 			params <- par(bg="white")	
 			options(show.error.messages = FALSE)
 			
-			boxplot(response.gene ~ as.factor(dose), xlab = "Dose", ylab = "Gene expression value", 
+			boxplot(response.gene ~ as.factor(dose), xlab = "Dose", ylab = "Response", 
 					border = "white", lwd=2, main=modelSelected)
 			points(response.gene ~ as.factor(dose), pch = 1, lwd=2)
 			points(models[[modelSelected]]$coeff ~ as.factor(unique(dose)), 
@@ -186,7 +186,7 @@ if (!exists("exprs") | !exists("dose"))
 			params <- par(bg="white")	
 			options(show.error.messages = FALSE)
 
-			boxplot(response.gene ~ as.factor(dose), xlab = "Dose", ylab = "Gene expression value", 
+			boxplot(response.gene ~ as.factor(dose), xlab = "Dose", ylab = "Response", 
 					border = "white", lwd=2,  main=paste0("M_",model.par))
 			points(response.gene ~ as.factor(dose), pch = 1, lwd=2)
 			points(models[[paste0("M_",model.par)]]$coeff ~ as.factor(unique(dose)), 

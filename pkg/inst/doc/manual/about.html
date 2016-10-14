@@ -1,3 +1,4 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
@@ -51,7 +52,8 @@ DIV,UL,OL /* Left */
               Additionally, the GUI contains extra methods from packages orQA,
               ORIClust and ORCME. The IsoGeneGUI is developed for the user with
               no or limited knowledge about R programming so he/she can perform
-              the analysis of dose-response in microarray setting easily. This
+              the analysis of dose-response for high dimensional data as well as for
+			  data from a single experiment, but with a focus on microarray setting. This
               GUI was developed using tcl/tk.</font></span></div>
         <div align="justify"><span style="font-family: Times New Roman;"><font class="ws12"><br>
             </font></span></div>
@@ -67,12 +69,13 @@ DIV,UL,OL /* Left */
     <div id="hr1" style="position:absolute; overflow:hidden; left:29px; top:83px; width:1027px; height:17px; z-index:2">
       <hr size="2" width="1027"> </div>
     <span style="font-family: Times New Roman;"> </span>
-    <div id="text3" style="position: absolute; overflow: hidden; left: 22px; top: 895px; width: 1171px; height: 788px; z-index: 3;"><span
+    <div id="text3" style="position: absolute; overflow: hidden; left: 22px; top: 895px; width: 1171px; height: 788px; z-index: 3;"><span
+
         style="font-family: Times New Roman;"> </span>
       <div class="wpmd"><span style="font-family: Times New Roman;"> </span>
         <div><span style="font-family: Times New Roman;"><font class="ws12">The
-              GUI has five main menus and in the middle of the window there is
-              an info box. The package has five main menus: File, Analysis,
+              GUI has six main menus and in the middle of the window there is
+              an info box. The package has six main menus: File, Analysis(HD), Analysis(SD),
               Clustering, Plots and Help.</font></span></div>
         <div><span style="font-family: Times New Roman;"><font class="ws12"><br>
               File:</font></span></div>
@@ -96,7 +99,7 @@ DIV,UL,OL /* Left */
         <span style="font-family: Times New Roman;"> </span>
         <div><span style="font-family: Times New Roman;"><font class="ws12"> </font></span></div>
         <span style="font-family: Times New Roman;"> </span>
-        <div><span style="font-family: Times New Roman;"><font class="ws12">Analysis:&nbsp;
+        <div><span style="font-family: Times New Roman;"><font class="ws12">Analysis(HD):&nbsp;
               </font></span></div><span style="font-family: Times New Roman;"> </span>
         <div><span style="font-family: Times New Roman;"><font class="ws12">&nbsp;&nbsp;&nbsp;&nbsp;
               1. Set Seed</font></span></div>
@@ -120,13 +123,49 @@ DIV,UL,OL /* Left */
             </font><font class="ws12">&nbsp;&nbsp;&nbsp; 5. Likelihood Ratio
               Test</font><font class="ws12"><font class="ws12"> (E2): orQA</font><br>
             </font><font class="ws12">&nbsp;&nbsp;&nbsp; 6. G</font>ORIC<br>
-            <br>
-            Clustering:<br>
-            &nbsp;&nbsp;&nbsp; 1. ORCME<br>
-            &nbsp;&nbsp;&nbsp; 2. ORIClust</span></div>
+			              <br>
+            </font></span></div>
+			
+			        <span style="font-family: Times New Roman;"> </span>
+        <div><span style="font-family: Times New Roman;"><font class="ws12"> </font></span></div>
+        <span style="font-family: Times New Roman;"> </span>
+        <div><span style="font-family: Times New Roman;"><font class="ws12">Analysis(HD):&nbsp;
+              </font></span></div><span style="font-family: Times New Roman;"> </span>
+        <div><span style="font-family: Times New Roman;"><font class="ws12">&nbsp;&nbsp;&nbsp;&nbsp;
+              1. Set Seed</font></span></div>
+        <span style="font-family: Times New Roman;"> </span>
+        <div><span style="font-family: Times New Roman;"><font class="ws12">&nbsp;&nbsp;&nbsp;&nbsp;
+              2. Likelihood Ratio Test (E2): Asymptotic<br>
+            </font></span></div>
+        <span style="font-family: Times New Roman;"> </span>
+        <div><span style="font-family: Times New Roman;"><font class="ws12">&nbsp;&nbsp;&nbsp;&nbsp;
+              3. Permutation <br>
+            </font></span></div>
+			<span style="font-family: Times New Roman;"> </span>
+        <div><span style="font-family: Times New Roman;"><font class="ws12">&nbsp;&nbsp;&nbsp;&nbsp;
+			  4. GORIC <br>
+            </font></span></div>
+			<span style="font-family: Times New Roman;"> </span>
+        <div><span style="font-family: Times New Roman;"><font class="ws12">&nbsp;&nbsp;&nbsp;&nbsp;
+			  5. IsoPlot <br>
+            </font></span></div>
+			<span style="font-family: Times New Roman;"> </span>
+        <div><span style="font-family: Times New Roman;"><font class="ws12">&nbsp;&nbsp;&nbsp;&nbsp;
+			  6. Permutation P-values Plot<br>
+			  	              <br>
+            </font></span></div>
+		
+						        <span style="font-family: Times New Roman;"> </span>
+        <div><span style="font-family: Times New Roman;"><font class="ws12"> </font></span></div>
+        <span style="font-family: Times New Roman;"> </span>
+        <div><span style="font-family: Times New Roman;"><font class="ws12">Clustering:&nbsp;
+              </font></span></div><span style="font-family: Times New Roman;"> </span>
+        <div><span style="font-family: Times New Roman;"><font class="ws12">&nbsp;&nbsp;&nbsp;&nbsp;
+            1. ORCME<br>&nbsp;&nbsp;&nbsp; 
+			2. ORIClust</span></div>
         <div><font class="ws12" face="Times New Roman"><br>
           </font></div>
-        <div><font class="ws12" face="Times New Roman">Plot:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <div><font class="ws12" face="Times New Roman">Plots:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             </font></div>
         <div><font class="ws12" face="Times New Roman">&nbsp;&nbsp;&nbsp; 1.
             IsoPlot</font></div>
@@ -160,7 +199,8 @@ DIV,UL,OL /* Left */
           </font></div>
       </div>
     </div>
-    <div id="image2" style="position:absolute; overflow:hidden; left:33px; top:295px; width:510px; height485px; z-index:4"><img
+    <div id="image2" style="position:absolute; overflow:hidden; left:33px; top:295px; width:510px; height485px; z-index:4"><img
+
         src="images/main.jpg" alt="" title="" border="0" height="510" width="485"></div>
   </body>
 </html>

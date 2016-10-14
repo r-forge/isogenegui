@@ -11,28 +11,23 @@
 \usepackage{Sweave}
 \usepackage{url}
 \begin{document}
+\SweaveOpts{concordance=TRUE}
 
 \title{IsoGeneGUI Package Vignette}
-\author{Setia Pramana, Martin Otava, Dan Lin, Ziv Shkedy}
+\author{Setia Pramana, Martin Otava, Dan Lin, Rudradev Sengupta, Ziv Shkedy}
 \date{\today}
 \maketitle
 
 \section{Introduction}
-The IsoGene Graphical User Interface (IsoGeneGUI) is a user friendly interface of the IsoGene package which is aimed to 
-perform analysis of dose-response studies in microarray experiments. Compared to
-original package, GUI is extended thoroughly by addition of methods from other
-packages related to gene expression analysis, namely GORIC, ORCME,
-ORIClust and orQA. Hence, it provides wide range of tools and covers all the
-range of methods currently available in are in "non-GUI" packages. The
-IsoGeneGUI is developed for the user with no or limited knowledge about R programming so he/she can perform the analysis of dose-response in microarray setting  easily. This GUI was developed using tcl/tk package.
+The IsoGene Graphical User Interface (IsoGeneGUI) is a user friendly interface of the IsoGene package which is aimed to perform analysis of dose-response studies in high dimensional setting as well as for data coming from a single experiment, with the main focus being microarray data. Compared to original package, GUI is extended thoroughly by addition of methods from other packages related to gene expression analysis, namely GORIC, ORCME, ORIClust and orQA. Hence, it provides wide range of tools and covers all the range of methods currently available in are in "non-GUI" packages. The IsoGeneGUI is developed for the user with no or limited knowledge about R programming so he/she can perform the analysis of dose-response in microarray setting  easily. This GUI was developed using tcl/tk package.
 The statistical methodologies (test statistics, etc.)  used in this package are discussed by Lin et.al (2007, 2008, 2010). 
 
 
 \section{Installation}
-The package can be installed directly from R environment. For proper installation, both CRAN and Bioconductor repositories need to be specified. 
+The IsoGeneGUI is freely available from R-Forge repository. It can be downloaded and run from R with commands:
 <<install, eval=FALSE >>=
-setRepository()
-install.packages("IsoGeneGUI")
+install.packages("IsoGeneGUI", repos="http://r-forge.r-project.
+                 org")
 @
 
 
@@ -70,7 +65,7 @@ middle of the main window there is an info box which provides information about 
       \item  Show dataset
        \item  Exit
  		\end{enumerate}
-\item Analysis:  
+\item Analysis(HD):  
  	\begin{enumerate}
     \item Set seed
     \item Likelihood Ratio Test (E2): Asymptotic
@@ -83,12 +78,21 @@ middle of the main window there is an info box which provides information about 
     \item Likelihood Ratio Test (E2): orQA
     \item GORIC
 	\end{enumerate}
+\item Analysis(SD):  
+   \begin{enumerate}
+    \item Set seed
+    \item Likelihood Ratio Test (E2): Asymptotic
+    \item Permutation
+    \item GORIC
+    \item IsoPlot	
+    \item Permutation P-values Plot
+	\end{enumerate}
 \item Clustering:  
  	\begin{enumerate}
     \item ORCME
     \item ORIClust
     \end{enumerate}
-\item Plot:    
+\item Plots:    
 	\begin{enumerate}    
     \item IsoPlot
    	\item Permutation Plot

@@ -16,7 +16,7 @@ LazyLoad: yes
 Collate: about.R adjustment.R browse.R browse2.R CalcStat.R ChooseStat.R
         CVPlot.R diginum.R doGORIC.R doGORICVec.R doORCME.R doORIClust.R ExactE2.R ExactE2Val.R ExactE2Vec.R exit.R
         get.ResSAM.R getDose.R IsofudgeMod.R IsofudgeMod2.R IsoGene1.R IsoGenem.R
-        IsoGenemMod.R Isomean.R Isoplot.R IsoPlot.mod.R IsoPlot.modVec.R IsoPlotSldr.R IsoPlotVec.R IsoPlotVec2.R
+        IsoGenemMod.R Isomean.R Isoplot.R IsoPlot.mod.R IsoPlot.modVec.R IsoPlotSldr.R IsoplotVec.R IsoPlotVec2.R
         IsopvalPlot.R IsopvalPlotVec.R IsopvaluePlot.R IsopvaluePlotVec.R IsoqqstatMOD.R IsoRawpMod.R IsoRawpModVec.R
         IsoGeneGUI.R IsoStat.R IsoTest.R loadDataSet.R MeanDiff.R
         onHelpIsoGene.R IsoGeneGUIHelp.R openFile.R orQAE2.R Permutation.R PermutationVec.R
